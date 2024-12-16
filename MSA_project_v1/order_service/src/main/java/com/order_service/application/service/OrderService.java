@@ -2,11 +2,10 @@ package com.order_service.application.service;
 
 import com.common.IdempotencyCreator;
 import com.common.UseCase;
-import com.order_service.adapter.in.web.PaymentCheckOutRequest;
 import com.order_service.adapter.out.persistence.entity.PaymentEvent;
 import com.order_service.application.port.in.PaymentCheckOutCommand;
 import com.order_service.application.port.in.RequestOrderUseCase;
-import com.order_service.application.port.out.GetProductPort;
+import com.order_service.application.port.out.GetCatalogtPort;
 import com.order_service.application.port.out.PaymentCheckOutOutPut;
 import com.order_service.application.port.out.PaymentCheckOutPort;
 import com.order_service.application.port.out.ProductOutPut;
@@ -25,14 +24,14 @@ import java.util.List;
 public class OrderService implements RequestOrderUseCase {
 
     private final PaymentValidator paymentValidator;
-    private final GetProductPort getProductPort;
+    private final GetCatalogtPort getCatalogtPort;
     private final PaymentCheckOutPort paymentCheckOut;
 
     @Override
     public PaymentCheckOutResponse paymentCheckOut(PaymentCheckOutCommand request) {
 
         List<ProductOutPut> productList
-                = getProductPort.selectProductListByProductNoList(request.getProductNoList());
+                = getCatalogtPort.selectProductListByProductNoList(request.getProductNoList());
 
         paymentValidator.isExistProduct(productList);
 
@@ -47,16 +46,13 @@ public class OrderService implements RequestOrderUseCase {
 
         paymentCheckOut.insertPaymentCheckOut(paymentEvent);
 
+        PaymentCheckOutOutPut paymentCheckOutOutPut
+                = PaymentCheckOutOutPut.of(
+                        paymentEvent.getTotalAmount(),
+                        paymentEvent.getOrderId(),
+                        paymentEvent.getOrderName()
+                );
 
-//        paymentCheckOutCommendService.insertPaymentCheckOut(paymentEvent);
-//
-//        PaymentCheckOutOutPut paymentCheckOutOutPut = paymentCheckOutQueryService.paymentCheckOut(
-//                idempotency,
-//                productList
-//        );
-//
-//        return PaymentCheckOutResponse.of(paymentCheckOutOutPut);
-
-        return null;
+        return PaymentCheckOutResponse.of(paymentCheckOutOutPut);
     }
 }

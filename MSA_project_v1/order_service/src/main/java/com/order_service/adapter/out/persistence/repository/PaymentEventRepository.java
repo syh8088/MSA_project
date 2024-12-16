@@ -13,11 +13,10 @@ import java.time.LocalDateTime;
 public interface PaymentEventRepository extends JpaRepository<PaymentEvent, Long>, PaymentEventRepositoryCustom {
 
     @Modifying
-    @Query("UPDATE PaymentEvent AS p SET p.paymentKey = :paymentKey, p.pspRawData = :pspRawData, p.approvedDateTime = :approvedDateTime, p.isPaymentDone = :isPaymentDone WHERE p.orderId = :orderId")
+    @Query("UPDATE PaymentEvent AS p SET p.paymentKey = :paymentKey, p.approvedDateTime = :approvedDateTime, p.isPaymentDone = :isPaymentDone WHERE p.orderId = :orderId")
     void updatePaymentEventExtraDetails(
             @Param("orderId") String orderId,
             @Param("paymentKey") String paymentKey,
-            @Param("pspRawData") String pspRawData,
             @Param("approvedDateTime") LocalDateTime approvedDateTime,
             @Param("isPaymentDone") boolean isPaymentDone
     );

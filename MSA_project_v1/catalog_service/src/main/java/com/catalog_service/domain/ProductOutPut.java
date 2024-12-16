@@ -1,7 +1,5 @@
-package com.order_service.application.port.out;
+package com.catalog_service.domain;
 
-import com.order_service.domain.SelectProductResponse;
-import com.order_service.domain.SelectProductResponses;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,21 +35,5 @@ public class ProductOutPut {
         else {
             return productList.get(0).getName();
         }
-    }
-
-    public static ProductOutPut of(SelectProductResponse selectProductResponse) {
-        return new ProductOutPut(
-                selectProductResponse.getProductNo(),
-                selectProductResponse.getSellerNo(),
-                selectProductResponse.getProductId(),
-                selectProductResponse.getName(),
-                selectProductResponse.getPrice()
-        );
-    }
-
-    public static List<ProductOutPut> of(SelectProductResponses selectProductResponses) {
-        return selectProductResponses.getProductList().stream()
-                .map(ProductOutPut::of)
-                .toList();
     }
 }

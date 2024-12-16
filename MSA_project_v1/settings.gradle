@@ -2,3 +2,4 @@ rootProject.name = 'MSA_payment'
 
 include 'common'
 include 'order_service'
+include 'catalog_service'
