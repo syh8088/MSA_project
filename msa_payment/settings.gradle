@@ -1,5 +1,0 @@
-rootProject.name = 'msa_payment'
-
-include 'common'
-include 'order-service'
-
