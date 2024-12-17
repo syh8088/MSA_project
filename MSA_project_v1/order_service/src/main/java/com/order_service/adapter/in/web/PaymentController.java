@@ -1,10 +1,14 @@
 package com.order_service.adapter.in.web;
 
+import com.order_service.adapter.out.stream.util.PartitionKeyUtil;
 import com.order_service.application.port.out.PaymentEventOutPut;
 import com.order_service.domain.message.PaymentEventMessage;
 import com.order_service.domain.message.PaymentEventMessageType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.stream.function.StreamBridge;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,32 +35,32 @@ public class PaymentController {
 //        return ApiResponse.ok(paymentEventWithOrderResponse);
 //    }
 //
-//    private final StreamBridge streamBridge;
-//    private final PartitionKeyUtil partitionKeyUtil;
-//    private static final String bindingName = "send-out-0";
+    private final StreamBridge streamBridge;
+    private final PartitionKeyUtil partitionKeyUtil;
+    private static final String bindingName = "send-out-0";
+
+    @GetMapping("test")
+    public String test() {
+
+        String orderId = "tewkgmwepm2394234" + LocalDateTime.now().toString();
+        int partitionKey = partitionKeyUtil.createPartitionKey(orderId.hashCode());
+        PaymentEventMessage paymentEventMessage = this.createPaymentEventMessage(orderId, partitionKey);
+
+//        streamBridge.send(bindingName, MessageBuilder.withPayload(paymentEventMessage).build());
 //
-//    @GetMapping("test")
-//    public String test() {
-//
-//        String orderId = "tewkgmwepm2394234" + LocalDateTime.now().toString();
-//        int partitionKey = partitionKeyUtil.createPartitionKey(orderId.hashCode());
-//        PaymentEventMessage paymentEventMessage = this.createPaymentEventMessage(orderId, partitionKey);
-//
-////        streamBridge.send(bindingName, MessageBuilder.withPayload(paymentEventMessage).build());
-////
-//        streamBridge.send(bindingName, MessageBuilder
-//                .withPayload(paymentEventMessage)
-//                .setHeader(KafkaHeaders.KEY, String.valueOf(partitionKey))
-//                .build());
-//
-//        return "test";
-//    }
-//
-//    private PaymentEventMessage createPaymentEventMessage(String orderId, int partitionKey) {
-//        return PaymentEventMessage.of(
-//                PaymentEventMessageType.PAYMENT_CONFIRMATION_SUCCESS,
-//                Map.of("orderId", orderId),
-//                Map.of("partitionKey", partitionKey)
-//        );
-//    }
+        streamBridge.send(bindingName, MessageBuilder
+                .withPayload(paymentEventMessage)
+                .setHeader(KafkaHeaders.KEY, String.valueOf(partitionKey))
+                .build());
+
+        return "test";
+    }
+
+    private PaymentEventMessage createPaymentEventMessage(String orderId, int partitionKey) {
+        return PaymentEventMessage.of(
+                PaymentEventMessageType.PAYMENT_CONFIRMATION_SUCCESS,
+                Map.of("orderId", orderId),
+                Map.of("partitionKey", partitionKey)
+        );
+    }
 }

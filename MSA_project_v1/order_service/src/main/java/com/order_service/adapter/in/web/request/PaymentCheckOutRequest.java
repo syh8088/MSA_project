@@ -1,4 +1,4 @@
-package com.order_service.adapter.in.web;
+package com.order_service.adapter.in.web.request;
 
 import lombok.Builder;
 import lombok.Getter;

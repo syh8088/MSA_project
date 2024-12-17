@@ -1,5 +1,6 @@
 package com.order_service.adapter.in.web;
 
+import com.order_service.adapter.in.web.request.PaymentConfirmRequest;
 import com.order_service.application.port.in.RequestOrderConfirmUseCase;
 import com.order_service.domain.PaymentConfirmCommand;
 import lombok.RequiredArgsConstructor;

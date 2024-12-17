@@ -8,4 +8,6 @@ public interface PaymentStatusUpdatePort {
     void updatePaymentStatusToExecuting(String orderId, String paymentKey);
 
     PaymentEventMessage updatePaymentStatus(PaymentExecutionResultOutPut command);
+
+    void updateIsWalletDoneByOrderId(String orderId, boolean isPaymentDone);
 }

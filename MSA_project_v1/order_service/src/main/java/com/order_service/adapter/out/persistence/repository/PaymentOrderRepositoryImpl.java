@@ -3,6 +3,8 @@ package com.order_service.adapter.out.persistence.repository;
 import com.order_service.adapter.out.persistence.entity.QPaymentOrder;
 import com.order_service.application.port.out.PaymentOrderStatusOutPut;
 import com.order_service.application.port.out.QPaymentOrderStatusOutPut;
+import com.order_service.domain.PaymentOrderWithSellerOutPut;
+import com.order_service.domain.QPaymentOrderWithSellerOutPut;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 
@@ -32,6 +34,24 @@ public class PaymentOrderRepositoryImpl implements PaymentOrderRepositoryCustom 
 				.from(qPaymentOrder)
 				.where(qPaymentOrder.orderId.eq(orderId))
 				.fetch();
+	}
+
+	@Override
+	public List<PaymentOrderWithSellerOutPut> selectPaymentOrderListWithSellerByOrderId(String orderId) {
+		return queryFactory
+				.select(
+						new QPaymentOrderWithSellerOutPut(
+								qPaymentOrder.no,
+								qPaymentOrder.orderId,
+								qPaymentOrder.amount,
+								qPaymentOrder.status,
+								qPaymentOrder.sellerNo
+						)
+				)
+				.from(qPaymentOrder)
+				.where(qPaymentOrder.orderId.eq(orderId))
+				.fetch();
+//		return null;
 	}
 
 }

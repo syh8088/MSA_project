@@ -1,5 +1,6 @@
 package com.order_service.adapter.in.web;
 
+import com.order_service.adapter.in.web.request.PaymentCheckOutRequest;
 import com.order_service.application.port.in.PaymentCheckOutCommand;
 import com.order_service.application.port.in.RequestOrderCheckOutUseCase;
 import com.order_service.domain.PaymentCheckOutResponse;

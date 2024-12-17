@@ -10,12 +10,14 @@ import com.order_service.adapter.out.persistence.repository.PaymentEventReposito
 import com.order_service.adapter.out.persistence.repository.PaymentOrderHistoryRepository;
 import com.order_service.adapter.out.persistence.repository.PaymentOrderRepository;
 import com.order_service.adapter.out.stream.util.PartitionKeyUtil;
+import com.order_service.application.port.out.GetOrderPort;
 import com.order_service.application.port.out.PaymentCheckOutPort;
 import com.order_service.application.port.out.PaymentOrderStatusOutPut;
 import com.order_service.application.port.out.PaymentStatusUpdatePort;
 import com.order_service.domain.OutBoxStatus;
 import com.order_service.domain.PaymentExecutionResultOutPut;
 import com.order_service.domain.PaymentOrderStatus;
+import com.order_service.domain.PaymentOrderWithSellerOutPut;
 import com.order_service.domain.message.PaymentEventMessage;
 import com.order_service.domain.message.PaymentEventMessageType;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +33,7 @@ import java.util.Map;
 @Slf4j
 @WebAdapter
 @RequiredArgsConstructor
-public class PaymentOrderPersistenceAdapter implements PaymentCheckOutPort, PaymentStatusUpdatePort {
+public class PaymentOrderPersistenceAdapter implements PaymentCheckOutPort, PaymentStatusUpdatePort, GetOrderPort {
 
     private final PaymentEventRepository paymentEventRepository;
     private final PaymentOrderRepository paymentOrderRepository;
@@ -155,7 +157,8 @@ public class PaymentOrderPersistenceAdapter implements PaymentCheckOutPort, Paym
         );
     }
 
-    private void updateIsWalletDoneByOrderId(String orderId, boolean isWalletDone) {
+    @Transactional
+    public void updateIsWalletDoneByOrderId(String orderId, boolean isWalletDone) {
         paymentEventRepository.updateIsWalletDoneByOrderId(orderId, isWalletDone);
     }
 
@@ -174,5 +177,10 @@ public class PaymentOrderPersistenceAdapter implements PaymentCheckOutPort, Paym
         );
 
         outBoxRepository.save(outBox);
+    }
+
+    @Override
+    public List<PaymentOrderWithSellerOutPut> selectPaymentOrderListWithSellerByOrderId(String orderId) {
+        return paymentOrderRepository.selectPaymentOrderListWithSellerByOrderId(orderId);
     }
 }
