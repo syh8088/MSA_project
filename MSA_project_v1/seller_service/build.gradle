@@ -13,6 +13,10 @@ java {
     }
 }
 
+ext{
+    axonVersion = "4.8.0"
+}
+
 repositories {
     mavenCentral()
 }
@@ -53,6 +57,10 @@ dependencies {
     // kafka
     implementation("org.springframework.cloud:spring-cloud-stream")
     implementation("org.springframework.cloud:spring-cloud-stream-binder-kafka")
+
+    // axon
+    implementation group: 'org.axonframework', name: 'axon-spring-boot-starter', version: "$axonVersion"
+    implementation group: 'org.axonframework', name: 'axon-configuration', version: "$axonVersion"
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
