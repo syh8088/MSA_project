@@ -19,7 +19,7 @@ public class InsertSellerController {
 
     private final InsertSellerUseCase insertSellerUseCase;
 
-    @PostMapping("confirm")
+    @PostMapping
     public ResponseEntity<?> insertSeller(@RequestBody InsertSellerRequest request) {
 
         InsertSellerCommand insertSellerCommand

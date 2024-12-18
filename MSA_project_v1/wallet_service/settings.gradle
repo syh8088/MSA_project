@@ -1,1 +1,3 @@
 rootProject.name = 'wallet_service'
+
+include 'common'
