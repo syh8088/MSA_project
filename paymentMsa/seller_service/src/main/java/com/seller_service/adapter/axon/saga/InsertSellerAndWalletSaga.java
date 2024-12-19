@@ -1,10 +1,11 @@
 package com.seller_service.adapter.axon.saga;
 
 import com.common.InsertWalletCommand;
+import com.common.command.InsertSellerCommand;
 import com.common.command.RollbackSellerRequestCommand;
 import com.common.event.RequestDeleteSellerEvent;
 import com.common.event.RequestInsertWalletFinishedEvent;
-import com.seller_service.adapter.axon.event.SagaInsertSellerEvent;
+import com.seller_service.adapter.axon.event.RequestInsertSellerEvent;
 import com.seller_service.adapter.axon.event.SagaInsertWalletEvent;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,13 +34,13 @@ public class InsertSellerAndWalletSaga {
 
     @StartSaga
     @SagaEventHandler(associationProperty = "requestInsertSellerId")
-    public void handle(SagaInsertSellerEvent event) {
+    public void handle(RequestInsertSellerEvent event) {
 
         String sagaInsertSellerId = UUID.randomUUID().toString();
         SagaLifecycle.associateWith("sagaInsertSellerId", sagaInsertSellerId);
 
         commandGateway.send(
-                new com.common.command.InsertSellerCommand(
+                new InsertSellerCommand(
                         UUID.randomUUID().toString(),
                         event.getRequestInsertSellerId(),
                         event.getSellerId(),
@@ -49,9 +50,9 @@ public class InsertSellerAndWalletSaga {
                 (result, throwable) -> {
                     if (throwable != null) {
                         throwable.printStackTrace();
-                        System.out.println("CheckRegisteredBankAccountCommand Command failed");
+                        log.error("RequestInsertSellerEvent Command failed, = {}", sagaInsertSellerId, throwable);
                     } else {
-                        System.out.println("CheckRegisteredBankAccountCommand Command success");
+                        log.info("RequestInsertSellerEvent SAGA success = {}", result.toString());
                     }
                 }
         );
@@ -74,9 +75,9 @@ public class InsertSellerAndWalletSaga {
                 (result, throwable) -> {
                     if (throwable != null) {
                         throwable.printStackTrace();
-                        System.out.println("CheckRegisteredBankAccountCommand Command failed");
+                        log.error("requestInsertWalletAggregate Command failed");
                     } else {
-                        System.out.println("CheckRegisteredBankAccountCommand Command success");
+                        log.info("requestInsertWalletAggregate SAGA success = {}", result.toString());
                     }
                 }
         );
@@ -93,16 +94,19 @@ public class InsertSellerAndWalletSaga {
             // 실패 시, 롤백 이벤트
             String sagaRollbackSellerId = UUID.randomUUID().toString();
             SagaLifecycle.associateWith("sagaRollbackSellerId", sagaRollbackSellerId);
-            commandGateway.send(new RollbackSellerRequestCommand(
-                    sagaRollbackSellerId,
-                    event.getSellerNo()
-            )).whenComplete(
+            commandGateway.send(
+                    new RollbackSellerRequestCommand(
+                        sagaRollbackSellerId,
+                        event.getSellerNo()
+                    )
+            ).whenComplete(
                     (result, throwable) -> {
                         if (throwable != null) {
                             throwable.printStackTrace();
-                            System.out.println("RollbackSellerRequestCommand Command failed");
-                        } else {
-                            System.out.println("Saga success : "+ result.toString());
+                            log.error("RequestWalletFinishedEvent Command failed");
+                        }
+                        else {
+                            log.info("RequestWalletFinishedEvent SAGA success = {}", result.toString());
                             SagaLifecycle.end();
                         }
                     }

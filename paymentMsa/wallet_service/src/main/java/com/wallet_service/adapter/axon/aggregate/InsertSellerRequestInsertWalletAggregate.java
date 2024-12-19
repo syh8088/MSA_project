@@ -36,8 +36,8 @@ public class InsertSellerRequestInsertWalletAggregate {
         id = insertWalletCommand.getAggregateIdentifier();
 
         // wallet insert
-//        boolean isSuccess = insertWalletPort.insertWallet(com.wallet_service.domain.InsertWalletCommand.of(insertWalletCommand.getSellerNo()));
-        boolean isSuccess = false;
+        boolean isSuccess = insertWalletPort.insertWallet(com.wallet_service.domain.InsertWalletCommand.of(insertWalletCommand.getSellerNo()));
+//        boolean isSuccess = false;
 
         String requestResultInsertWalletId = UUID.randomUUID().toString();
 

@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Getter
 @NoArgsConstructor
-public class AxonInsertSellerCommand {
+public class RequestInsertSellerCommand {
 
     @TargetAggregateIdentifier
     private String id;
@@ -17,16 +17,16 @@ public class AxonInsertSellerCommand {
     private String sellerId;
 
     @Builder
-    private AxonInsertSellerCommand(String id, String sellerId) {
+    private RequestInsertSellerCommand(String id, String sellerId) {
         this.id = id;
         this.sellerId = sellerId;
     }
 
-    public static AxonInsertSellerCommand of(String sellerId) {
+    public static RequestInsertSellerCommand of(String sellerId) {
 
         String id = UUID.randomUUID().toString();
 
-        return AxonInsertSellerCommand.builder()
+        return RequestInsertSellerCommand.builder()
                 .id(id)
                 .sellerId(sellerId)
                 .build();

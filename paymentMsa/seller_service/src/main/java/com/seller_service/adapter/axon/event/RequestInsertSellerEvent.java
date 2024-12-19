@@ -5,13 +5,13 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class SagaInsertSellerEvent {
+public class RequestInsertSellerEvent {
 
     private String requestInsertSellerId;
     private String sellerId;
 
 
-    public SagaInsertSellerEvent(String requestInsertSellerId, String sellerId) {
+    public RequestInsertSellerEvent(String requestInsertSellerId, String sellerId) {
         this.requestInsertSellerId = requestInsertSellerId;
         this.sellerId = sellerId;
     }

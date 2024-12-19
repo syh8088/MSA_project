@@ -2,7 +2,7 @@ package com.seller_service.adapter.in.web;
 
 import com.seller_service.adapter.in.web.request.InsertSellerRequest;
 import com.seller_service.application.port.in.InsertSellerUseCase;
-import com.seller_service.domain.InsertSellerCommand;
+import com.seller_service.domain.RequestPersistenceInsertSellerCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +22,8 @@ public class InsertSellerController {
     @PostMapping
     public ResponseEntity<?> insertSeller(@RequestBody InsertSellerRequest request) {
 
-        InsertSellerCommand insertSellerCommand
-                = InsertSellerCommand.of(request.getSellerId());
+        RequestPersistenceInsertSellerCommand insertSellerCommand
+                = RequestPersistenceInsertSellerCommand.of(request.getSellerId());
         insertSellerUseCase.insertSeller(insertSellerCommand);
 
         return ResponseEntity.noContent().build();

@@ -2,8 +2,8 @@ package com.seller_service.adapter.axon.aggregate;
 
 import com.common.command.RollbackSellerRequestCommand;
 import com.common.event.RequestDeleteSellerEvent;
-import com.seller_service.adapter.axon.command.AxonInsertSellerCommand;
-import com.seller_service.adapter.axon.event.SagaInsertSellerEvent;
+import com.seller_service.adapter.axon.command.RequestInsertSellerCommand;
+import com.seller_service.adapter.axon.event.RequestInsertSellerEvent;
 import com.seller_service.application.port.out.DeleteSellerPort;
 import lombok.Data;
 import org.axonframework.commandhandling.CommandHandler;
@@ -25,13 +25,13 @@ public class SellerAggregate {
 
     @CommandHandler
     @CreationPolicy(AggregateCreationPolicy.ALWAYS)
-    public void handler(AxonInsertSellerCommand command) {
+    public void handler(RequestInsertSellerCommand command) {
 
         this.id = command.getId();
         String requestInsertSellerId = UUID.randomUUID().toString();
 
         // Saga Start
-        apply(new SagaInsertSellerEvent(requestInsertSellerId, command.getSellerId()));
+        apply(new RequestInsertSellerEvent(requestInsertSellerId, command.getSellerId()));
     }
 
     @CommandHandler

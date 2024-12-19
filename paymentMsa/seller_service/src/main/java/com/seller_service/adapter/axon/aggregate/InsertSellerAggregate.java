@@ -1,7 +1,9 @@
 package com.seller_service.adapter.axon.aggregate;
 
+import com.common.command.InsertSellerCommand;
 import com.seller_service.adapter.axon.event.SagaInsertWalletEvent;
 import com.seller_service.application.port.out.InsertSellerPort;
+import com.seller_service.domain.RequestPersistenceInsertSellerCommand;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.CommandHandler;
@@ -25,16 +27,16 @@ public class InsertSellerAggregate {
     @CommandHandler
     @CreationPolicy(AggregateCreationPolicy.ALWAYS)
     public void requestInsertWalletAggregate(
-            com.common.command.InsertSellerCommand command,
+            InsertSellerCommand command,
             InsertSellerPort insertSellerPort
     ) {
         id = command.getId();
 
         // seller insert
-//        long savedSellerNo = insertSellerPort.insertSeller(
-//                InsertSellerCommand.of(command.getSellerId())
-//        );
-        long savedSellerNo = 9;
+        long savedSellerNo = insertSellerPort.insertSeller(
+                RequestPersistenceInsertSellerCommand.of(command.getSellerId())
+        );
+//        long savedSellerNo = 9;
         String requestInsertWalletId = UUID.randomUUID().toString();
 
         // Saga Start

@@ -1,9 +1,8 @@
 package com.seller_service.application.service;
 
 import com.common.UseCase;
-import com.seller_service.adapter.axon.command.AxonInsertSellerCommand;
 import com.seller_service.application.port.in.InsertSellerUseCase;
-import com.seller_service.domain.InsertSellerCommand;
+import com.seller_service.domain.RequestPersistenceInsertSellerCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -16,17 +15,19 @@ public class SellerService implements InsertSellerUseCase {
     private final CommandGateway commandGateway;
 
     @Override
-    public void insertSeller(InsertSellerCommand insertSellerCommand) {
+    public void insertSeller(RequestPersistenceInsertSellerCommand insertSellerCommand) {
 
-        AxonInsertSellerCommand axonInsertSellerCommand = AxonInsertSellerCommand.of(insertSellerCommand.getSellerId());
-        commandGateway.send(axonInsertSellerCommand)
+        com.seller_service.adapter.axon.command.RequestInsertSellerCommand requestInsertSellerCommand = com.seller_service.adapter.axon.command.RequestInsertSellerCommand.of(insertSellerCommand.getSellerId());
+        commandGateway.send(requestInsertSellerCommand)
         .whenComplete(
                 (result, throwable) -> {
                     if (throwable != null) {
                         throwable.printStackTrace();
+                        log.error("InsertSellerCommand Command failed = {}", result.toString());
                         throw new RuntimeException(throwable);
-                    } else {
-                        System.out.println("result = " + result); // aggregateIdentifier
+                    }
+                    else {
+                        log.info("InsertSellerCommand SAGA success = {}", result.toString());
                     }
                 }
         );
