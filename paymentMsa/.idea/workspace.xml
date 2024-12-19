@@ -4,31 +4,284 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e9f1aadd-be60-491f-999d-3385590e9b9b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../MSA_project_v1/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MSA_project_v1/common/src/main/java/com/common/InsertWalletCommandV2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MSA_project_v1/docker-compose.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MSA_project_v1/seller_service/src/main/java/com/seller_service/SellerConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MSA_project_v1/seller_service/src/main/java/com/seller_service/adapter/axon/aggregate/SellerAggregate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MSA_project_v1/seller_service/src/main/java/com/seller_service/adapter/axon/command/AxonInsertSellerCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MSA_project_v1/seller_service/src/main/java/com/seller_service/adapter/axon/command/InsertWalletCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MSA_project_v1/seller_service/src/main/java/com/seller_service/adapter/axon/event/AxonInsertSellerEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MSA_project_v1/seller_service/src/main/java/com/seller_service/adapter/axon/event/RequestInsertWalletFinishedEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MSA_project_v1/seller_service/src/main/java/com/seller_service/adapter/axon/saga/InsertSellerSaga.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MSA_project_v1/wallet_service/src/main/java/com/wallet_service/WalletConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MSA_project_v1/wallet_service/src/main/java/com/wallet_service/adapter/axon/aggregate/InsertSellerRequestInsertWalletAggregate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MSA_project_v1/wallet_service/src/main/java/com/wallet_service/adapter/axon/command/InsertWalletCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MSA_project_v1/wallet_service/src/main/java/com/wallet_service/adapter/axon/event/RequestInsertWalletFinishedEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MSA_project_v1/common/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../MSA_project_v1/common/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MSA_project_v1/common/src/main/java/com/common/ApiResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MSA_project_v1/seller_service/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../MSA_project_v1/seller_service/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MSA_project_v1/seller_service/src/main/java/com/common/ApiResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MSA_project_v1/seller_service/src/main/java/com/seller_service/adapter/in/web/InsertSellerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MSA_project_v1/seller_service/src/main/java/com/seller_service/adapter/in/web/InsertSellerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MSA_project_v1/seller_service/src/main/java/com/seller_service/application/service/SellerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MSA_project_v1/seller_service/src/main/java/com/seller_service/application/service/SellerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MSA_project_v1/seller_service/src/main/resources/yaml/application-local.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../MSA_project_v1/seller_service/src/main/resources/yaml/application-local.yaml" afterDir="false" />
+    <list default="true" id="04894aaa-032f-455c-89da-14421624d688" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/src/main/java/com/catalog_service/CatalogServiceApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/src/main/java/com/catalog_service/adapter/in/web/RequestProductController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/src/main/java/com/catalog_service/adapter/in/web/SelectProductListRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/src/main/java/com/catalog_service/adapter/out/persistence/entity/CommonEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/src/main/java/com/catalog_service/adapter/out/persistence/entity/Product.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/src/main/java/com/catalog_service/adapter/out/persistence/repository/ProductRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/src/main/java/com/catalog_service/adapter/out/persistence/repository/ProductRepositoryCustom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/src/main/java/com/catalog_service/adapter/out/persistence/repository/ProductRepositoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/src/main/java/com/catalog_service/adapter/out/persistence/service/GetProductAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/src/main/java/com/catalog_service/application/port/in/RequestProductUseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/src/main/java/com/catalog_service/application/port/in/SelectProductListRequestCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/src/main/java/com/catalog_service/application/port/out/GetProductPort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/src/main/java/com/catalog_service/application/service/ProductService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/src/main/java/com/catalog_service/domain/ProductOutPut.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/src/main/java/com/catalog_service/domain/SelectProductResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/src/main/java/com/catalog_service/domain/SelectProductResponses.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/src/main/java/com/common/ApiResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/src/main/java/com/common/CommonApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/src/main/java/com/common/IdempotencyCreator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/src/main/java/com/common/PersistenceAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/src/main/java/com/common/UseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/src/main/java/com/common/WebAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/src/main/resources/application.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/src/main/resources/messages/error_en.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/src/main/resources/messages/error_ko.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/src/main/resources/messages/messages.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/src/main/resources/messages/messages_en.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/src/main/resources/messages/messages_ko.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/src/main/resources/yaml/application-common.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/src/main/resources/yaml/application-local.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog_service/src/main/resources/yaml/application-test.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/common/CommonApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/common/IdempotencyCreator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/common/InsertWalletCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/common/InsertWalletCommandV2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/common/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/common/PersistenceAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/common/UseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/common/WebAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/common/command/InsertSellerCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/common/command/RollbackSellerRequestCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/common/event/RequestDeleteSellerEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/common/event/RequestIRollbackInsertWalletFinishedEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/common/event/RequestInsertWalletFinishedEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/common/ApiResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/common/CommonApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/common/IdempotencyCreator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/common/JsonUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/common/PersistenceAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/common/UseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/common/WebAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/OrderConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/OrderServiceApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/in/stream/WalletKafkaConsumer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/in/web/OrderController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/in/web/PaymentCheckoutController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/in/web/PaymentConfirmController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/in/web/PaymentController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/in/web/PaymentViewController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/in/web/request/PaymentCheckOutRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/in/web/request/PaymentConfirmRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/in/web/response/PaymentOrderWithSellerResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/in/web/response/PaymentOrderWithSellerResponses.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/out/persistence/entity/CommonEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/out/persistence/entity/OutBox.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/out/persistence/entity/PaymentEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/out/persistence/entity/PaymentOrder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/out/persistence/entity/PaymentOrderHistory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/out/persistence/repository/OutBoxRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/out/persistence/repository/OutBoxRepositoryCustom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/out/persistence/repository/OutBoxRepositoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/out/persistence/repository/PaymentEventRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/out/persistence/repository/PaymentEventRepositoryCustom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/out/persistence/repository/PaymentEventRepositoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/out/persistence/repository/PaymentOrderHistoryRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/out/persistence/repository/PaymentOrderRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/out/persistence/repository/PaymentOrderRepositoryCustom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/out/persistence/repository/PaymentOrderRepositoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/out/persistence/service/OutBoxPersistenceAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/out/persistence/service/PaymentOrderPersistenceAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/out/service/CatalogServiceAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/out/stream/PaymentEventMessageSender.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/out/stream/util/PartitionKeyUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/out/web/error/errorCode/ErrorCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/out/web/error/errorCode/PSPErrorCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/out/web/error/errorCode/PaymentErrorCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/out/web/error/exception/BusinessException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/out/web/error/exception/CustomMessageHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/out/web/error/exception/GlobalExceptionController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/out/web/error/exception/PSPConfirmationException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/out/web/error/exception/PaymentException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/out/web/toss/PaymentExecutorWebAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/out/web/toss/executor/PaymentExecutor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/adapter/out/web/toss/executor/TossPaymentExecutor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/application/port/in/PaymentCheckOutCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/application/port/in/RequestOrderCheckOutUseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/application/port/in/RequestOrderConfirmUseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/application/port/in/RequestOrderUseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/application/port/out/GetCatalogtPort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/application/port/out/GetOrderPort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/application/port/out/OutBoxStatusUpdatePort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/application/port/out/PaymentCheckOutOutPut.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/application/port/out/PaymentCheckOutPort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/application/port/out/PaymentEventOutPut.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/application/port/out/PaymentExecutorPort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/application/port/out/PaymentOrderOutPut.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/application/port/out/PaymentOrderStatusOutPut.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/application/port/out/PaymentStatusUpdatePort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/application/port/out/ProductOutPut.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/application/service/OrderCheckOutService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/application/service/OrderConfirmService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/application/service/OrderService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/application/service/RetryPaymentEventMessageService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/client/CatalogClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/client/TossPaymentClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/OutBoxOutPut.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/OutBoxStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/PSPConfirmationStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/PaymentCheckOutResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/PaymentConfirmCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/PaymentEventMethod.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/PaymentEventType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/PaymentExecutionResultOutPut.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/PaymentExtraDetailsOutPut.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/PaymentFailureOutPut.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/PaymentOrderStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/PaymentOrderWithSellerOutPut.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/SelectProductListRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/SelectProductResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/SelectProductResponses.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/TimeConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/message/PaymentEventMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/message/PaymentEventMessageType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/message/WalletEventMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/message/WalletEventMessageType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/properties/TossPaymentProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/toss/Cancel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/toss/Card.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/toss/CashReceipt.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/toss/Checkout.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/toss/Discount.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/toss/EasyPay.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/toss/GiftCertificate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/toss/MobilePhone.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/toss/Receipt.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/toss/RefundReceiveAccount.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/toss/TossFailureResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/toss/TossPaymentConfirmationResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/toss/TossPaymentConfirmationWithPspRawDataResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/toss/TossPaymentError.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/toss/Transfer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/domain/toss/VirtualAccount.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/feign/CatalogFeignConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/feign/FeignResponseUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/feign/PaymentAuthenticationInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/feign/TossPaymentFeignConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/feign/handler/CatalogFeignErrorDecode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/feign/handler/TossPaymentFeignErrorDecode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/java/com/order_service/validator/PaymentValidator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/resources/application.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/resources/messages/error_en.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/resources/messages/error_ko.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/resources/messages/messages.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/resources/messages/messages_en.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/resources/messages/messages_ko.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/resources/templates/checkout.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/resources/templates/fail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/resources/templates/success.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/resources/yaml/application-common.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/resources/yaml/application-local.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order_service/src/main/resources/yaml/application-test.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/java/com/common/CommonApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/java/com/common/IdempotencyCreator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/java/com/common/JsonUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/java/com/common/PersistenceAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/java/com/common/UseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/java/com/common/WebAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/SellerConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/SellerServiceApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/adapter/axon/aggregate/InsertSellerAggregate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/adapter/axon/aggregate/SellerAggregate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/adapter/axon/command/AxonInsertSellerCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/adapter/axon/command/InsertWalletCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/adapter/axon/event/RequestInsertWalletFinishedEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/adapter/axon/event/SagaInsertSellerEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/adapter/axon/event/SagaInsertWalletEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/adapter/axon/saga/InsertSellerAndWalletSaga.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/adapter/in/web/InsertSellerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/adapter/in/web/request/InsertSellerRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/adapter/out/persistence/entity/CommonEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/adapter/out/persistence/entity/Seller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/adapter/out/persistence/repository/SellerRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/adapter/out/persistence/service/SellerPersistenceAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/application/port/in/InsertSellerUseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/application/port/out/DeleteSellerPort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/application/port/out/InsertSellerPort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/application/service/SellerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/domain/InsertSellerCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/resources/application.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/resources/messages/error_en.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/resources/messages/error_ko.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/resources/messages/messages.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/resources/messages/messages_en.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/resources/messages/messages_ko.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/resources/yaml/application-common.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/resources/yaml/application-local.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seller_service/src/main/resources/yaml/application-test.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/common/CommonApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/common/IdempotencyCreator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/common/JsonUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/common/PersistenceAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/common/StreamAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/common/UseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/common/WebAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/WalletConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/WalletServiceApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/adapter/axon/aggregate/InsertSellerRequestInsertWalletAggregate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/adapter/axon/command/InsertWalletCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/adapter/axon/event/RequestInsertWalletFinishedEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/adapter/in/stream/PaymentEventMessageHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/adapter/out/client/OrderClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/adapter/out/exception/RetryExhaustedWithOptimisticLockingFailureException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/adapter/out/feign/FeignResponseUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/adapter/out/feign/OrderFeignConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/adapter/out/feign/PaymentAuthenticationInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/adapter/out/feign/handler/OrderFeignErrorDecode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/adapter/out/persistence/entity/Wallet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/adapter/out/persistence/entity/WalletTransaction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/adapter/out/persistence/repository/WalletRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/adapter/out/persistence/repository/WalletRepositoryCustom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/adapter/out/persistence/repository/WalletRepositoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/adapter/out/persistence/repository/WalletTransactionRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/adapter/out/persistence/repository/WalletTransactionRepositoryCustom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/adapter/out/persistence/repository/WalletTransactionRepositoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/adapter/out/persistence/service/WalletPersistenceAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/adapter/out/service/OrderServiceAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/application/port/in/SettlementUseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/application/port/out/GetPaymentOrderPort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/application/port/out/GetWalletPort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/application/port/out/InsertWalletPort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/application/port/out/InsertWalletTransactionsPort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/application/port/out/UpdateWalletPort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/application/service/SettlementService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/domain/InsertWalletCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/domain/PaymentEventMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/domain/PaymentEventMessageType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/domain/PaymentOrderStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/domain/PaymentOrderWithSellerOutPut.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/domain/PaymentOrderWithSellerResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/domain/PaymentOrderWithSellerResponses.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/domain/ReferenceType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/domain/TransactionType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/domain/WalletEventMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/domain/WalletEventMessageType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/domain/WalletOutPut.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/domain/WalletTransactionOutPut.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/resources/application.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/resources/messages/error_en.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/resources/messages/error_ko.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/resources/messages/messages.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/resources/messages/messages_en.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/resources/messages/messages_ko.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/resources/yaml/application-common.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/resources/yaml/application-local.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_service/src/main/resources/yaml/application-test.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MSA_project_v1/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../MSA_project_v1/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MSA_project_v1/common/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../MSA_project_v1/common/settings.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MSA_project_v1/wallet_service/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../MSA_project_v1/wallet_service/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MSA_project_v1/wallet_service/src/main/java/com/common/ApiResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MSA_project_v1/wallet_service/src/main/resources/yaml/application-local.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../MSA_project_v1/wallet_service/src/main/resources/yaml/application-local.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,49 +292,204 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
-    <projectState path="$PROJECT_DIR$/common">
-      <ProjectState />
-    </projectState>
-    <projectState path="$PROJECT_DIR$/seller_service">
-      <ProjectState />
-    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$/wallet_service">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/seller_service">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/order_service">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/catalog_service">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="paymentMsa" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="paymentMsa" type="f1a62948:ProjectNode" />
+                <item name="catalog_service" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="paymentMsa" type="f1a62948:ProjectNode" />
+                <item name="catalog_service" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="paymentMsa" type="f1a62948:ProjectNode" />
+                <item name="catalog_service" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="other" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
-  <component name="ProjectId" id="2qNaOyoniGT3vtGOeHhAKKSVplt" />
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2qOVmNnhOvAcFaiMItGmJoLCKjh" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.paymentMsa [:Main.main()].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "jdk.selected.JAVA_MODULE": "corretto-17",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Gradle.Build paymentMsa.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.paymentMsa:catalog_service [compileJava].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.paymentMsa:order_service [compileJava].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.paymentMsa:seller_service [compileJava].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.paymentMsa:wallet_service [compileJava].executor&quot;: &quot;Run&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.CatalogServiceApplication.executor&quot;: &quot;Debug&quot;,
+    &quot;Spring Boot.CommonApplication.executor&quot;: &quot;Debug&quot;,
+    &quot;Spring Boot.OrderServiceApplication.executor&quot;: &quot;Debug&quot;,
+    &quot;Spring Boot.SellerServiceApplication.executor&quot;: &quot;Debug&quot;,
+    &quot;Spring Boot.WalletServiceApplication.executor&quot;: &quot;Debug&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/syh80/workspace/CODE/github/MSA_project/paymentMsa&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.annotationProcessors&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.Main" />
-      <module name="paymentMsa.main" />
+}</component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\syh80\workspace\CODE\github\MSA_project\paymentMsa" />
+      <recent name="C:\Users\syh80\workspace\CODE\github\MSA_project\paymentMsa\wallet_service" />
+      <recent name="C:\Users\syh80\workspace\CODE\github\MSA_project\paymentMsa\seller_service" />
+      <recent name="C:\Users\syh80\workspace\CODE\github\MSA_project\paymentMsa\order_service" />
+      <recent name="C:\Users\syh80\workspace\CODE\github\MSA_project\paymentMsa\common" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.seller_service.adapter.axon.aggregate" />
+      <recent name="com.seller_service.adapter.axon.event" />
+      <recent name="com.common.event" />
+      <recent name="com.common" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="MicronautRunConfigurationType" />
+        <option value="QuarkusRunConfigurationType" />
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.WalletServiceApplication">
+    <configuration name="paymentMsa:catalog_service [compileJava]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/catalog_service" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="compileJava" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="paymentMsa:catalog_service [compileJava]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/catalog_service" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="compileJava" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="CatalogServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="paymentMsa.catalog_service.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.catalog_service.CatalogServiceApplication" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.*" />
+          <option name="PATTERN" value="com.catalog_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CatalogServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="paymentMsa.catalog_service.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.catalog_service.CatalogServiceApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.catalog_service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -90,22 +498,104 @@
       </method>
     </configuration>
     <configuration name="CommonApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="common.main" />
+      <module name="paymentMsa.common.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.common.CommonApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SellerServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="seller_service.main" />
+    <configuration name="CommonApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="paymentMsa.common.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.common.CommonApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OrderServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="paymentMsa.order_service.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.order_service.OrderServiceApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.order_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OrderServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="paymentMsa.order_service.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.order_service.OrderServiceApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.order_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SellerServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="paymentMsa.seller_service.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.seller_service.SellerServiceApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.seller_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SellerServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="paymentMsa.seller_service.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.seller_service.SellerServiceApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.seller_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WalletServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="paymentMsa.wallet_service.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.wallet_service.WalletServiceApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.wallet_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WalletServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="paymentMsa.wallet_service.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.wallet_service.WalletServiceApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.wallet_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
+        <item itemvalue="Spring Boot.WalletServiceApplication" />
+        <item itemvalue="Spring Boot.SellerServiceApplication" />
+        <item itemvalue="Spring Boot.CatalogServiceApplication" />
+        <item itemvalue="Gradle.paymentMsa:catalog_service [compileJava]" />
+        <item itemvalue="Spring Boot.OrderServiceApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -120,16 +610,97 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e9f1aadd-be60-491f-999d-3385590e9b9b" name="Changes" comment="" />
-      <created>1734505460486</created>
+      <changelist id="04894aaa-032f-455c-89da-14421624d688" name="Changes" comment="" />
+      <created>1734533768333</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1734505460486</updated>
-      <workItem from="1734505461540" duration="1269000" />
+      <updated>1734533768333</updated>
+      <workItem from="1734533769459" duration="6820000" />
+      <workItem from="1734567163613" duration="23075000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/application/service/SellerService.java</url>
+          <line>21</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/application/service/SellerService.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/application/service/SellerService.java</url>
+          <line>35</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/adapter/in/web/InsertSellerController.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/adapter/axon/aggregate/SellerAggregate.java</url>
+          <line>58</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/adapter/axon/saga/InsertSellerAndWalletSaga.java</url>
+          <line>122</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/adapter/axon/saga/InsertSellerAndWalletSaga.java</url>
+          <line>123</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/adapter/axon/saga/InsertSellerAndWalletSaga.java</url>
+          <line>125</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/adapter/axon/saga/InsertSellerAndWalletSaga.java</url>
+          <line>126</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/adapter/axon/saga/InsertSellerAndWalletSaga.java</url>
+          <line>165</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/adapter/axon/aggregate/InsertSellerRequestInsertWalletAggregate.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/adapter/axon/saga/InsertSellerAndWalletSaga.java</url>
+          <line>108</line>
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/wallet_service/src/main/java/com/wallet_service/adapter/axon/aggregate/InsertSellerRequestInsertWalletAggregate.java</url>
+          <line>35</line>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/seller_service/src/main/java/com/seller_service/adapter/axon/aggregate/SellerAggregate.java</url>
+          <line>68</line>
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.util.concurrent.CompletionException" package="java.util.concurrent" />
+          <option name="timeStamp" value="46" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

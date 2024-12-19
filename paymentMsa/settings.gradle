@@ -1,0 +1,7 @@
+rootProject.name = 'paymentMsa'
+include 'wallet_service'
+include 'common'
+include 'catalog_service'
+include 'order_service'
+include 'seller_service'
+

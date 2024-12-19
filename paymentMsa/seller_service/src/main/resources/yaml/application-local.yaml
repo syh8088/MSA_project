@@ -1,0 +1,78 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    url: jdbc:mysql://localhost:3306/payment_msa
+#    url: jdbc:mysql://mysql-server:3306/payment_msa
+    username: root
+    password: 1234
+  jpa:
+    show-sql: true # 콘솔로그로 출력하려면
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: false
+        default_batch_fetch_size: 1000
+        format_sql: true # SQL 포맷팅
+        highlight_sql: true # ANSI 코드에 색을 나타낸다
+        use_sql_comments: true # SQL 내부에 /* */ 주석 추가
+        dialect: org.hibernate.dialect.MySQLDialect
+    open-in-view: false
+
+#  cloud:
+#    function:
+#      definition: wallet;
+#    stream:
+#      kafka:
+#        binder:
+#          brokers: 127.0.0.1:9092
+##          brokers: kafka1:9092
+#        bindings:
+#
+#          # 카프카 프로듀서를 통해서 메시지를 보낸 이후에 메시지 전송 결과를 받아볼 수 있도록 레코드 메타 데이터 채널 설정을 추가
+#          # 메시지는 기본적으로 비동기식으로 전송 합니다. 이렇게 메시지 전송 결과를 받아보지 않는다면 메시지 전달이 되었는지 보장할 수 없음
+#          send-out-0:
+#            producer:
+#              record-metadata-channel: payment-result
+#              configuration:
+#                key:
+#                  serializer: org.apache.kafka.common.serialization.StringSerializer
+#          wallet-in-0:
+#            consumer:
+#              configuration:
+#                isolation:
+#                  level: read_committed
+#              # 메시지 처리의 신뢰성을 보장하기 위해서 데드레터 큐 또한 사용할 수 있도록 설정
+#              enable-dlq: true
+#              dlq-name: wallet_payment_dlq
+#
+#      bindings:
+#        send-out-0:
+#          destination: payment # topic
+#          group: payment-service
+#
+#        # 정산 처리 성공 메시지와 장부 기입 성공 메시지를 카프카에서 수신할 수 있도록 바인딩을 선언
+#        wallet-in-0:
+#          destination: wallet
+#          group: payment-service
+
+
+logging:
+  level:
+    org.hibernate.SQL: debug # logger에 출력하려면
+    org.hibernate.type.descriptor.sql: trace # 파라미터 값 출력
+
+axon:
+  axonserver:
+    servers: localhost:8124
+  serializer:
+    events: jackson
+    messages: jackson
+    general: xstream
+
+  eventhandling:
+    processors:
+      name:
+        mode: tracking
