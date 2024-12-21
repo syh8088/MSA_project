@@ -4,4 +4,5 @@ include 'common'
 include 'catalog_service'
 include 'order_service'
 include 'seller_service'
+include 'order_query_service'
 

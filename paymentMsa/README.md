@@ -102,6 +102,7 @@ create table sellers
     seller_id  varchar(128) default '0'               not null,
     created_at datetime     default CURRENT_TIMESTAMP not null,
     updated_at datetime     default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP,
+    is_deleted tinyint(1) default 0                 not null,
     constraint sellerId
         unique (seller_id)
 );

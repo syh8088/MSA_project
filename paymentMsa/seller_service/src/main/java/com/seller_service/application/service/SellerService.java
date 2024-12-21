@@ -1,6 +1,7 @@
 package com.seller_service.application.service;
 
 import com.common.UseCase;
+import com.seller_service.adapter.axon.command.RequestInsertSellerCommand;
 import com.seller_service.application.port.in.InsertSellerUseCase;
 import com.seller_service.domain.RequestPersistenceInsertSellerCommand;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,7 @@ public class SellerService implements InsertSellerUseCase {
     @Override
     public void insertSeller(RequestPersistenceInsertSellerCommand insertSellerCommand) {
 
-        com.seller_service.adapter.axon.command.RequestInsertSellerCommand requestInsertSellerCommand = com.seller_service.adapter.axon.command.RequestInsertSellerCommand.of(insertSellerCommand.getSellerId());
+        RequestInsertSellerCommand requestInsertSellerCommand = RequestInsertSellerCommand.of(insertSellerCommand.getSellerId());
         commandGateway.send(requestInsertSellerCommand)
         .whenComplete(
                 (result, throwable) -> {

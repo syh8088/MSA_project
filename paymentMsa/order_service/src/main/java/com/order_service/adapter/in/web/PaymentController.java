@@ -2,6 +2,8 @@ package com.order_service.adapter.in.web;
 
 import com.order_service.adapter.out.stream.util.PartitionKeyUtil;
 import com.order_service.application.port.out.PaymentEventOutPut;
+import com.order_service.domain.message.OrderQueryEventMessage;
+import com.order_service.domain.message.OrderQueryEventMessageType;
 import com.order_service.domain.message.PaymentEventMessage;
 import com.order_service.domain.message.PaymentEventMessageType;
 import lombok.RequiredArgsConstructor;
@@ -59,6 +61,31 @@ public class PaymentController {
     private PaymentEventMessage createPaymentEventMessage(String orderId, int partitionKey) {
         return PaymentEventMessage.of(
                 PaymentEventMessageType.PAYMENT_CONFIRMATION_SUCCESS,
+                Map.of("orderId", orderId),
+                Map.of("partitionKey", partitionKey)
+        );
+    }
+
+    @GetMapping("test2")
+    public String test2() {
+
+        String orderId = "tewkgmwepm2394234" + LocalDateTime.now().toString();
+        int partitionKey = partitionKeyUtil.createPartitionKey(orderId.hashCode());
+        OrderQueryEventMessage paymentEventMessage = this.createPaymentEventMessage2(orderId, partitionKey);
+
+//        streamBridge.send(bindingName, MessageBuilder.withPayload(paymentEventMessage).build());
+//
+        streamBridge.send("order-query-send-out-0", MessageBuilder
+                .withPayload(paymentEventMessage)
+                .setHeader(KafkaHeaders.KEY, String.valueOf(partitionKey))
+                .build());
+
+        return "test";
+    }
+
+    private OrderQueryEventMessage createPaymentEventMessage2(String orderId, int partitionKey) {
+        return OrderQueryEventMessage.of(
+                OrderQueryEventMessageType.SUCCESS,
                 Map.of("orderId", orderId),
                 Map.of("partitionKey", partitionKey)
         );

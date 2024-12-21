@@ -16,6 +16,7 @@ public class PaymentOrderWithSellerOutPut {
     private PaymentOrderStatus status;
     private long sellerNo;
     private String sellerId;
+    private long productNo;
 
     @QueryProjection
     public PaymentOrderWithSellerOutPut(long paymentOrderNo, String orderId, BigDecimal amount, PaymentOrderStatus status, long sellerNo, String sellerId) {
@@ -28,11 +29,12 @@ public class PaymentOrderWithSellerOutPut {
     }
 
     @QueryProjection
-    public PaymentOrderWithSellerOutPut(long paymentOrderNo, String orderId, BigDecimal amount, PaymentOrderStatus status, long sellerNo) {
+    public PaymentOrderWithSellerOutPut(long paymentOrderNo, String orderId, BigDecimal amount, PaymentOrderStatus status, long sellerNo, long productNo) {
         this.paymentOrderNo = paymentOrderNo;
         this.orderId = orderId;
         this.amount = amount;
         this.status = status;
         this.sellerNo = sellerNo;
+        this.productNo = productNo;
     }
 }

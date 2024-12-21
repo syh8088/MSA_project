@@ -39,6 +39,15 @@ services:
       - MYSQL_USER=root
       - MYSQL_PASSWORD=1234
 
+  myredis:
+    image: redis
+    hostname: myredis
+    ports:
+      - "6379:6379"
+#    depends_on:
+#      cassandra-node-0:
+#        condition: service_healthy
+
   zookeeper:
     image: bitnami/zookeeper:latest
     networks:

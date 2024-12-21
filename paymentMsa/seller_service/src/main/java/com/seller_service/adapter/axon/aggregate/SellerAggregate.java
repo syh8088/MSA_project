@@ -43,7 +43,7 @@ public class SellerAggregate {
 
         id = command.getSagaRollbackSellerId();
 
-        // seller insert
+        // seller delete
         deleteSellerPort.deleteSeller(command.getSellerNo());
 
         String requestDeleteSellerId = UUID.randomUUID().toString();

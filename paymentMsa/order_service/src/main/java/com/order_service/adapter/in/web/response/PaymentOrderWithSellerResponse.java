@@ -19,15 +19,17 @@ public class PaymentOrderWithSellerResponse {
     private PaymentOrderStatus status;
     private long sellerNo;
     private String sellerId;
+    private long productNo;
 
     @Builder
-    private PaymentOrderWithSellerResponse(long paymentOrderNo, String orderId, BigDecimal amount, PaymentOrderStatus status, long sellerNo, String sellerId) {
+    private PaymentOrderWithSellerResponse(long paymentOrderNo, String orderId, BigDecimal amount, PaymentOrderStatus status, long sellerNo, String sellerId, long productNo) {
         this.paymentOrderNo = paymentOrderNo;
         this.orderId = orderId;
         this.amount = amount;
         this.status = status;
         this.sellerNo = sellerNo;
         this.sellerId = sellerId;
+        this.productNo = productNo;
     }
 
     public static PaymentOrderWithSellerResponse of(PaymentOrderWithSellerOutPut paymentOrderWithSellerOutPut) {
@@ -38,6 +40,7 @@ public class PaymentOrderWithSellerResponse {
                 .status(paymentOrderWithSellerOutPut.getStatus())
                 .sellerNo(paymentOrderWithSellerOutPut.getSellerNo())
                 .sellerId(paymentOrderWithSellerOutPut.getSellerId())
+                .productNo(paymentOrderWithSellerOutPut.getProductNo())
                 .build();
     }
 

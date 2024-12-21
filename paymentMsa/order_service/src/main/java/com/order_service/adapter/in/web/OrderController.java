@@ -31,4 +31,13 @@ public class OrderController {
         return ResponseEntity.ok().body(PaymentOrderWithSellerResponses.of(paymentOrderWithSellerResponses));
     }
 
+    @GetMapping("/sellers/{sellerNo}")
+    public ResponseEntity<?> selectOrderTotalAmountGroupingProductBySellerNo(@PathVariable(value = "sellerNo") long sellerNo) {
+
+        requestOrderUseCase.selectOrderTotalAmountGroupingProductBySellerNo(sellerNo);
+
+
+        return ResponseEntity.ok().body(null);
+    }
+
 }

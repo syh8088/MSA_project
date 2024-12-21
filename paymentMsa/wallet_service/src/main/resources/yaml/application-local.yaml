@@ -23,11 +23,12 @@ spring:
 
   cloud:
     function:
-      definition: paymentEventMessageHandler;
+      definition: consume;
     stream:
       kafka:
         bindings:
-          paymentEventMessageHandler-in-0:
+#          paymentEventMessageHandler-in-0:
+          consume-in-0:
             consumer:
               enable-dlq: true
               dlq-name: payment_wallet_dlq
@@ -35,7 +36,8 @@ spring:
           brokers: 127.0.0.1:9092
       #          brokers: kafka1:9092
       bindings:
-        paymentEventMessageHandler-in-0:
+#        paymentEventMessageHandler-in-0:
+        consume-in-0:
           destination: payment # topic
           group: wallet-service
           consumer:

@@ -45,7 +45,8 @@ public class PaymentOrderRepositoryImpl implements PaymentOrderRepositoryCustom 
 								qPaymentOrder.orderId,
 								qPaymentOrder.amount,
 								qPaymentOrder.status,
-								qPaymentOrder.sellerNo
+								qPaymentOrder.sellerNo,
+								qPaymentOrder.productNo
 						)
 				)
 				.from(qPaymentOrder)

@@ -1,4 +1,4 @@
-package com.wallet_service.domain;
+package com.wallet_service.domain.message;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

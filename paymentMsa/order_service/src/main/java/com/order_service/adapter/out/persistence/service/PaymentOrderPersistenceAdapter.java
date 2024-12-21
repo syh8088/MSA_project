@@ -2,18 +2,13 @@ package com.order_service.adapter.out.persistence.service;
 
 import com.common.WebAdapter;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.order_service.adapter.in.web.response.OrderTotalAmountGroupingProductResponse;
 import com.order_service.adapter.out.persistence.entity.OutBox;
 import com.order_service.adapter.out.persistence.entity.PaymentEvent;
 import com.order_service.adapter.out.persistence.entity.PaymentOrderHistory;
-import com.order_service.adapter.out.persistence.repository.OutBoxRepository;
-import com.order_service.adapter.out.persistence.repository.PaymentEventRepository;
-import com.order_service.adapter.out.persistence.repository.PaymentOrderHistoryRepository;
-import com.order_service.adapter.out.persistence.repository.PaymentOrderRepository;
+import com.order_service.adapter.out.persistence.repository.*;
 import com.order_service.adapter.out.stream.util.PartitionKeyUtil;
-import com.order_service.application.port.out.GetOrderPort;
-import com.order_service.application.port.out.PaymentCheckOutPort;
-import com.order_service.application.port.out.PaymentOrderStatusOutPut;
-import com.order_service.application.port.out.PaymentStatusUpdatePort;
+import com.order_service.application.port.out.*;
 import com.order_service.domain.OutBoxStatus;
 import com.order_service.domain.PaymentExecutionResultOutPut;
 import com.order_service.domain.PaymentOrderStatus;
@@ -23,22 +18,26 @@ import com.order_service.domain.message.PaymentEventMessageType;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Slf4j
 @WebAdapter
 @RequiredArgsConstructor
-public class PaymentOrderPersistenceAdapter implements PaymentCheckOutPort, PaymentStatusUpdatePort, GetOrderPort {
+public class PaymentOrderPersistenceAdapter implements PaymentCheckOutPort, PaymentStatusUpdatePort, GetOrderPort, PaymentOrderRedisPort {
 
     private final PaymentEventRepository paymentEventRepository;
     private final PaymentOrderRepository paymentOrderRepository;
     private final PaymentOrderHistoryRepository paymentOrderHistoryRepository;
     private final OutBoxRepository outBoxRepository;
+    private final PaymentOrderRedisRepository paymentOrderRedisRepository;
 
     private final PartitionKeyUtil partitionKeyUtil;
 
@@ -182,5 +181,48 @@ public class PaymentOrderPersistenceAdapter implements PaymentCheckOutPort, Paym
     @Override
     public List<PaymentOrderWithSellerOutPut> selectPaymentOrderListWithSellerByOrderId(String orderId) {
         return paymentOrderRepository.selectPaymentOrderListWithSellerByOrderId(orderId);
+    }
+
+    @Override
+    public void updatePaymentOrderAmountSumGropingSellerNo(String orderId) {
+
+        List<PaymentOrderWithSellerOutPut> paymentOrderWithSellerList = this.selectPaymentOrderListWithSellerByOrderId(orderId);
+
+        // 결제 주문 데이터에 저장되어 있는 판매자 ID 를 바탕으로 판매자 지갑대를 조회하는 로직
+        Map<Long, List<PaymentOrderWithSellerOutPut>> paymentOrderWithSellerGroupingSellerNoMap
+                = paymentOrderWithSellerList.stream()
+                .collect(Collectors.groupingBy(PaymentOrderWithSellerOutPut::getSellerNo));
+
+        for (long sellerNo : paymentOrderWithSellerGroupingSellerNoMap.keySet()) {
+
+            List<PaymentOrderWithSellerOutPut> paymentOrderList = paymentOrderWithSellerGroupingSellerNoMap.get(sellerNo);
+            Map<Long, List<PaymentOrderWithSellerOutPut>> paymentOrderWithSellerGroupingProductNoMap = paymentOrderList.stream()
+                    .collect(Collectors.groupingBy(PaymentOrderWithSellerOutPut::getProductNo));
+
+            for (long productNo : paymentOrderWithSellerGroupingProductNoMap.keySet()) {
+                List<PaymentOrderWithSellerOutPut> paymentOrderWithSellerOutPuts = paymentOrderWithSellerGroupingProductNoMap.get(productNo);
+                double totalAmount = this.calculateTotalAmount(paymentOrderWithSellerOutPuts);
+                paymentOrderRedisRepository.updatePaymentOrderAmountSumGropingSellerNo(sellerNo, productNo, totalAmount);
+            }
+        }
+    }
+
+    @Override
+    public void selectOrderTotalAmountGroupingProductBySellerNo(long sellerNo) {
+
+        Set<ZSetOperations.TypedTuple<String>> strings
+                = paymentOrderRedisRepository.selectOrderTotalAmountGroupingProductBySellerNo(sellerNo);
+
+        List<OrderTotalAmountGroupingProductResponse> mapWithSons = strings.stream()
+                .map(data -> OrderTotalAmountGroupingProductResponse.of(data.getScore(), data.getValue()))
+                .toList();
+
+        System.out.println("strings = " + mapWithSons);
+    }
+
+    private double calculateTotalAmount(List<PaymentOrderWithSellerOutPut> paymentOrderWithSellerOutPuts) {
+        return paymentOrderWithSellerOutPuts.stream()
+                .mapToDouble(data -> data.getAmount().doubleValue())
+                .sum();
     }
 }
