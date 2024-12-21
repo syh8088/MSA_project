@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Objects;
 
 @Getter
 @NoArgsConstructor
@@ -21,22 +20,18 @@ public class OrderTotalAmountGroupingProductResponse {
         this.productNo = productNo;
     }
 
-    public static OrderTotalAmountGroupingProductResponse of(Double amount, String productNo) {
+    public static List<OrderTotalAmountGroupingProductResponse> of(List<OrderTotalAmountGroupingProduct> orderTotalAmountGroupingProductList) {
 
-        return OrderTotalAmountGroupingProductResponse.builder()
-                .amount(BigDecimal.valueOf(amount))
-                .productNo(Integer.parseInt(productNo))
-                .build();
+        return orderTotalAmountGroupingProductList.stream()
+                .map(OrderTotalAmountGroupingProductResponse::of)
+                .toList();
     }
 
-    public static double calculateTotalAmount(List<OrderTotalAmountGroupingProductResponse> orderTotalAmountGroupingProductResponseList) {
+    public static OrderTotalAmountGroupingProductResponse of(OrderTotalAmountGroupingProduct orderTotalAmountGroupingProduct) {
 
-        if (Objects.isNull(orderTotalAmountGroupingProductResponseList)) {
-            return 0;
-        }
-
-        return orderTotalAmountGroupingProductResponseList.stream()
-                .mapToDouble(data -> data.getAmount().doubleValue())
-                .sum();
+        return OrderTotalAmountGroupingProductResponse.builder()
+                .amount(orderTotalAmountGroupingProduct.getAmount())
+                .productNo(orderTotalAmountGroupingProduct.getProductNo())
+                .build();
     }
 }

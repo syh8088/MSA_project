@@ -1,6 +1,7 @@
 package com.order_query_service.application.service;
 
 import com.common.UseCase;
+import com.order_query_service.adapter.in.web.response.OrderTotalAmountGroupingProduct;
 import com.order_query_service.application.port.in.GetOrderQueryUseCase;
 import com.order_query_service.application.port.in.OrderQuerySellerAmountSumGroupingProductUseCase;
 import com.order_query_service.application.port.out.GetPaymentOrderPort;
@@ -29,10 +30,8 @@ public class OrderQueryService implements OrderQuerySellerAmountSumGroupingProdu
     }
 
     @Override
-    public List<PaymentOrderWithSellerOutPut> selectOrderTotalAmountGroupingProductBySellerNo(long sellerNo) {
+    public List<OrderTotalAmountGroupingProduct> selectOrderTotalAmountGroupingProductBySellerNo(long sellerNo) {
 
-        paymentOrderRedisPort.selectOrderTotalAmountGroupingProductBySellerNo(sellerNo);
-
-        return List.of();
+        return paymentOrderRedisPort.selectOrderTotalAmountGroupingProductBySellerNo(sellerNo);
     }
 }

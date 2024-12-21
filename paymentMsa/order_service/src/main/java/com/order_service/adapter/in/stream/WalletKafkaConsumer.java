@@ -1,8 +1,6 @@
 package com.order_service.adapter.in.stream;
 
-import com.order_service.application.port.out.OutBoxStatusUpdatePort;
-import com.order_service.application.port.out.PaymentStatusUpdatePort;
-import com.order_service.domain.OutBoxStatus;
+import com.order_service.application.port.in.WalletResultEventMessageUseCase;
 import com.order_service.domain.message.WalletEventMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -18,8 +16,7 @@ import java.util.function.Consumer;
 @RequiredArgsConstructor
 public class WalletKafkaConsumer implements Consumer<Message<WalletEventMessage>> {
 
-    private final PaymentStatusUpdatePort paymentStatusUpdatePort;
-    private final OutBoxStatusUpdatePort outBoxStatusUpdatePort;
+    private final WalletResultEventMessageUseCase walletResultEventMessageUseCase;
 
     @SneakyThrows
     @Override
@@ -30,7 +27,6 @@ public class WalletKafkaConsumer implements Consumer<Message<WalletEventMessage>
         WalletEventMessage walletEventMessage = clusterMessage.getPayload();
         String orderId = walletEventMessage.orderId();
 
-        paymentStatusUpdatePort.updateIsWalletDoneByOrderId(orderId, true);
-        outBoxStatusUpdatePort.updateStatusByIdempotencyKey(orderId, OutBoxStatus.SUCCESS);
+        walletResultEventMessageUseCase.execute(orderId);
     }
 }

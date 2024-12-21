@@ -10,5 +10,4 @@ public interface RequestOrderUseCase {
 
     List<PaymentOrderWithSellerOutPut> selectPaymentOrderListWithSellerByOrderId(String orderId);
 
-    void selectOrderTotalAmountGroupingProductBySellerNo(long sellerNo);
 }
