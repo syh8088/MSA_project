@@ -2,9 +2,6 @@ package com.order_query_service.adapter.in.stream;
 
 import com.common.StreamAdapter;
 import com.order_query_service.application.port.in.OrderQuerySellerAmountSumGroupingProductUseCase;
-import com.order_query_service.application.port.out.GetPaymentOrderPort;
-import com.order_query_service.application.port.out.PaymentOrderRedisPort;
-import com.order_query_service.domain.PaymentOrderWithSellerOutPut;
 import com.order_query_service.domain.message.OrderQueryEventMessage;
 import com.order_query_service.domain.message.OrderQueryEventMessageType;
 import com.order_query_service.domain.message.PaymentEventMessage;
@@ -19,7 +16,6 @@ import org.springframework.kafka.support.converter.MessagingMessageConverter;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 
-import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
@@ -28,9 +24,6 @@ import java.util.function.Consumer;
 @StreamAdapter
 @RequiredArgsConstructor
 public class PaymentEventMessageHandler {
-
-	private final PaymentOrderRedisPort paymentOrderRedisPort;
-	private final GetPaymentOrderPort getPaymentOrderPort;
 
 	private final OrderQuerySellerAmountSumGroupingProductUseCase orderQuerySellerAmountSumGroupingProductUseCase;
 
