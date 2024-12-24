@@ -23,6 +23,7 @@ import com.order_service.domain.message.PaymentEventMessageType;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
@@ -41,6 +42,7 @@ public class PaymentOrderPersistenceAdapter implements PaymentCheckOutPort, Paym
     private final OutBoxRepository outBoxRepository;
 
     private final PartitionKeyUtil partitionKeyUtil;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Override
     public void insertPaymentCheckOut(PaymentEvent paymentEvent) {
@@ -55,14 +57,13 @@ public class PaymentOrderPersistenceAdapter implements PaymentCheckOutPort, Paym
 
     @Transactional
     @Override
-    public PaymentEventMessage updatePaymentStatus(PaymentExecutionResultOutPut paymentExecutionResult) {
+    public void updatePaymentStatus(PaymentExecutionResultOutPut paymentExecutionResult) {
 
         PaymentOrderStatus paymentStatus = paymentExecutionResult.getPaymentStatus();
-        PaymentEventMessage paymentEventMessage = null;
 
         switch (paymentStatus) {
             case SUCCESS:
-                paymentEventMessage = this.updatePaymentStatusToSuccess(paymentExecutionResult);
+                this.updatePaymentStatusToSuccess(paymentExecutionResult);
                 break;
             case FAILURE, UNKNOWN:
                 this.updatePaymentStatusToFailureOrUnknown(paymentExecutionResult);
@@ -73,11 +74,9 @@ public class PaymentOrderPersistenceAdapter implements PaymentCheckOutPort, Paym
                 throw new IllegalArgumentException("결제 상태 업그레이드 에러 발생 ## 주문 아이디값: " + paymentExecutionResult.getOrderId());
             }
         }
-
-        return paymentEventMessage;
     }
 
-    private PaymentEventMessage updatePaymentStatusToSuccess(PaymentExecutionResultOutPut paymentExecutionResult) {
+    private void updatePaymentStatusToSuccess(PaymentExecutionResultOutPut paymentExecutionResult) {
 
         List<PaymentOrderStatusOutPut> paymentOrderStatusList
                 = this.selectPaymentOrderStatusListByOrderId(paymentExecutionResult.getOrderId());
@@ -94,9 +93,8 @@ public class PaymentOrderPersistenceAdapter implements PaymentCheckOutPort, Paym
         int partitionKey = partitionKeyUtil.createPartitionKey(orderId.hashCode());
         PaymentEventMessage paymentEventMessage = this.createPaymentEventMessage(orderId, partitionKey);
         this.insertOutBox(paymentEventMessage);
-//        paymentEventMessagePublisher.publishEvent(paymentEventMessage);
 
-        return paymentEventMessage;
+        eventPublisher.publishEvent(paymentEventMessage);
     }
 
     private void updatePaymentStatusToFailureOrUnknown(PaymentExecutionResultOutPut paymentExecutionResult) {
