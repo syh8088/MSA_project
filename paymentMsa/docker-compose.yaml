@@ -2,7 +2,6 @@ version: '3'
 services:
   axon-server:
     container_name: axon-server
-#    image: axoniq/axonserver:4.6.3-jdk-11-dev
     image: axoniq/axonserver:4.6.4-jdk-17-dev
     networks:
       - syh_network
@@ -21,13 +20,11 @@ services:
   #      - axonserver-events:/axonserver/events
   #      - axonserver-config:/axonserver/config:ro
   mysql:
-    #    image: mysql:8.0
     image: mysql
     networks:
       - syh_network
     volumes:
       - ./db/conf.d:/etc/mysql/conf.d
-      #      - ./db/data:/var/lib/mysql
       - ./db/initdb.d:/docker-entrypoint-initdb.d
       - C:\Users\syh80\workspace\docker-volume\mysql_docker\mysql-container:/var/lib/mysql
     env_file: .env
@@ -44,9 +41,6 @@ services:
     hostname: myredis
     ports:
       - "6379:6379"
-#    depends_on:
-#      cassandra-node-0:
-#        condition: service_healthy
 
   zookeeper:
     image: bitnami/zookeeper:latest

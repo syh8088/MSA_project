@@ -21,9 +21,32 @@ https://syh8088.github.io/2024/12/14/MSA/MSA_Payment_Project_1/
 - JPA
 - QueryDsl
 - Mysql 8.x
+- zookeeper
 - Kafka
+- kafka-ui
 - docker
-- Axon
+- Redis
+
+
+#### Execution
+```
+./gradlew docker
+docker-compose up -d
+```
+
+#### Service Endpoint
+- 결제 하기
+  - http://localhost:8080 접속 및 결제 하기
+- Seller 등록 API
+  - POST http://localhost:8083/api/sellers -
+- Mysql
+  - http://localhost:3306
+  - root password: 1234
+  - database: payment_msa
+- Kafka UI
+  - http://localhost:8989
+- Axon Server Dashboard
+  - http://localhost:8024
 
 #### DB initial settings
 ```mysql
@@ -157,24 +180,5 @@ INSERT INTO products (no, seller_no, product_id, name, price, created_at, update
 INSERT INTO products (no, seller_no, product_id, name, price, created_at, updated_at) VALUES (3, 1, 'C', '상품C', 3000.00, '2024-11-28 22:55:09', '2024-11-28 22:55:09');
 ```
 
-#### Execution
-```
-./gradlew docker
-docker-compose up -d
-```
-
-#### Service Endpoint
-- 결제 하기
-  - http://localhost:8080 접속 및 결제 하기
-- Seller 등록 API
-  - POST http://localhost:8083/api/sellers -
-- Mysql
-  - http://localhost:3306
-  - root password: 1234
-  - database: payment_msa
-- Kafka UI
-  - http://localhost:8989
-- Axon Server Dashboard
-  - http://localhost:8024
 
 
