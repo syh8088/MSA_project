@@ -23,10 +23,10 @@ services:
     image: mysql
     networks:
       - syh_network
-    volumes:
-      - ./db/conf.d:/etc/mysql/conf.d
-      - ./db/initdb.d:/docker-entrypoint-initdb.d
-      - C:\Users\syh80\workspace\docker-volume\mysql_docker\mysql-container:/var/lib/mysql
+#    volumes:
+#      - ./db/conf.d:/etc/mysql/conf.d
+#      - ./db/initdb.d:/docker-entrypoint-initdb.d
+#      - C:\Users\syh80\workspace\docker-volume\mysql_docker\mysql-container:/var/lib/mysql
     env_file: .env
     ports:
       - "3306:3306"
