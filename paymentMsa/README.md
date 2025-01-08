@@ -10,7 +10,9 @@
 
 자세한 설명은
 
-https://syh8088.github.io/2024/12/14/MSA/MSA_Payment_Project_1/
+https://syh8088.github.io/2024/12/14/MSA/paymentMsa/MSA_Payment_Project_1
+https://syh8088.github.io/2024/12/15/MSA/paymentMsa/MSA_Payment_Project_2
+https://syh8088.github.io/2024/12/16/MSA/paymentMsa/MSA_Payment_Project_3
 
 에서 정리 되어 있습니다. 참고 부탁드립니다.
 
