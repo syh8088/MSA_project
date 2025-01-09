@@ -1,0 +1,12 @@
+rootProject.name = 'KiwiShop'
+
+include 'common'
+include 'service'
+include 'service:order'
+include 'service:catalog'
+include 'service:hot-catalog'
+include 'service:seller'
+include 'service:wallet'
+include 'service:order'
+include 'service:review'
+include 'service:like'
