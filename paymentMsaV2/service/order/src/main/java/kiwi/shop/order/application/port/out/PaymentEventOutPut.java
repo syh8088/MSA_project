@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class PaymentEventOutPut {
 
-    private long paymentEventNo;
+    private long paymentEventId;
     private String paymentKey;
     private String orderId;
     private String orderName;
@@ -26,8 +26,8 @@ public class PaymentEventOutPut {
     private List<PaymentOrderOutPut> paymentOrderList;
 
     @QueryProjection
-    public PaymentEventOutPut(long paymentEventNo, String paymentKey, String orderId, String orderName, PaymentEventMethod method, PaymentEventType type, LocalDateTime approvedDateTime, boolean isPaymentDone) {
-        this.paymentEventNo = paymentEventNo;
+    public PaymentEventOutPut(long paymentEventId, String paymentKey, String orderId, String orderName, PaymentEventMethod method, PaymentEventType type, LocalDateTime approvedDateTime, boolean isPaymentDone) {
+        this.paymentEventId = paymentEventId;
         this.paymentKey = paymentKey;
         this.orderId = orderId;
         this.orderName = orderName;

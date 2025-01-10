@@ -1,29 +1,25 @@
 package kiwi.shop.order.adapter.out.persistence.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import kiwi.shop.order.adapter.out.persistence.entity.OutBox;
+import kiwi.shop.common.event.EventType;
+import kiwi.shop.common.event.payload.PaymentConfirmEventPayload;
+import kiwi.shop.common.outboxmessagerelay.OutboxEventPublisher;
 import kiwi.shop.order.adapter.out.persistence.entity.PaymentEvent;
 import kiwi.shop.order.adapter.out.persistence.entity.PaymentOrderHistory;
-import kiwi.shop.order.adapter.out.persistence.repository.OutBoxRepository;
 import kiwi.shop.order.adapter.out.persistence.repository.PaymentEventRepository;
 import kiwi.shop.order.adapter.out.persistence.repository.PaymentOrderHistoryRepository;
 import kiwi.shop.order.adapter.out.persistence.repository.PaymentOrderRepository;
-import kiwi.shop.order.adapter.out.stream.util.PartitionKeyUtil;
 import kiwi.shop.order.application.port.out.GetOrderPort;
 import kiwi.shop.order.application.port.out.PaymentCheckOutPort;
 import kiwi.shop.order.application.port.out.PaymentOrderStatusOutPut;
 import kiwi.shop.order.application.port.out.PaymentStatusUpdatePort;
 import kiwi.shop.order.common.WebAdapter;
-import kiwi.shop.order.domain.OutBoxStatus;
 import kiwi.shop.order.domain.PaymentExecutionResultOutPut;
 import kiwi.shop.order.domain.PaymentOrderStatus;
 import kiwi.shop.order.domain.PaymentOrderWithSellerOutPut;
 import kiwi.shop.order.domain.message.PaymentEventMessage;
 import kiwi.shop.order.domain.message.PaymentEventMessageType;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
@@ -39,15 +35,12 @@ public class PaymentOrderPersistenceAdapter implements PaymentCheckOutPort, Paym
     private final PaymentEventRepository paymentEventRepository;
     private final PaymentOrderRepository paymentOrderRepository;
     private final PaymentOrderHistoryRepository paymentOrderHistoryRepository;
-    private final OutBoxRepository outBoxRepository;
 
-    private final PartitionKeyUtil partitionKeyUtil;
-    private final ApplicationEventPublisher eventPublisher;
+    private final OutboxEventPublisher outboxEventPublisher;
 
     @Override
     public void insertPaymentCheckOut(PaymentEvent paymentEvent) {
         paymentEventRepository.save(paymentEvent);
-        paymentOrderRepository.saveAll(paymentEvent.getPaymentOrderList());
     }
 
     @Override
@@ -90,11 +83,17 @@ public class PaymentOrderPersistenceAdapter implements PaymentCheckOutPort, Paym
         );
 
         String orderId = paymentExecutionResult.getOrderId();
-        int partitionKey = partitionKeyUtil.createPartitionKey(orderId.hashCode());
-        PaymentEventMessage paymentEventMessage = this.createPaymentEventMessage(orderId, partitionKey);
-        this.insertOutBox(paymentEventMessage);
+        PaymentConfirmEventPayload payload = PaymentConfirmEventPayload.of(orderId);
+        outboxEventPublisher.publish(
+                EventType.PAYMENT_CONFIRM,
+                payload,
+                orderId
+        );
 
-        eventPublisher.publishEvent(paymentEventMessage);
+//        PaymentEventMessage paymentEventMessage = this.createPaymentEventMessage(orderId, partitionKey);
+//        this.insertOutBox(paymentEventMessage);
+//
+//        eventPublisher.publishEvent(paymentEventMessage);
     }
 
     private void updatePaymentStatusToFailureOrUnknown(PaymentExecutionResultOutPut paymentExecutionResult) {
@@ -160,22 +159,22 @@ public class PaymentOrderPersistenceAdapter implements PaymentCheckOutPort, Paym
         paymentEventRepository.updateIsWalletDoneByOrderId(orderId, isWalletDone);
     }
 
-    @SneakyThrows
-    private void insertOutBox(PaymentEventMessage paymentEventMessage) {
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        OutBox outBox = OutBox.of(
-                OutBoxStatus.INIT,
-                (String) paymentEventMessage.getPayload().get("orderId"),
-                paymentEventMessage.getType().name(),
-                (paymentEventMessage.getMetadata().get("partitionKey") != null) ? Integer.parseInt((String) paymentEventMessage.getMetadata().get("partitionKey")) : 0,
-                objectMapper.writeValueAsString(paymentEventMessage.getPayload()),
-                objectMapper.writeValueAsString(paymentEventMessage.getMetadata())
-
-        );
-
-        outBoxRepository.save(outBox);
-    }
+//    @SneakyThrows
+//    private void insertOutBox(PaymentEventMessage paymentEventMessage) {
+//        ObjectMapper objectMapper = new ObjectMapper();
+//
+//        OutBox outBox = OutBox.of(
+//                OutBoxStatus.INIT,
+//                (String) paymentEventMessage.getPayload().get("orderId"),
+//                paymentEventMessage.getType().name(),
+//                (paymentEventMessage.getMetadata().get("partitionKey") != null) ? Integer.parseInt((String) paymentEventMessage.getMetadata().get("partitionKey")) : 0,
+//                objectMapper.writeValueAsString(paymentEventMessage.getPayload()),
+//                objectMapper.writeValueAsString(paymentEventMessage.getMetadata())
+//
+//        );
+//
+//        outBoxRepository.save(outBox);
+//    }
 
     @Override
     public List<PaymentOrderWithSellerOutPut> selectPaymentOrderListWithSellerByOrderId(String orderId) {

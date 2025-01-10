@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class PaymentOrderOutPut {
 
-    private long paymentOrderNo;
+    private long paymentOrderId;
     private String orderId;
     private BigDecimal amount;
     private PaymentOrderStatus status;
@@ -22,8 +22,8 @@ public class PaymentOrderOutPut {
     private BigDecimal price;
 
     @QueryProjection
-    public PaymentOrderOutPut(long paymentOrderNo, String orderId, BigDecimal amount, PaymentOrderStatus status, long productNo, String productId, String name, BigDecimal price) {
-        this.paymentOrderNo = paymentOrderNo;
+    public PaymentOrderOutPut(long paymentOrderId, String orderId, BigDecimal amount, PaymentOrderStatus status, long productNo, String productId, String name, BigDecimal price) {
+        this.paymentOrderId = paymentOrderId;
         this.orderId = orderId;
         this.amount = amount;
         this.status = status;

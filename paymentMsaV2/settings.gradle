@@ -1,6 +1,5 @@
 rootProject.name = 'KiwiShop'
 
-include 'common'
 include 'service'
 include 'service:order'
 include 'service:catalog'
@@ -10,3 +9,9 @@ include 'service:wallet'
 include 'service:order'
 include 'service:review'
 include 'service:like'
+
+include 'common'
+include 'common:snowflake'
+include 'common:data-serializer'
+include 'common:event'
+include 'common:outbox-message-relay'

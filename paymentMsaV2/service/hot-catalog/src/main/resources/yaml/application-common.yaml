@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: kiwi-shop-hot-catalog-service
   config:
     activate:
       on-profile: common

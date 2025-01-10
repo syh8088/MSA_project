@@ -1,5 +1,6 @@
 package kiwi.shop.order.adapter.out.persistence.entity;
 
+import kiwi.shop.common.snowflake.Snowflake;
 import kiwi.shop.order.application.port.out.ProductOutPut;
 import kiwi.shop.order.domain.PaymentEventMethod;
 import kiwi.shop.order.domain.PaymentEventType;
@@ -23,10 +24,10 @@ import java.util.List;
 public class PaymentEvent extends CommonEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long no;
+    @Column(name = "payment_event_no")
+    private Long paymentEventNo;
 
-    @OneToMany(mappedBy = "paymentEvent", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "paymentEvent", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<PaymentOrder> paymentOrderList = new ArrayList<>();
 
     @Column(name = "order_id")
@@ -49,9 +50,6 @@ public class PaymentEvent extends CommonEntity {
     @Column(name = "approved_at")
     private LocalDateTime approvedDateTime;
 
-//    @Column(name = "psp_raw_data", columnDefinition = "LONGTEXT")
-//    private String pspRawData;
-
     @Column(name = "is_payment_done")
     private boolean isPaymentDone;
 
@@ -59,7 +57,8 @@ public class PaymentEvent extends CommonEntity {
     private boolean isWalletDone;
 
     @Builder
-    private PaymentEvent(List<PaymentOrder> paymentOrderList, String orderId, String paymentKey, String orderName, PaymentEventMethod method, PaymentEventType type, LocalDateTime approvedDateTime, boolean isPaymentDone, boolean isWalletDone) {
+    private PaymentEvent(Long paymentEventNo, List<PaymentOrder> paymentOrderList, String orderId, String paymentKey, String orderName, PaymentEventMethod method, PaymentEventType type, LocalDateTime approvedDateTime, boolean isPaymentDone, boolean isWalletDone) {
+        this.paymentEventNo = paymentEventNo;
         this.paymentOrderList = paymentOrderList;
         this.orderId = orderId;
         this.paymentKey = paymentKey;
@@ -78,7 +77,10 @@ public class PaymentEvent extends CommonEntity {
             List<ProductOutPut> productList
     ) {
 
+        Snowflake snowflake = new Snowflake();
+
         PaymentEvent paymentEvent = PaymentEvent.builder()
+                .paymentEventNo(snowflake.nextId())
                 .orderId(oderId)
                 .method(method)
                 .type(type)
@@ -86,6 +88,7 @@ public class PaymentEvent extends CommonEntity {
                 .build();
 
         List<PaymentOrder> paymentOrders = PaymentOrder.of(
+                snowflake,
                 paymentEvent,
                 oderId,
                 PaymentOrderStatus.NOT_STARTED,

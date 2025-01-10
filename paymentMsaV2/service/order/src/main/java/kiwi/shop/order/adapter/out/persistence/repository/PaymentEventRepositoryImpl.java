@@ -23,7 +23,7 @@ public class PaymentEventRepositoryImpl implements PaymentEventRepositoryCustom 
 		return queryFactory
 				.select(
 						new QPaymentEventOutPut(
-								qPaymentEvent.no,
+								qPaymentEvent.paymentEventNo,
 								qPaymentEvent.paymentKey,
 								qPaymentEvent.orderId,
 								qPaymentEvent.orderName,

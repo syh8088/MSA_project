@@ -11,7 +11,7 @@ import java.util.List;
 
 @FeignClient(
         name = "catalog",
-        url = "${catalog.url}",
+        url = "${endpoints.catalog.url}",
         configuration = {
                 CatalogFeignConfig.class,
         }
@@ -19,6 +19,6 @@ import java.util.List;
 public interface CatalogClient {
 
     @GetMapping(value = "/products", produces = MediaType.APPLICATION_JSON_VALUE)
-    SelectProductResponses selectProducts(@RequestParam("productNo") List<Long> productNoList);
+    SelectProductResponses selectProducts(@RequestParam("productNoList") List<Long> productNoList);
 
 }

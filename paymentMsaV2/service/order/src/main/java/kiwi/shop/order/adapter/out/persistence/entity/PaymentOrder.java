@@ -1,5 +1,6 @@
 package kiwi.shop.order.adapter.out.persistence.entity;
 
+import kiwi.shop.common.snowflake.Snowflake;
 import kiwi.shop.order.application.port.out.ProductOutPut;
 import kiwi.shop.order.domain.PaymentOrderStatus;
 import jakarta.persistence.*;
@@ -20,9 +21,8 @@ import java.util.UUID;
 public class PaymentOrder extends CommonEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "no")
-    private Long no;
+    @Column(name = "payment_order_no")
+    private Long paymentOrderNo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "payment_event_no")
@@ -51,8 +51,8 @@ public class PaymentOrder extends CommonEntity {
     private PaymentOrderStatus status;
 
     @Builder
-    private PaymentOrder(Long no, PaymentEvent paymentEvent, long productNo, long sellerNo, String orderId, BigDecimal amount, int failedCount, int threshold, PaymentOrderStatus status) {
-        this.no = no;
+    private PaymentOrder(Long paymentOrderNo, PaymentEvent paymentEvent, long productNo, long sellerNo, String orderId, BigDecimal amount, int failedCount, int threshold, PaymentOrderStatus status) {
+        this.paymentOrderNo = paymentOrderNo;
         this.paymentEvent = paymentEvent;
         this.productNo = productNo;
         this.sellerNo = sellerNo;
@@ -63,13 +63,14 @@ public class PaymentOrder extends CommonEntity {
         this.status = status;
     }
 
-    public static PaymentOrder of(long no) {
+    public static PaymentOrder of(long paymentOrderNo) {
         return PaymentOrder.builder()
-                .no(no)
+                .paymentOrderNo(paymentOrderNo)
                 .build();
     }
 
     public static List<PaymentOrder> of(
+            Snowflake snowflake,
             PaymentEvent paymentEvent,
             String orderId,
             PaymentOrderStatus status,
@@ -78,17 +79,19 @@ public class PaymentOrder extends CommonEntity {
 
         return productList.stream()
                 .map(productOutPut ->
-                        PaymentOrder.of(paymentEvent, orderId, status, productOutPut))
+                        PaymentOrder.of(snowflake, paymentEvent, orderId, status, productOutPut))
                 .toList();
     }
 
     public static PaymentOrder of(
+            Snowflake snowflake,
             PaymentEvent paymentEvent,
             String orderId,
             PaymentOrderStatus status,
             ProductOutPut product
     ) {
         return PaymentOrder.builder()
+                .paymentOrderNo(snowflake.nextId())
                 .paymentEvent(paymentEvent)
                 .orderId(orderId)
                 .status(status)

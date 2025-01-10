@@ -27,7 +27,7 @@ public class OrderCheckOutService implements RequestOrderCheckOutUseCase {
 
     private final PaymentValidator paymentValidator;
     private final GetCatalogPort getCatalogPort;
-    private final PaymentCheckOutPort paymentCheckOut;
+    private final PaymentCheckOutPort paymentCheckOutPort;
 
     @Override
     public PaymentCheckOutResponse paymentCheckOut(PaymentCheckOutCommand request) {
@@ -46,7 +46,7 @@ public class OrderCheckOutService implements RequestOrderCheckOutUseCase {
                 productList
         );
 
-        paymentCheckOut.insertPaymentCheckOut(paymentEvent);
+        paymentCheckOutPort.insertPaymentCheckOut(paymentEvent);
 
         PaymentCheckOutOutPut paymentCheckOutOutPut
                 = PaymentCheckOutOutPut.of(

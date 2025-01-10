@@ -1,5 +1,6 @@
 package kiwi.shop.order.adapter.out.persistence.entity;
 
+import kiwi.shop.common.snowflake.Snowflake;
 import kiwi.shop.order.application.port.out.PaymentOrderStatusOutPut;
 import kiwi.shop.order.domain.PaymentOrderStatus;
 import jakarta.persistence.*;
@@ -17,9 +18,8 @@ import java.util.List;
 public class PaymentOrderHistory extends CommonEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "no")
-    private Long no;
+    @Column(name = "payment_order_history_no")
+    private Long paymentOrderHistoryNo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "payment_order_no")
@@ -37,7 +37,8 @@ public class PaymentOrderHistory extends CommonEntity {
     private String reason;
 
     @Builder
-    private PaymentOrderHistory(PaymentOrder paymentOrder, PaymentOrderStatus previousStatus, PaymentOrderStatus newStatus, String reason) {
+    private PaymentOrderHistory(Long paymentOrderHistoryNo, PaymentOrder paymentOrder, PaymentOrderStatus previousStatus, PaymentOrderStatus newStatus, String reason) {
+        this.paymentOrderHistoryNo = paymentOrderHistoryNo;
         this.paymentOrder = paymentOrder;
         this.previousStatus = previousStatus;
         this.newStatus = newStatus;
@@ -50,7 +51,11 @@ public class PaymentOrderHistory extends CommonEntity {
             PaymentOrderStatus newStatus,
             String reason
     ) {
+
+        Snowflake snowflake = new Snowflake();
+
         return PaymentOrderHistory.builder()
+                .paymentOrderHistoryNo(snowflake.nextId())
                 .paymentOrder(PaymentOrder.of(paymentOrderNo))
                 .previousStatus(previousStatus)
                 .newStatus(newStatus)
@@ -64,7 +69,7 @@ public class PaymentOrderHistory extends CommonEntity {
             String reason
     ) {
         return paymentOrderStatusList.stream()
-                .map(data -> PaymentOrderHistory.of(data.getNo(), data.getStatus(), newPaymentStatus, reason))
+                .map(data -> PaymentOrderHistory.of(data.getPaymentOrderNo(), data.getStatus(), newPaymentStatus, reason))
                 .toList();
     }
 

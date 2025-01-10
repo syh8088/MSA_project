@@ -25,7 +25,7 @@ public class PaymentOrderRepositoryImpl implements PaymentOrderRepositoryCustom 
 		return queryFactory
 				.select(
 						new QPaymentOrderStatusOutPut(
-								qPaymentOrder.no,
+								qPaymentOrder.paymentOrderNo,
 								qPaymentOrder.orderId,
 								qPaymentOrder.status,
 								qPaymentOrder.amount
@@ -41,7 +41,7 @@ public class PaymentOrderRepositoryImpl implements PaymentOrderRepositoryCustom 
 		return queryFactory
 				.select(
 						new QPaymentOrderWithSellerOutPut(
-								qPaymentOrder.no,
+								qPaymentOrder.paymentOrderNo,
 								qPaymentOrder.orderId,
 								qPaymentOrder.amount,
 								qPaymentOrder.status,
@@ -52,7 +52,6 @@ public class PaymentOrderRepositoryImpl implements PaymentOrderRepositoryCustom 
 				.from(qPaymentOrder)
 				.where(qPaymentOrder.orderId.eq(orderId))
 				.fetch();
-//		return null;
 	}
 
 }
