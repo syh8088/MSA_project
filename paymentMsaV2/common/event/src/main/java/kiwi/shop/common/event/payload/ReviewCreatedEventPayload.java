@@ -1,12 +1,9 @@
 package kiwi.shop.common.event.payload;
 
 import kiwi.shop.common.event.EventPayload;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.math.BigDecimal;
 
 @Getter
 @NoArgsConstructor
@@ -17,13 +14,13 @@ public class ReviewCreatedEventPayload implements EventPayload {
     private long memberNo;
     private String title;
     private String content;
-    private BigDecimal starRating;
+    private long starRating;
     private Boolean isDeleted;
     private long reviewCount;
-    private BigDecimal reviewStarRatingSum;
+    private long reviewStarRatingSum;
 
     @Builder
-    private ReviewCreatedEventPayload(long catalogReviewNo, long productNo, long memberNo, String title, String content, BigDecimal starRating, Boolean isDeleted, long reviewCount, BigDecimal reviewStarRatingSum) {
+    private ReviewCreatedEventPayload(long catalogReviewNo, long productNo, long memberNo, String title, String content, long starRating, Boolean isDeleted, long reviewCount, long reviewStarRatingSum) {
         this.catalogReviewNo = catalogReviewNo;
         this.productNo = productNo;
         this.memberNo = memberNo;
@@ -35,7 +32,7 @@ public class ReviewCreatedEventPayload implements EventPayload {
         this.reviewStarRatingSum = reviewStarRatingSum;
     }
 
-    public static ReviewCreatedEventPayload of(long catalogReviewNo, long productNo, long memberNo, String title, String content, BigDecimal starRating, Boolean isDeleted, long reviewCount, BigDecimal reviewStarRatingSum) {
+    public static ReviewCreatedEventPayload of(long catalogReviewNo, long productNo, long memberNo, String title, String content, long starRating, Boolean isDeleted, long reviewCount, long reviewStarRatingSum) {
         return ReviewCreatedEventPayload.builder()
                 .catalogReviewNo(catalogReviewNo)
                 .productNo(productNo)

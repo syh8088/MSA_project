@@ -2,23 +2,22 @@ package kiwi.shop.catalogreview.adapter.in.web.request;
 
 import lombok.Getter;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 
 @Getter
 public enum StarRatingType {
 
-    ONE("ONE", BigDecimal.ONE),
-    TWO("TWO", BigDecimal.valueOf(2)),
-    THREE("THREE", BigDecimal.valueOf(3)),
-    FOUR("FOUR", BigDecimal.valueOf(4)),
-    FIVE("FIVE", BigDecimal.valueOf(5))
+    ONE("ONE", 1L),
+    TWO("TWO", 2L),
+    THREE("THREE", 3L),
+    FOUR("FOUR", 4L),
+    FIVE("FIVE", 5L)
     ;
 
     private final String type;
-    private final BigDecimal starRating;
+    private final long starRating;
 
-    StarRatingType(String type, BigDecimal starRating) {
+    StarRatingType(String type, long starRating) {
         this.type = type;
         this.starRating = starRating;
     }

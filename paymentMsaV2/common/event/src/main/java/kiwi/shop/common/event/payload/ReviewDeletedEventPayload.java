@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-
 @Getter
 @NoArgsConstructor
 public class ReviewDeletedEventPayload implements EventPayload {
@@ -16,13 +14,13 @@ public class ReviewDeletedEventPayload implements EventPayload {
     private long memberNo;
     private String title;
     private String content;
-    private BigDecimal starRating;
+    private long starRating;
     private Boolean isDeleted;
     private long reviewCount;
-    private BigDecimal reviewStarRatingSum;
+    private long reviewStarRatingSum;
 
     @Builder
-    private ReviewDeletedEventPayload(long catalogReviewNo, long productNo, long memberNo, String title, String content, BigDecimal starRating, Boolean isDeleted, long reviewCount, BigDecimal reviewStarRatingSum) {
+    private ReviewDeletedEventPayload(long catalogReviewNo, long productNo, long memberNo, String title, String content, long starRating, Boolean isDeleted, long reviewCount, long reviewStarRatingSum) {
         this.catalogReviewNo = catalogReviewNo;
         this.productNo = productNo;
         this.memberNo = memberNo;
@@ -34,7 +32,7 @@ public class ReviewDeletedEventPayload implements EventPayload {
         this.reviewStarRatingSum = reviewStarRatingSum;
     }
 
-    public static ReviewDeletedEventPayload of(long catalogReviewNo, long productNo, long memberNo, String title, String content, BigDecimal starRating, Boolean isDeleted, long reviewCount, BigDecimal reviewStarRatingSum) {
+    public static ReviewDeletedEventPayload of(long catalogReviewNo, long productNo, long memberNo, String title, String content, long starRating, Boolean isDeleted, long reviewCount, long reviewStarRatingSum) {
         return ReviewDeletedEventPayload.builder()
                 .catalogReviewNo(catalogReviewNo)
                 .productNo(productNo)

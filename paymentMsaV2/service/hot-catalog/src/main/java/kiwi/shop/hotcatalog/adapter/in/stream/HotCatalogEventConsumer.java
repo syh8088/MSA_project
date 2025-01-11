@@ -20,7 +20,8 @@ public class HotCatalogEventConsumer {
     private final HotCatalogUseCase hotCatalogUsecase;
 
     @KafkaListener(topics = {
-                EventType.Topic.KIWI_SHOP_PRODUCT_LIKE
+                EventType.Topic.KIWI_SHOP_PRODUCT_LIKE,
+                EventType.Topic.KIWI_SHOP_PRODUCT_REVIEW,
             },
             groupId = "hot-catalog-service"
     )
