@@ -17,7 +17,7 @@ import java.util.Objects;
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-public class HotCatalogListRedisRepository {
+public class HotProductListRedisRepository {
 
     private final StringRedisTemplate redisTemplate;
 
@@ -26,7 +26,7 @@ public class HotCatalogListRedisRepository {
 
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd");
 
-    public void registerHotCatalog(long productNo, Long score, long hotProductLimitCount, Duration hotProductExpireTtl) {
+    public void registerHotProduct(long productNo, Long score, long hotProductLimitCount, Duration hotProductExpireTtl) {
 
         /**
          * executePipelined() -> 레디스 서버에 네트워크 한번만 연결하면서 여러번 연산을 수행 할 수 있다.
@@ -61,7 +61,7 @@ public class HotCatalogListRedisRepository {
         return KEY_FORMAT;
     }
 
-    public List<Long> readAll() {
+    public List<Long> selectHotProductList() {
         return Objects.requireNonNull(
                         redisTemplate.opsForZSet()
                                 .reverseRangeWithScores(generateKey(), 0, -1)
