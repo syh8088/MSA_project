@@ -1,7 +1,6 @@
 package kiwi.shop.cataloglike.application.service;
 
 import kiwi.shop.cataloglike.adapter.out.persistence.entity.CatalogLike;
-import kiwi.shop.cataloglike.adapter.out.persistence.entity.CatalogLikeCount;
 import kiwi.shop.cataloglike.application.port.in.CatalogLikeUseCase;
 import kiwi.shop.cataloglike.application.port.out.CatalogLikeCountPort;
 import kiwi.shop.cataloglike.application.port.out.CatalogLikePort;
