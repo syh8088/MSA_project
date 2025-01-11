@@ -1,6 +1,7 @@
 package kiwi.shop.cataloglike.application.service;
 
 import kiwi.shop.cataloglike.application.port.in.CatalogLikeUseCase;
+import kiwi.shop.cataloglike.application.port.out.CatalogLikeCountPort;
 import kiwi.shop.cataloglike.application.port.out.CatalogLikePort;
 import kiwi.shop.cataloglike.common.UseCase;
 import kiwi.shop.cataloglike.domain.CatalogLikeCommand;
@@ -22,6 +23,8 @@ public class CatalogLikeService implements CatalogLikeUseCase {
 
     private final CatalogLikePort catalogLikePort;
 
+    private final CatalogLikeCountPort catalogLikeCountPort;
+
     private final OutboxEventPublisher outboxEventPublisher;
 
     private final Snowflake snowflake = new Snowflake();
@@ -34,6 +37,8 @@ public class CatalogLikeService implements CatalogLikeUseCase {
         LocalDateTime now = LocalDateTime.now();
         CatalogLikeCommand catalogLikeCommand = CatalogLikeCommand.of(nextId, productNo, memberNo, now);
         catalogLikePort.like(catalogLikeCommand);
+
+        catalogLikeCountPort.increase(productNo);
 
         ProductLikedEventPayload productLikedEventPayload = ProductLikedEventPayload.of(nextId, productNo, memberNo, now);
         outboxEventPublisher.publish(
@@ -49,5 +54,7 @@ public class CatalogLikeService implements CatalogLikeUseCase {
 
         CatalogUnLikeCommand catalogUnLikeCommand = CatalogUnLikeCommand.of(productNo, memberNo);
         catalogLikePort.unlike(catalogUnLikeCommand);
+
+        catalogLikeCountPort.decrease(productNo);
     }
 }
