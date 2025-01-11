@@ -1,8 +1,10 @@
-package kiwi.shop.hotcatalog.adapter.in.stream;
+package kiwi.shop.hotcatalog.application.service.handler;
 
 import kiwi.shop.common.event.Event;
 import kiwi.shop.common.event.EventType;
 import kiwi.shop.common.event.payload.ProductLikedEventPayload;
+import kiwi.shop.hotcatalog.application.port.out.CatalogLikeCountPort;
+import kiwi.shop.hotcatalog.common.TimeConverter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -12,16 +14,18 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ProductLikedEventHandler implements EventHandler<ProductLikedEventPayload> {
 
+    private final CatalogLikeCountPort catalogLikeCountPort;
+
 
     @Override
     public void handle(Event<ProductLikedEventPayload> event) {
 
         ProductLikedEventPayload payload = event.getPayload();
 
-        articleLikeCountRepository.createOrUpdate(
-                payload.getArticleId(),
-                payload.getArticleLikeCount(),
-                TimeCalculatorUtils.calculateDurationToMidnight()
+        catalogLikeCountPort.updateCatalogLikeCount(
+                payload.getProductNo(),
+                payload.getProductLikeCount(),
+                TimeConverter.calculateDurationToMidnight()
         );
     }
 

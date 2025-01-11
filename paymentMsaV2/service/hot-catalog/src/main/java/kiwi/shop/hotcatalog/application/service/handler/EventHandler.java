@@ -1,4 +1,4 @@
-package kiwi.shop.hotcatalog.adapter.in.stream;
+package kiwi.shop.hotcatalog.application.service.handler;
 
 
 import kiwi.shop.common.event.Event;

@@ -31,4 +31,12 @@ public class CatalogLikeCountPersistenceAdapter implements CatalogLikeCountPort 
         CatalogLikeCount catalogLikeCount = catalogLikeCountRepository.findById(productNo).orElseThrow();
         catalogLikeCount.decrease();
     }
+
+    @Override
+    public long selectProductLikeCountByProductNo(long productNo) {
+        return catalogLikeCountRepository.findById(productNo)
+                .map(CatalogLikeCount::getLikeCount)
+                .orElse(0L);
+    }
+
 }
