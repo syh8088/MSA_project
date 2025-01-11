@@ -1,5 +1,6 @@
-package kiwi.shop.cataloglike.domain;
+package kiwi.shop.common.event.payload;
 
+import kiwi.shop.common.event.EventPayload;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
-public class CatalogLikeCommand {
+public class ProductLikedEventPayload implements EventPayload {
 
     private long catalogLikeNo;
     private long productNo;
@@ -16,15 +17,15 @@ public class CatalogLikeCommand {
     private LocalDateTime createdAt;
 
     @Builder
-    private CatalogLikeCommand(long catalogLikeNo, long productNo, long memberNo, LocalDateTime createdAt) {
+    private ProductLikedEventPayload(long catalogLikeNo, long productNo, long memberNo, LocalDateTime createdAt) {
         this.catalogLikeNo = catalogLikeNo;
         this.productNo = productNo;
         this.memberNo = memberNo;
         this.createdAt = createdAt;
     }
 
-    public static CatalogLikeCommand of(long catalogLikeNo, long productNo, long memberNo, LocalDateTime createdAt) {
-        return CatalogLikeCommand.builder()
+    public static ProductLikedEventPayload of(long catalogLikeNo, long productNo, long memberNo, LocalDateTime createdAt) {
+        return ProductLikedEventPayload.builder()
                 .catalogLikeNo(catalogLikeNo)
                 .productNo(productNo)
                 .memberNo(memberNo)

@@ -2,11 +2,6 @@ spring:
   config:
     activate:
       on-profile: local
-  datasource:
-    url: jdbc:mysql://localhost:3306/payment_msa
-#    url: jdbc:mysql://mysql-server:3306/payment_msa
-    username: root
-    password: 1234
   jpa:
     show-sql: true # 콘솔로그로 출력하려면
     hibernate:

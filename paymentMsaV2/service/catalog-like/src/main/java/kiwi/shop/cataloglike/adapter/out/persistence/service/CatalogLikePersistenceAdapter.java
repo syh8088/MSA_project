@@ -21,7 +21,8 @@ public class CatalogLikePersistenceAdapter implements CatalogLikePort {
         catalogLikeMapper.insertCatalogLike(
                 catalogLikeCommand.getCatalogLikeNo(),
                 catalogLikeCommand.getProductNo(),
-                catalogLikeCommand.getMemberNo()
+                catalogLikeCommand.getMemberNo(),
+                catalogLikeCommand.getCreatedAt()
         );
     }
 

@@ -11,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 public enum EventType {
 
     PAYMENT_CONFIRM(PaymentConfirmEventPayload.class, Topic.KIWI_SHOP_PAYMENT),
+    PRODUCT_LIKED(ProductLikedEventPayload.class, Topic.KIWI_SHOP_PRODUCT_LIKE),
+    PRODUCT_UNLIKED(ProductUnLikedEventPayload.class, Topic.KIWI_SHOP_PRODUCT_LIKE),
 //    WALLET(PaymentConfirmEventPayload.class, Topic.KIWI_SHOP_WALLET),
 //    ORDER_QUERY(PaymentConfirmEventPayload.class, Topic.KIWI_SHOP_ORDERQUERY),
 
@@ -32,6 +34,7 @@ public enum EventType {
 
     public static class Topic {
         public static final String KIWI_SHOP_PAYMENT = "kiwi-shop-payment";
+        public static final String KIWI_SHOP_PRODUCT_LIKE = "kiwi-shop-product-like";
         public static final String KIWI_SHOP_WALLET = "kiwi-shop-wallet";
         public static final String KIWI_SHOP_ORDERQUERY = "kiwi-shop-orderquery";
     }
