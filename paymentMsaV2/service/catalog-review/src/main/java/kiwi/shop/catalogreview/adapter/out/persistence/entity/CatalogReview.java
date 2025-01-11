@@ -5,7 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import kiwi.shop.catalogreview.adapter.in.web.request.StarRatingType;
-import kiwi.shop.common.outboxmessagerelay.CommonEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,7 +21,7 @@ public class CatalogReview extends CommonEntity {
 
     @Id
     @Column(name = "catalog_review_no")
-    private Long catalogLikeNo;
+    private Long catalogReviewNo;
 
     @Column(name = "product_no")
     private long productNo;
@@ -43,8 +42,8 @@ public class CatalogReview extends CommonEntity {
     private Boolean isDeleted;
 
     @Builder
-    private CatalogReview(Long catalogLikeNo, long productNo, long memberNo, String title, String content, BigDecimal starRating, Boolean isDeleted) {
-        this.catalogLikeNo = catalogLikeNo;
+    private CatalogReview(Long catalogReviewNo, long productNo, long memberNo, String title, String content, BigDecimal starRating, Boolean isDeleted) {
+        this.catalogReviewNo = catalogReviewNo;
         this.productNo = productNo;
         this.memberNo = memberNo;
         this.title = title;
@@ -53,9 +52,9 @@ public class CatalogReview extends CommonEntity {
         this.isDeleted = isDeleted;
     }
 
-    public static CatalogReview of(long catalogLikeNo, long productNo, long memberNo, String title, String content, StarRatingType starRatingType) {
+    public static CatalogReview of(long catalogReviewNo, long productNo, long memberNo, String title, String content, StarRatingType starRatingType) {
         return CatalogReview.builder()
-                .catalogLikeNo(catalogLikeNo)
+                .catalogReviewNo(catalogReviewNo)
                 .productNo(productNo)
                 .memberNo(memberNo)
                 .title(title)
@@ -63,5 +62,9 @@ public class CatalogReview extends CommonEntity {
                 .starRating(starRatingType.getStarRating())
                 .isDeleted(false)
                 .build();
+    }
+
+    public void delete() {
+        this.isDeleted = true;
     }
 }

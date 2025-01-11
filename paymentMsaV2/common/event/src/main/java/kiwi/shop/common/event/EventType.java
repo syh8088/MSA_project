@@ -13,6 +13,8 @@ public enum EventType {
     PAYMENT_CONFIRM(PaymentConfirmEventPayload.class, Topic.KIWI_SHOP_PAYMENT),
     PRODUCT_LIKED(ProductLikedEventPayload.class, Topic.KIWI_SHOP_PRODUCT_LIKE),
     PRODUCT_UNLIKED(ProductUnLikedEventPayload.class, Topic.KIWI_SHOP_PRODUCT_LIKE),
+    PRODUCT_CREATED_REVIEW(ReviewCreatedEventPayload.class, Topic.KIWI_SHOP_PRODUCT_REVIEW),
+    PRODUCT_DELETED_REVIEW(ReviewDeletedEventPayload.class, Topic.KIWI_SHOP_PRODUCT_REVIEW),
 //    WALLET(PaymentConfirmEventPayload.class, Topic.KIWI_SHOP_WALLET),
 //    ORDER_QUERY(PaymentConfirmEventPayload.class, Topic.KIWI_SHOP_ORDERQUERY),
 
@@ -35,6 +37,7 @@ public enum EventType {
     public static class Topic {
         public static final String KIWI_SHOP_PAYMENT = "kiwi-shop-payment";
         public static final String KIWI_SHOP_PRODUCT_LIKE = "kiwi-shop-product-like";
+        public static final String KIWI_SHOP_PRODUCT_REVIEW = "kiwi-shop-product-review";
         public static final String KIWI_SHOP_WALLET = "kiwi-shop-wallet";
         public static final String KIWI_SHOP_ORDERQUERY = "kiwi-shop-orderquery";
     }

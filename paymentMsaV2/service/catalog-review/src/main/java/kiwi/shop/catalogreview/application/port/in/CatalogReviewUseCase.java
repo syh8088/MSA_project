@@ -5,4 +5,6 @@ import kiwi.shop.catalogreview.domain.InsertCatalogReviewCommand;
 public interface CatalogReviewUseCase {
 
     void insertCatalogReview(InsertCatalogReviewCommand insertCatalogReviewCommand);
+
+    void deleteCatalogReview(long catalogLikeNo);
 }

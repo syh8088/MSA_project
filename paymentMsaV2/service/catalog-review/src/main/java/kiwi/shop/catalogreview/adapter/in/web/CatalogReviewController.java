@@ -33,12 +33,10 @@ public class CatalogReviewController {
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/products/{productNo}/members/{memberNo}")
-    public ResponseEntity<?> unlikePessimisticLock2(
-            @PathVariable("productNo") long productNo,
-            @PathVariable("memberNo") long memberNo
-    ) {
-        catalogLikeUseCase.unlike(productNo, memberNo);
+    @DeleteMapping("/{catalogReviewNo}")
+    public ResponseEntity<?> deleteCatalogReview(@PathVariable("catalogReviewNo") long catalogReviewNo) {
+
+        catalogReviewUseCase.deleteCatalogReview(catalogReviewNo);
 
         return ResponseEntity.noContent().build();
     }

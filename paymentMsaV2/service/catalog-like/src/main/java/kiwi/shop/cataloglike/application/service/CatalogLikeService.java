@@ -39,9 +39,10 @@ public class CatalogLikeService implements CatalogLikeUseCase {
         long nextId = snowflake.nextId();
         LocalDateTime now = LocalDateTime.now();
         CatalogLikeCommand catalogLikeCommand = CatalogLikeCommand.of(nextId, productNo, memberNo, now);
-        catalogLikePort.like(catalogLikeCommand);
 
+        catalogLikePort.like(catalogLikeCommand);
         catalogLikeCountPort.increase(productNo);
+
         long productLikeCount = catalogLikeCountPort.selectProductLikeCountByProductNo(productNo);
 
         ProductLikedEventPayload productLikedEventPayload = ProductLikedEventPayload.of(nextId, productNo, memberNo, productLikeCount, now);
