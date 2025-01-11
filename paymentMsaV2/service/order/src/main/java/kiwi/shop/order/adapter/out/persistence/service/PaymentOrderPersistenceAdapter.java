@@ -89,11 +89,6 @@ public class PaymentOrderPersistenceAdapter implements PaymentCheckOutPort, Paym
                 payload,
                 orderId
         );
-
-//        PaymentEventMessage paymentEventMessage = this.createPaymentEventMessage(orderId, partitionKey);
-//        this.insertOutBox(paymentEventMessage);
-//
-//        eventPublisher.publishEvent(paymentEventMessage);
     }
 
     private void updatePaymentStatusToFailureOrUnknown(PaymentExecutionResultOutPut paymentExecutionResult) {
@@ -158,23 +153,6 @@ public class PaymentOrderPersistenceAdapter implements PaymentCheckOutPort, Paym
     public void updateIsWalletDoneByOrderId(String orderId, boolean isWalletDone) {
         paymentEventRepository.updateIsWalletDoneByOrderId(orderId, isWalletDone);
     }
-
-//    @SneakyThrows
-//    private void insertOutBox(PaymentEventMessage paymentEventMessage) {
-//        ObjectMapper objectMapper = new ObjectMapper();
-//
-//        OutBox outBox = OutBox.of(
-//                OutBoxStatus.INIT,
-//                (String) paymentEventMessage.getPayload().get("orderId"),
-//                paymentEventMessage.getType().name(),
-//                (paymentEventMessage.getMetadata().get("partitionKey") != null) ? Integer.parseInt((String) paymentEventMessage.getMetadata().get("partitionKey")) : 0,
-//                objectMapper.writeValueAsString(paymentEventMessage.getPayload()),
-//                objectMapper.writeValueAsString(paymentEventMessage.getMetadata())
-//
-//        );
-//
-//        outBoxRepository.save(outBox);
-//    }
 
     @Override
     public List<PaymentOrderWithSellerOutPut> selectPaymentOrderListWithSellerByOrderId(String orderId) {
