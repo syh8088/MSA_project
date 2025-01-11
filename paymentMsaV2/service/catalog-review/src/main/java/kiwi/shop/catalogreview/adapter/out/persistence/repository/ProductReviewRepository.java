@@ -10,5 +10,5 @@ public interface ProductReviewRepository extends JpaRepository<ProductReview, Lo
 
     @Modifying
     @Query("UPDATE ProductReview AS c SET c.isDeleted = :isDeleted, c.updatedDateTime = CURRENT_TIMESTAMP WHERE c.productReviewNo = :catalogReviewNo")
-    void deleteByProductReviewNo(@Param("catalogReviewNo") long catalogReviewNo);
+    void deleteByProductReviewNo(@Param("isDeleted") boolean isDeleted, @Param("catalogReviewNo") long catalogReviewNo);
 }

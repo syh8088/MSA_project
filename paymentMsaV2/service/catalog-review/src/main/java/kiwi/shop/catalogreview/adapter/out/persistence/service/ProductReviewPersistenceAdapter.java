@@ -47,7 +47,7 @@ public class ProductReviewPersistenceAdapter implements ProductReviewPort, Produ
     @Override
     public void deleteProductReview(long productReviewNo) {
 
-        productReviewRepository.deleteByProductReviewNo(productReviewNo);
+        productReviewRepository.deleteByProductReviewNo(true, productReviewNo);
     }
 
     @Override
