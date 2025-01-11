@@ -3,11 +3,14 @@ package kiwi.shop.hotcatalog.application.service;
 import kiwi.shop.common.event.Event;
 import kiwi.shop.common.event.EventPayload;
 import kiwi.shop.hotcatalog.application.port.in.HotCatalogUseCase;
+import kiwi.shop.hotcatalog.application.port.out.HotCatalogListPort;
+import kiwi.shop.hotcatalog.application.port.out.HotCatalogScoreCalculatorPort;
 import kiwi.shop.hotcatalog.application.service.handler.EventHandler;
 import kiwi.shop.hotcatalog.common.UseCase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -17,7 +20,16 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class HotCatalogService implements HotCatalogUseCase {
 
+    private final HotCatalogScoreCalculatorPort hotCatalogScoreCalculatorPort;
+    private final HotCatalogListPort hotCatalogListPort;
+
     private final List<EventHandler> eventHandlers;
+
+    // 인기 상품은 최대 10개 까지만 저장 하도록 합니다.
+    private static final long HOT_PRODUCT_LIMIT_COUNT = 10;
+
+    // 최근 10일까지만 저장 하도록 합니다.
+    private static final Duration HOT_PRODUCT_EXPIRE_TTL = Duration.ofDays(10);
 
     @Override
     public void messageEventHandler(Event<EventPayload> event) {
@@ -45,9 +57,19 @@ public class HotCatalogService implements HotCatalogUseCase {
     private void update(Event<EventPayload> event, EventHandler<EventPayload> eventHandler) {
 
         long productNo = eventHandler.selectProductNo(event);
-//        LocalDateTime createdTime = articleCreatedTimeRepository.read(articleId);
 
         eventHandler.handle(event);
+
+        /**
+         * 해당 상품에 대한 인기글 점수 계산을 합니다.
+         */
+        long score = hotCatalogScoreCalculatorPort.calculateHotCatalogScore(productNo);
+        hotCatalogListPort.registerHotCatalog(
+                productNo,
+                score,
+                HOT_PRODUCT_LIMIT_COUNT,
+                HOT_PRODUCT_EXPIRE_TTL
+        );
     }
 
     private EventHandler<EventPayload> extectEventHandler(Event<EventPayload> event) {

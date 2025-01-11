@@ -14,8 +14,8 @@ public class HotCatalogLikeCountRedisRepository {
 
     private final StringRedisTemplate redisTemplate;
 
-    // hot-article::article::{articleId}::like-count
-    private static final String KEY_FORMAT = "hot-catalog::product::%s::like-count";
+    // hot-catalogs::products::{productNo}::like-count
+    private static final String KEY_FORMAT = "hot-catalogs::products::%s::like-counts";
 
     public void updateCatalogLikeCount(long productNo, long likeCount, Duration ttl) {
         redisTemplate.opsForValue().set(generateKey(productNo), String.valueOf(likeCount), ttl);

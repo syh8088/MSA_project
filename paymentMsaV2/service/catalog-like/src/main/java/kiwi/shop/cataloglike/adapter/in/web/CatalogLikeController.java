@@ -15,7 +15,7 @@ public class CatalogLikeController {
     private final CatalogLikeUseCase catalogLikeUseCase;
 
     @PostMapping("/products/{productNo}/members/{memberNo}")
-    public ResponseEntity<?> paymentConfirm(
+    public ResponseEntity<?> likeCatalog(
             @PathVariable("productNo") long productNo,
             @PathVariable("memberNo") long memberNo
     ) {
@@ -26,7 +26,7 @@ public class CatalogLikeController {
     }
 
     @DeleteMapping("/products/{productNo}/members/{memberNo}")
-    public ResponseEntity<?> unlikePessimisticLock2(
+    public ResponseEntity<?> unlikeCatalog(
             @PathVariable("productNo") long productNo,
             @PathVariable("memberNo") long memberNo
     ) {
