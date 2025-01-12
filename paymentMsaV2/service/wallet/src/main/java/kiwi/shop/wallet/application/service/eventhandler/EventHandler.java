@@ -1,4 +1,4 @@
-package kiwi.shop.wallet.adapter.in.stream;
+package kiwi.shop.wallet.application.service.eventhandler;
 
 import kiwi.shop.common.event.Event;
 import kiwi.shop.common.event.EventPayload;

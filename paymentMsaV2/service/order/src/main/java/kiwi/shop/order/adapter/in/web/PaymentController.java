@@ -1,22 +1,9 @@
 package kiwi.shop.order.adapter.in.web;
 
-import kiwi.shop.order.adapter.out.stream.util.PartitionKeyUtil;
-import kiwi.shop.order.application.port.out.PaymentEventOutPut;
-import kiwi.shop.order.domain.message.OrderQueryEventMessage;
-import kiwi.shop.order.domain.message.OrderQueryEventMessageType;
-import kiwi.shop.order.domain.message.PaymentEventMessage;
-import kiwi.shop.order.domain.message.PaymentEventMessageType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.kafka.support.KafkaHeaders;
-import org.springframework.messaging.support.MessageBuilder;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Map;
 
 @Slf4j
 @RestController

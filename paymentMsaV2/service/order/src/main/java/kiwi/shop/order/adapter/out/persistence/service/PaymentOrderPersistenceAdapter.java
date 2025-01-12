@@ -5,17 +5,13 @@ import kiwi.shop.common.event.payload.PaymentConfirmEventPayload;
 import kiwi.shop.common.outboxmessagerelay.OutboxEventPublisher;
 import kiwi.shop.order.adapter.out.persistence.entity.PaymentEvent;
 import kiwi.shop.order.adapter.out.persistence.entity.PaymentOrderHistory;
+import kiwi.shop.order.adapter.out.persistence.repository.PaymentEventMapper;
 import kiwi.shop.order.adapter.out.persistence.repository.PaymentEventRepository;
 import kiwi.shop.order.adapter.out.persistence.repository.PaymentOrderHistoryRepository;
 import kiwi.shop.order.adapter.out.persistence.repository.PaymentOrderRepository;
-import kiwi.shop.order.application.port.out.GetOrderPort;
-import kiwi.shop.order.application.port.out.PaymentCheckOutPort;
-import kiwi.shop.order.application.port.out.PaymentOrderStatusOutPut;
-import kiwi.shop.order.application.port.out.PaymentStatusUpdatePort;
+import kiwi.shop.order.application.port.out.*;
 import kiwi.shop.order.common.WebAdapter;
-import kiwi.shop.order.domain.PaymentExecutionResultOutPut;
-import kiwi.shop.order.domain.PaymentOrderStatus;
-import kiwi.shop.order.domain.PaymentOrderWithSellerOutPut;
+import kiwi.shop.order.domain.*;
 import kiwi.shop.order.domain.message.PaymentEventMessage;
 import kiwi.shop.order.domain.message.PaymentEventMessageType;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +22,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 
 @Slf4j
 @WebAdapter
@@ -35,6 +33,7 @@ public class PaymentOrderPersistenceAdapter implements PaymentCheckOutPort, Paym
     private final PaymentEventRepository paymentEventRepository;
     private final PaymentOrderRepository paymentOrderRepository;
     private final PaymentOrderHistoryRepository paymentOrderHistoryRepository;
+    private final PaymentEventMapper paymentEventMapper;
 
     private final OutboxEventPublisher outboxEventPublisher;
 
@@ -154,8 +153,46 @@ public class PaymentOrderPersistenceAdapter implements PaymentCheckOutPort, Paym
         paymentEventRepository.updateIsWalletDoneByOrderId(orderId, isWalletDone);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<PaymentOrderWithSellerOutPut> selectPaymentOrderListWithSellerByOrderId(String orderId) {
         return paymentOrderRepository.selectPaymentOrderListWithSellerByOrderId(orderId);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public Optional<PaymentEventOutPut> selectPaymentEventByMemberNoAndPaymentMethodNo(long memberNo, long paymentMethodNo) {
+        return paymentEventRepository.selectPaymentEventByMemberNoAndPaymentMethodNo(memberNo, paymentMethodNo);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<PaymentEventOutPut> selectPaymentEventList(long memberNo) {
+        return paymentEventRepository.selectPaymentEventListByMemberNo(memberNo);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<PaymentEventWithOrderOutPut> selectPaymentEventWithOrderListByMemberNoAndPaymentEventNo(PaymentEventWithOrderListCommand paymentEventWithOrderListCommand) {
+
+        if (Objects.isNull(paymentEventWithOrderListCommand.getPaymentEventNo()) || Objects.isNull(paymentEventWithOrderListCommand.getCreatedDateTime())) {
+            return paymentEventMapper.selectFirstPaymentEventWithOrderListByMemberNo(
+                    paymentEventWithOrderListCommand.getMemberNo(),
+                    paymentEventWithOrderListCommand.getLimit()
+            );
+        }
+
+        return paymentEventMapper.selectPaymentEventWithOrderListByMemberNoAndPaymentEventNo(
+                paymentEventWithOrderListCommand.getPaymentEventNo(),
+                paymentEventWithOrderListCommand.getCreatedDateTime(),
+                paymentEventWithOrderListCommand.getMemberNo(),
+                paymentEventWithOrderListCommand.getLimit()
+        );
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<PaymentEventWithOrderOutPut> selectPaymentEventWithOrderListByMemberNoAndPaymentEventNo(long memberNo, long paymentEventNo) {
+        return paymentEventRepository.selectPaymentEventWithOrderListByMemberNoAndPaymentEventNo(memberNo, paymentEventNo);
     }
 }

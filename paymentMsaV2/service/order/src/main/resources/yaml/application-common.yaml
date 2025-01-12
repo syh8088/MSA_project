@@ -11,6 +11,12 @@ spring:
       host: 127.0.0.1
       port: 6379
 
+mybatis:
+  type-aliases-package: kiwi.shop.order.adapter
+  mapper-locations: classpath*:/mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
 logging:
   level:
     p6spy: info

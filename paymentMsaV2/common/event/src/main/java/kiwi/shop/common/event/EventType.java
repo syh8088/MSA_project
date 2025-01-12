@@ -38,7 +38,7 @@ public enum EventType {
         public static final String KIWI_SHOP_PAYMENT = "kiwi-shop-payment";
         public static final String KIWI_SHOP_PRODUCT_LIKE = "kiwi-shop-product-like";
         public static final String KIWI_SHOP_PRODUCT_REVIEW = "kiwi-shop-product-review";
-        public static final String KIWI_SHOP_WALLET = "kiwi-shop-wallet";
-        public static final String KIWI_SHOP_ORDERQUERY = "kiwi-shop-orderquery";
+//        public static final String KIWI_SHOP_WALLET = "kiwi-shop-wallet";
+//        public static final String KIWI_SHOP_ORDERQUERY = "kiwi-shop-orderquery";
     }
 }

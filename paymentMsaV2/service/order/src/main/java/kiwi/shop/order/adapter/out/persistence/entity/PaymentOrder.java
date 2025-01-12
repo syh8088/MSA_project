@@ -37,6 +37,9 @@ public class PaymentOrder extends CommonEntity {
     @Column(name = "order_id")
     private String orderId;
 
+    @Column(name = "product_name")
+    private String productName;
+
     @Column(name = "amount")
     private BigDecimal amount;
 
@@ -51,12 +54,13 @@ public class PaymentOrder extends CommonEntity {
     private PaymentOrderStatus status;
 
     @Builder
-    private PaymentOrder(Long paymentOrderNo, PaymentEvent paymentEvent, long productNo, long sellerNo, String orderId, BigDecimal amount, int failedCount, int threshold, PaymentOrderStatus status) {
+    private PaymentOrder(Long paymentOrderNo, PaymentEvent paymentEvent, long productNo, long sellerNo, String orderId, BigDecimal amount, int failedCount, int threshold, String productName, PaymentOrderStatus status) {
         this.paymentOrderNo = paymentOrderNo;
         this.paymentEvent = paymentEvent;
         this.productNo = productNo;
         this.sellerNo = sellerNo;
         this.orderId = orderId;
+        this.productName = productName;
         this.amount = amount;
         this.failedCount = failedCount;
         this.threshold = threshold;
@@ -94,6 +98,7 @@ public class PaymentOrder extends CommonEntity {
                 .paymentOrderNo(snowflake.nextId())
                 .paymentEvent(paymentEvent)
                 .orderId(orderId)
+                .productName(product.getName())
                 .status(status)
                 .amount(product.getPrice())
                 .productNo(product.getProductNo())

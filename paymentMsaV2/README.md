@@ -10,6 +10,7 @@
 5. hot-catalog-service - 인기 상품 서비스 (8084)
 6. catalog-review-service - 리뷰 서비스 (8085)
 7. catalog-like-service - 좋아요 상품 서비스 (8086)
+8. order-query-service - 상품 조회 전용 서비스 (CQRS) (8087)
 
 자세한 설명은
 

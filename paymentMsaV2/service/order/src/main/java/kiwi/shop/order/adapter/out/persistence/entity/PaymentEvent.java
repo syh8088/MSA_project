@@ -27,6 +27,9 @@ public class PaymentEvent extends CommonEntity {
     @Column(name = "payment_event_no")
     private Long paymentEventNo;
 
+    @Column(name = "member_no")
+    private Long memberNo;
+
     @OneToMany(mappedBy = "paymentEvent", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<PaymentOrder> paymentOrderList = new ArrayList<>();
 
@@ -57,9 +60,10 @@ public class PaymentEvent extends CommonEntity {
     private boolean isWalletDone;
 
     @Builder
-    private PaymentEvent(Long paymentEventNo, List<PaymentOrder> paymentOrderList, String orderId, String paymentKey, String orderName, PaymentEventMethod method, PaymentEventType type, LocalDateTime approvedDateTime, boolean isPaymentDone, boolean isWalletDone) {
+    private PaymentEvent(Long paymentEventNo, List<PaymentOrder> paymentOrderList, Long memberNo, String orderId, String paymentKey, String orderName, PaymentEventMethod method, PaymentEventType type, LocalDateTime approvedDateTime, boolean isPaymentDone, boolean isWalletDone) {
         this.paymentEventNo = paymentEventNo;
         this.paymentOrderList = paymentOrderList;
+        this.memberNo = memberNo;
         this.orderId = orderId;
         this.paymentKey = paymentKey;
         this.orderName = orderName;

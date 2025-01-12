@@ -7,6 +7,7 @@ include 'service:hot-catalog'
 include 'service:seller'
 include 'service:wallet'
 include 'service:order'
+include 'service:order-query'
 include 'service:catalog-review'
 include 'service:catalog-like'
 

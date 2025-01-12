@@ -3,6 +3,7 @@ package kiwi.shop.wallet.adapter.in.stream;
 import kiwi.shop.common.event.Event;
 import kiwi.shop.common.event.EventPayload;
 import kiwi.shop.common.event.EventType;
+import kiwi.shop.wallet.application.service.eventhandler.EventHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
