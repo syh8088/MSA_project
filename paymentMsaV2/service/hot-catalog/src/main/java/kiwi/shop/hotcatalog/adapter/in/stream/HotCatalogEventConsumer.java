@@ -27,6 +27,7 @@ public class HotCatalogEventConsumer {
     )
     public void listen(String message, Acknowledgment ack) {
 
+//        throw new IllegalArgumentException("일부러 Exception 발생");
         log.info("[HotCatalogEventConsumer.listen] received message={}", message);
 
         Event<EventPayload> event = Event.fromJson(message);

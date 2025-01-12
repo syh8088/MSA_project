@@ -22,11 +22,6 @@ spring:
     open-in-view: false
   kafka:
     bootstrap-servers: localhost:9092,localhost:9093,localhost:9094
-#    consumer:
-#      group-id: wallet-service
-#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-#      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-#      enable-auto-commit: false
 
 logging:
   level:

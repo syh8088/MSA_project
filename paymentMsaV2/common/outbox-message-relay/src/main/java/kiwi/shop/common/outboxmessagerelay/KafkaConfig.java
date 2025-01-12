@@ -68,7 +68,7 @@ public class KafkaConfig {
 
     @Bean
     @Primary
-    CommonErrorHandler errorHandler() {
+    CommonErrorHandler errorHandler(KafkaTemplate<String, Object> kafkaTemplate) {
         CommonContainerStoppingErrorHandler cseh = new CommonContainerStoppingErrorHandler();
         AtomicReference<Consumer<? ,?>> consumer2 = new AtomicReference<>();
         AtomicReference<MessageListenerContainer> container2 = new AtomicReference<>();
@@ -84,6 +84,11 @@ public class KafkaConfig {
                 Consumer<?, ?> consumer,
                 MessageListenerContainer container
             ) {
+
+                for (ConsumerRecord<?, ?> record : records) {
+                    kafkaTemplate.send(record.topic() + ".DLT", (String) record.key(), record.value());
+                }
+
                 consumer2.set(consumer);
                 container2.set(container);
                 super.handleRemaining(thrownException, records, consumer, container);
