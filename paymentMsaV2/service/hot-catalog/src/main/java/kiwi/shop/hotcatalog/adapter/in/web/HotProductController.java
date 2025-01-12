@@ -1,6 +1,6 @@
 package kiwi.shop.hotcatalog.adapter.in.web;
 
-import kiwi.shop.hotcatalog.application.port.in.HotCatalogUseCase;
+import kiwi.shop.hotcatalog.application.port.in.HotProductUseCase;
 import kiwi.shop.hotcatalog.domain.SelectProductResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,12 +18,12 @@ import java.util.Optional;
 @RequestMapping("/api/hot-products")
 public class HotProductController {
 
-    private final HotCatalogUseCase hotCatalogUseCase;
+    private final HotProductUseCase hotProductUseCase;
 
     @GetMapping()
     public ResponseEntity<SelectProductResponses> selectHotProductList() {
 
-        Optional<SelectProductResponses> optionalSelectProductResponses = hotCatalogUseCase.selectHotProductList();
+        Optional<SelectProductResponses> optionalSelectProductResponses = hotProductUseCase.selectHotProductList();
         if (optionalSelectProductResponses.isPresent()) {
             return ResponseEntity.ok().body(optionalSelectProductResponses.get());
         }

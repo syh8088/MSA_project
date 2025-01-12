@@ -1,7 +1,7 @@
 package kiwi.shop.hotcatalog.adapter.out.persistence.service;
 
-import kiwi.shop.hotcatalog.adapter.out.persistence.repository.HotCatalogReviewCountRedisRepository;
-import kiwi.shop.hotcatalog.adapter.out.persistence.repository.HotCatalogReviewStarRatingSumRedisRepository;
+import kiwi.shop.hotcatalog.adapter.out.persistence.repository.HotProductReviewCountRedisRepository;
+import kiwi.shop.hotcatalog.adapter.out.persistence.repository.HotProductReviewStarRatingSumRedisRepository;
 import kiwi.shop.hotcatalog.application.port.out.CatalogReviewCountPort;
 import kiwi.shop.hotcatalog.common.WebAdapter;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +14,8 @@ import java.time.Duration;
 @RequiredArgsConstructor
 public class HotCatalogReviewCountPersistenceAdapter implements CatalogReviewCountPort {
 
-    private final HotCatalogReviewCountRedisRepository hotCatalogReviewCountRedisRepository;
-    private final HotCatalogReviewStarRatingSumRedisRepository hotCatalogReviewStarRatingSumRedisRepository;
+    private final HotProductReviewCountRedisRepository hotProductReviewCountRedisRepository;
+    private final HotProductReviewStarRatingSumRedisRepository hotProductReviewStarRatingSumRedisRepository;
 
     @Override
     public void updateCatalogReviewCount(
@@ -31,8 +31,8 @@ public class HotCatalogReviewCountPersistenceAdapter implements CatalogReviewCou
             Duration duration
     ) {
 
-        hotCatalogReviewCountRedisRepository.updateCatalogReviewCount(productNo, reviewCount, duration);
-        hotCatalogReviewStarRatingSumRedisRepository.updateCatalogReviewStarRatingSum(productNo, reviewStarRatingSum, duration);
+        hotProductReviewCountRedisRepository.updateCatalogReviewCount(productNo, reviewCount, duration);
+        hotProductReviewStarRatingSumRedisRepository.updateCatalogReviewStarRatingSum(productNo, reviewStarRatingSum, duration);
     }
 
 }

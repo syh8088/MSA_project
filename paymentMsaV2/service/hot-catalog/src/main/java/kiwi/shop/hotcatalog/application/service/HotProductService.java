@@ -2,9 +2,9 @@ package kiwi.shop.hotcatalog.application.service;
 
 import kiwi.shop.common.event.Event;
 import kiwi.shop.common.event.EventPayload;
-import kiwi.shop.hotcatalog.application.port.in.HotCatalogUseCase;
+import kiwi.shop.hotcatalog.application.port.in.HotProductUseCase;
 import kiwi.shop.hotcatalog.application.port.out.HotProductListPort;
-import kiwi.shop.hotcatalog.application.port.out.HotCatalogScoreCalculatorPort;
+import kiwi.shop.hotcatalog.application.port.out.HotProductScoreCalculatorPort;
 import kiwi.shop.hotcatalog.application.service.handler.EventHandler;
 import kiwi.shop.hotcatalog.common.UseCase;
 import kiwi.shop.hotcatalog.domain.SelectProductResponses;
@@ -19,9 +19,9 @@ import java.util.Optional;
 @Slf4j
 @UseCase
 @RequiredArgsConstructor
-public class HotProductService implements HotCatalogUseCase {
+public class HotProductService implements HotProductUseCase {
 
-    private final HotCatalogScoreCalculatorPort hotCatalogScoreCalculatorPort;
+    private final HotProductScoreCalculatorPort hotProductScoreCalculatorPort;
     private final HotProductListPort hotProductListPort;
 
     private final List<EventHandler> eventHandlers;
@@ -71,7 +71,7 @@ public class HotProductService implements HotCatalogUseCase {
         /**
          * 해당 상품에 대한 인기글 점수 계산을 합니다.
          */
-        long score = hotCatalogScoreCalculatorPort.calculateHotCatalogScore(productNo);
+        long score = hotProductScoreCalculatorPort.calculateHotProductScore(productNo);
         hotProductListPort.registerHotProduct(
                 productNo,
                 score,

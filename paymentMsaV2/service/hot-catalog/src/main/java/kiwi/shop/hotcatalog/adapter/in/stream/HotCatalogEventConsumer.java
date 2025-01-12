@@ -3,7 +3,7 @@ package kiwi.shop.hotcatalog.adapter.in.stream;
 import kiwi.shop.common.event.Event;
 import kiwi.shop.common.event.EventPayload;
 import kiwi.shop.common.event.EventType;
-import kiwi.shop.hotcatalog.application.port.in.HotCatalogUseCase;
+import kiwi.shop.hotcatalog.application.port.in.HotProductUseCase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -17,7 +17,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class HotCatalogEventConsumer {
 
-    private final HotCatalogUseCase hotCatalogUsecase;
+    private final HotProductUseCase hotProductUsecase;
 
     @KafkaListener(topics = {
                 EventType.Topic.KIWI_SHOP_PRODUCT_LIKE,
@@ -31,7 +31,7 @@ public class HotCatalogEventConsumer {
 
         Event<EventPayload> event = Event.fromJson(message);
         if (Objects.nonNull(event)) {
-            hotCatalogUsecase.messageEventHandler(event);
+            hotProductUsecase.messageEventHandler(event);
         }
 
         ack.acknowledge();

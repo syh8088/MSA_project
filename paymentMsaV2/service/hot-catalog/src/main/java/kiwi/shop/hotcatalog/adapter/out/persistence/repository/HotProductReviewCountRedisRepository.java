@@ -11,7 +11,7 @@ import java.util.Objects;
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-public class HotCatalogReviewCountRedisRepository {
+public class HotProductReviewCountRedisRepository {
 
     private final StringRedisTemplate redisTemplate;
 

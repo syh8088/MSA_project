@@ -6,29 +6,27 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.time.Duration;
-import java.util.Objects;
 
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-public class HotCatalogReviewStarRatingSumRedisRepository {
+public class HotProductLikeCountRedisRepository {
 
     private final StringRedisTemplate redisTemplate;
 
-    // hot-catalogs::catalogs::{productNo}::review-star-rating-sums
-    private static final String KEY_FORMAT = "hot-catalogs::products::%s::review-star-rating-sums";
+    // hot-catalogs::products::{productNo}::like-count
+    private static final String KEY_FORMAT = "hot-catalogs::products::%s::like-counts";
 
-    public void updateCatalogReviewStarRatingSum(long productNo, long reviewStarRatingSum, Duration ttl) {
-        redisTemplate.opsForValue().set(generateKey(productNo), String.valueOf(reviewStarRatingSum), ttl);
+    public void updateCatalogLikeCount(long productNo, long likeCount, Duration ttl) {
+        redisTemplate.opsForValue().set(generateKey(productNo), String.valueOf(likeCount), ttl);
     }
 
     public Long read(long productNo) {
         String result = redisTemplate.opsForValue().get(generateKey(productNo));
-        return (Objects.isNull(result)) ? 0L : Long.parseLong(result);
+        return result == null ? 0L : Long.parseLong(result);
     }
 
     private String generateKey(long productNo) {
         return KEY_FORMAT.formatted(productNo);
     }
-
 }

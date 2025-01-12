@@ -6,7 +6,7 @@ import kiwi.shop.hotcatalog.domain.SelectProductResponses;
 
 import java.util.Optional;
 
-public interface HotCatalogUseCase {
+public interface HotProductUseCase {
 
     void messageEventHandler(Event<EventPayload> event);
 
