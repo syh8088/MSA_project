@@ -319,7 +319,7 @@ docker-compose up -d
 - 결제 하기
   - POST http://localhost:8080 접속 및 결제 하기
 
-###### API Reference
+# API Reference
 
 <details markdown="1">
 <summary>자원</summary>
