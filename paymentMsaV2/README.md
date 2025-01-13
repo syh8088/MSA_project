@@ -361,7 +361,8 @@ docker-compose up -d
 
 <details markdown="1" style="margin-left:14px">
 <summary>상품 좋아요 등록</summary>
-  **상품 좋아요 등록**
+
+**상품 좋아요 등록**
 ----
 상품 좋아요 등록합니다.
 
@@ -383,7 +384,8 @@ docker-compose up -d
 
 <details markdown="1" style="margin-left:14px">
 <summary>hot 상품 조회</summary>
-  **hot 상품 조회**
+
+**hot 상품 조회**
 ----
 hot 상품 조회 합니다.
 
@@ -399,7 +401,8 @@ hot 상품 조회 합니다.
 
 <details markdown="1" style="margin-left:14px">
 <summary>주문 조회 (첫번째 페이지)</summary>
-  ****
+
+**주문 조회 (첫번째 페이지)**
 ----
 주문 조회 (첫번째 페이지) 합니다.
 
@@ -420,7 +423,8 @@ hot 상품 조회 합니다.
 
 <details markdown="1" style="margin-left:14px">
 <summary>주문 조회 (두번째 페이지)</summary>
-  ****
+
+**주문 조회 (두번째 페이지)**
 ----
 주문 조회 (두번째 페이지) 합니다.
 
@@ -443,7 +447,8 @@ hot 상품 조회 합니다.
 
 <details markdown="1" style="margin-left:14px">
 <summary>주문 상세 조회</summary>
-  ****
+
+**주문 상세 조회**
 ----
 주문 상세 조회 합니다.
 
