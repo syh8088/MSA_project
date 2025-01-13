@@ -14,6 +14,10 @@
 
 
 ## 결제 시스템 설명 및 소개
+
+![주문 아키텍처](./md_resource/order_Architecture.png)
+![상품 좋아요 및 리뷰 등록 아키텍처](./md_resource/like_review_Architecture.png)
+
 대상이 되는 서비스 시스템은 결제 주문 시스템 입니다. `Seller (판매자)` 가 직접 상품을 등록 하면 `member (사용자)` 는 등록된 상품을 보고 결제를 할 수 있습니다.
 결제를 하게 된다면 나중에 `Seller (판매자)` 들에게 정산 후불 처리를 하기 위해 정산 처리를 하게 됩니다.
 
