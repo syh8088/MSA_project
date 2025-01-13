@@ -93,8 +93,6 @@ public class PaymentQueryService implements PaymentQueryUseCase {
                 .toList();
     }
 
-
-
     private Optional<PaymentEventQueryModel> paymentOrderFetch(long memberNo, long paymentEventNo) {
 
         PaymentEventResponse paymentEventResponse = orderClient.selectPaymentOrder(paymentEventNo, memberNo);

@@ -1,11 +1,12 @@
-package kiwi.shop.order.domain;
+package kiwi.shop.common.event.domain;
 
-import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+
+import com.querydsl.core.annotations.QueryProjection;
 
 @Getter
 @NoArgsConstructor

@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
+import kiwi.shop.common.event.domain.PaymentOrderStatus;
+
+
 @Getter
 @NoArgsConstructor
 public class PaymentOrderWithSellerOutPut {

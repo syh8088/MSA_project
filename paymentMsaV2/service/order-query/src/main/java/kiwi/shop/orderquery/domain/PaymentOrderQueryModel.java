@@ -1,5 +1,8 @@
 package kiwi.shop.orderquery.domain;
 
+import kiwi.shop.common.event.domain.PaymentOrderStatus;
+
+import kiwi.shop.common.event.payload.PaymentConfirmOrderPayload;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,6 +42,22 @@ public class PaymentOrderQueryModel {
                 .amount(paymentOrderResponse.getAmount())
                 .status(paymentOrderResponse.getStatus())
                 .productName(paymentOrderResponse.getProductName())
+                .build();
+    }
+
+    public static List<PaymentOrderQueryModel> ofByPayload(List<PaymentConfirmOrderPayload> payloads) {
+        return payloads.stream()
+                .map(PaymentOrderQueryModel::ofByPayload)
+                .toList();
+    }
+
+    public static PaymentOrderQueryModel ofByPayload(PaymentConfirmOrderPayload payload) {
+        return PaymentOrderQueryModel.builder()
+                .paymentOrderNo(payload.getPaymentOrderNo())
+                .productNo(payload.getProductNo())
+                .amount(payload.getAmount())
+                .status(payload.getStatus())
+                .productName(payload.getProductName())
                 .build();
     }
 }

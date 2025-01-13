@@ -3,6 +3,7 @@ package kiwi.shop.order.domain;
 import kiwi.shop.order.domain.toss.TossFailureResponse;
 import kiwi.shop.order.domain.toss.TossPaymentConfirmationResponse;
 import kiwi.shop.order.domain.toss.TossPaymentConfirmationWithPspRawDataResponse;
+import kiwi.shop.common.event.domain.PaymentOrderStatus;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

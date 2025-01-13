@@ -14,9 +14,11 @@ import kiwi.shop.order.common.WebAdapter;
 import kiwi.shop.order.domain.*;
 import kiwi.shop.order.domain.message.PaymentEventMessage;
 import kiwi.shop.order.domain.message.PaymentEventMessageType;
+import kiwi.shop.common.event.domain.PaymentOrderStatus;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
+import kiwi.shop.common.event.domain.PaymentEventWithOrderOutPut;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -24,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @WebAdapter
@@ -70,8 +73,10 @@ public class PaymentOrderPersistenceAdapter implements PaymentCheckOutPort, Paym
 
     private void updatePaymentStatusToSuccess(PaymentExecutionResultOutPut paymentExecutionResult) {
 
-        List<PaymentOrderStatusOutPut> paymentOrderStatusList
-                = this.selectPaymentOrderStatusListByOrderId(paymentExecutionResult.getOrderId());
+        List<PaymentEventWithOrderOutPut> paymentEventWithOrderList
+                = this.selectPaymentEventWithOrderListByOrderId(paymentExecutionResult.getOrderId());
+        List<PaymentOrderStatusOutPut> paymentOrderStatusList = PaymentOrderStatusOutPut.of(paymentEventWithOrderList);
+
         this.insertPaymentOrderHistoryList(paymentOrderStatusList, paymentExecutionResult.getPaymentStatus(), "PAYMENT_CONFIRMATION_DONE");
         this.updatePaymentOrderStatusByOrderId(paymentExecutionResult.getOrderId(), paymentExecutionResult.getPaymentStatus());
         this.updatePaymentEventExtraDetails(
@@ -82,12 +87,20 @@ public class PaymentOrderPersistenceAdapter implements PaymentCheckOutPort, Paym
         );
 
         String orderId = paymentExecutionResult.getOrderId();
-        PaymentConfirmEventPayload payload = PaymentConfirmEventPayload.of(orderId);
-        outboxEventPublisher.publish(
-                EventType.PAYMENT_CONFIRM,
-                payload,
-                orderId
-        );
+        Map<Long, List<PaymentEventWithOrderOutPut>> paymentEventWithOrderGroupingPaymentEventNoMap
+                = paymentEventWithOrderList.stream()
+                .collect(Collectors.groupingBy(PaymentEventWithOrderOutPut::getPaymentEventNo));
+
+        for (Long paymentEventNo : paymentEventWithOrderGroupingPaymentEventNoMap.keySet()) {
+            List<PaymentEventWithOrderOutPut> paymentEventList = paymentEventWithOrderGroupingPaymentEventNoMap.get(paymentEventNo);
+
+            PaymentConfirmEventPayload payload = PaymentConfirmEventPayload.of(paymentEventList);
+            outboxEventPublisher.publish(
+                    EventType.PAYMENT_CONFIRM,
+                    payload,
+                    orderId
+            );
+        }
     }
 
     private void updatePaymentStatusToFailureOrUnknown(PaymentExecutionResultOutPut paymentExecutionResult) {
@@ -116,6 +129,9 @@ public class PaymentOrderPersistenceAdapter implements PaymentCheckOutPort, Paym
         return paymentOrderRepository.selectPaymentOrderStatusListByOrderId(orderId);
     }
 
+    private List<PaymentEventWithOrderOutPut> selectPaymentEventWithOrderListByOrderId(String orderId) {
+        return paymentEventRepository.selectPaymentEventWithOrderListByOrderId(orderId);
+    }
 
     private BigDecimal selectTotalAmountByOrderId(String orderId) {
         return paymentOrderRepository.selectTotalAmountByOrderId(orderId);

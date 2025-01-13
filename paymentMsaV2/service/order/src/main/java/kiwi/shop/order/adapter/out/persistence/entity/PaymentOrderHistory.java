@@ -2,7 +2,7 @@ package kiwi.shop.order.adapter.out.persistence.entity;
 
 import kiwi.shop.common.snowflake.Snowflake;
 import kiwi.shop.order.application.port.out.PaymentOrderStatusOutPut;
-import kiwi.shop.order.domain.PaymentOrderStatus;
+import kiwi.shop.common.event.domain.PaymentOrderStatus;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;

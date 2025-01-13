@@ -4,6 +4,9 @@ import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import kiwi.shop.common.event.domain.PaymentEventType;
+import kiwi.shop.common.event.domain.PaymentEventMethod;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;

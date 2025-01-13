@@ -2,7 +2,7 @@ package kiwi.shop.order.adapter.out.persistence.repository;
 
 
 import kiwi.shop.order.domain.PaymentEventOutPut;
-import kiwi.shop.order.domain.PaymentEventWithOrderOutPut;
+import kiwi.shop.common.event.domain.PaymentEventWithOrderOutPut;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,4 +16,6 @@ public interface PaymentEventRepositoryCustom {
     Optional<PaymentEventOutPut> selectPaymentEventByMemberNoAndPaymentMethodNo(long memberNo, long paymentMethodNo);
 
     List<PaymentEventWithOrderOutPut> selectPaymentEventWithOrderListByMemberNoAndPaymentEventNo(long memberNo, long paymentEventNo);
+
+    List<PaymentEventWithOrderOutPut> selectPaymentEventWithOrderListByOrderId(String orderId);
 }

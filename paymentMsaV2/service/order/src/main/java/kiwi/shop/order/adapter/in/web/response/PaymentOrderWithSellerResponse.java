@@ -1,6 +1,6 @@
 package kiwi.shop.order.adapter.in.web.response;
 
-import kiwi.shop.order.domain.PaymentOrderStatus;
+import kiwi.shop.common.event.domain.PaymentOrderStatus;
 import kiwi.shop.order.domain.PaymentOrderWithSellerOutPut;
 import lombok.Builder;
 import lombok.Getter;

@@ -1,9 +1,9 @@
 package kiwi.shop.order.adapter.in.web.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import kiwi.shop.order.domain.PaymentEventMethod;
-import kiwi.shop.order.domain.PaymentEventType;
-import kiwi.shop.order.domain.PaymentEventWithOrderOutPut;
+import kiwi.shop.common.event.domain.PaymentEventMethod;
+import kiwi.shop.common.event.domain.PaymentEventType;
+import kiwi.shop.common.event.domain.PaymentEventWithOrderOutPut;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,5 +1,7 @@
 package kiwi.shop.orderquery.domain;
 
+import kiwi.shop.common.event.domain.PaymentOrderStatus;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -7,7 +7,7 @@ import kiwi.shop.order.adapter.in.web.response.PaymentOrderWithSellerResponse;
 import kiwi.shop.order.adapter.in.web.response.PaymentOrderWithSellerResponses;
 import kiwi.shop.order.application.port.in.RequestOrderUseCase;
 import kiwi.shop.order.domain.PaymentEventWithOrderListCommand;
-import kiwi.shop.order.domain.PaymentEventWithOrderOutPut;
+import kiwi.shop.common.event.domain.PaymentEventWithOrderOutPut;
 import kiwi.shop.order.domain.PaymentOrderWithSellerOutPut;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

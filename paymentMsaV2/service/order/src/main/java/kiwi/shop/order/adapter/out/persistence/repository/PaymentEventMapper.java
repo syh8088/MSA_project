@@ -1,6 +1,6 @@
 package kiwi.shop.order.adapter.out.persistence.repository;
 
-import kiwi.shop.order.domain.PaymentEventWithOrderOutPut;
+import kiwi.shop.common.event.domain.PaymentEventWithOrderOutPut;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;

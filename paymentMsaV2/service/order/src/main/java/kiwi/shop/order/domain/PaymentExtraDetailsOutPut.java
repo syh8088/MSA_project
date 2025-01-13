@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import kiwi.shop.common.event.domain.PaymentEventType;
+import kiwi.shop.common.event.domain.PaymentEventMethod;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;

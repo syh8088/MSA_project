@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kiwi.shop.order.adapter.out.persistence.repository.PaymentEventMapper">
 
-	<select id="selectFirstPaymentEventWithOrderListByMemberNo" resultType="kiwi.shop.order.domain.PaymentEventWithOrderOutPut">
+	<select id="selectFirstPaymentEventWithOrderListByMemberNo" resultType="kiwi.shop.common.event.domain.PaymentEventWithOrderOutPut">
 		SELECT
 			pe.payment_event_no AS 'paymentEventNo',
 			pe.member_no AS 'memberNo',
@@ -17,6 +17,7 @@
 			po.product_no AS 'productNo',
 			po.seller_no AS 'sellerNo',
 			po.amount AS 'amount',
+			po.product_name AS 'productName',
 			po.payment_order_status AS 'status'
 		FROM
 			payment_msa_v2_order.payment_events AS pe
@@ -25,13 +26,13 @@
 		ON
 			pe.payment_event_no = po.payment_event_no
 		WHERE
-			pe.member_no = #{memberNo}
+			pe.member_no = #{memberNo} AND pe.is_payment_done = 1
 		ORDER BY
 			pe.payment_event_no DESC, pe.created_at DESC
 		LIMIT #{limit}
 	</select>
 
-    <select id="selectPaymentEventWithOrderListByMemberNoAndPaymentEventNo" resultType="kiwi.shop.order.domain.PaymentEventWithOrderOutPut">
+    <select id="selectPaymentEventWithOrderListByMemberNoAndPaymentEventNo" resultType="kiwi.shop.common.event.domain.PaymentEventWithOrderOutPut">
 		SELECT
 			pe.payment_event_no AS 'paymentEventNo',
 			pe.member_no AS 'memberNo',
@@ -46,6 +47,7 @@
             po.product_no AS 'productNo',
             po.seller_no AS 'sellerNo',
             po.amount AS 'amount',
+            po.product_name AS 'productName',
             po.payment_order_status AS 'status'
 		FROM
 			payment_msa_v2_order.payment_events AS pe
@@ -54,7 +56,7 @@
 		ON
 			pe.payment_event_no = po.payment_event_no
 		WHERE
-			pe.member_no = #{memberNo} AND ((pe.created_at = #{createdDateTime} AND pe.payment_event_no <![CDATA[<]]> #{paymentEventNo}) OR (pe.created_at <![CDATA[<]]> #{createdDateTime}))
+			pe.member_no = #{memberNo} AND pe.is_payment_done = 1 AND ((pe.created_at = #{createdDateTime} AND pe.payment_event_no <![CDATA[<]]> #{paymentEventNo}) OR (pe.created_at <![CDATA[<]]> #{createdDateTime}))
 		ORDER BY
 			pe.payment_event_no DESC, pe.created_at DESC
 		LIMIT #{limit}

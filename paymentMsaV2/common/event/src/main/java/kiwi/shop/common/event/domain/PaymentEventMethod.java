@@ -1,4 +1,4 @@
-package kiwi.shop.orderquery.domain;
+package kiwi.shop.common.event.domain;
 
 import lombok.Getter;
 

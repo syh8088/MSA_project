@@ -3,7 +3,7 @@ package kiwi.shop.order.application.port.in;
 
 import kiwi.shop.order.domain.PaymentEventOutPut;
 import kiwi.shop.order.domain.PaymentEventWithOrderListCommand;
-import kiwi.shop.order.domain.PaymentEventWithOrderOutPut;
+import kiwi.shop.common.event.domain.PaymentEventWithOrderOutPut;
 import kiwi.shop.order.domain.PaymentOrderWithSellerOutPut;
 
 import java.util.List;
