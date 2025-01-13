@@ -29,11 +29,13 @@ public class MessageRelayCoordinator {
     private final int PING_FAILURE_THRESHOLD = 3;
 
     public AssignedShard assignShards() {
-        return AssignedShard.of(APP_ID, findAppIds(), MessageRelayConstants.SHARD_COUNT);
+        return AssignedShard.of(APP_ID, this.findAppIds(), MessageRelayConstants.SHARD_COUNT);
     }
 
     private List<String> findAppIds() {
-        return redisTemplate.opsForZSet().reverseRange(generateKey(), 0, -1).stream()
+        return redisTemplate.opsForZSet()
+                .reverseRange(this.generateKey(), 0, -1)
+                .stream()
                 .sorted()
                 .toList();
     }
