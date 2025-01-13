@@ -322,7 +322,7 @@ docker-compose up -d
 # API Reference
 
 <details markdown="1">
-<summary>자원</summary>
+<summary>자원 <-- <b>클릭하면 목록이 나타납니다!!</b> </summary>
 
 <details markdown="1" style="margin-left:14px">
 <summary>상품 리뷰 등록</summary>
