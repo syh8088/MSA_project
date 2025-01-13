@@ -20,7 +20,7 @@ public class PaymentCheckoutController {
 	@GetMapping
 	public String checkoutPage(PaymentCheckOutRequest request, Model model) {
 
-		PaymentCheckOutCommand paymentCheckOutCommand = PaymentCheckOutCommand.of(request.getProductNoList());
+		PaymentCheckOutCommand paymentCheckOutCommand = PaymentCheckOutCommand.of(request.getProductNoList(), request.getMemberNo());
 		PaymentCheckOutResponse paymentCheckOut = requestOrderCheckOutUseCase.paymentCheckOut(paymentCheckOutCommand);
 
 		model.addAttribute("orderId", paymentCheckOut.getOrderId());

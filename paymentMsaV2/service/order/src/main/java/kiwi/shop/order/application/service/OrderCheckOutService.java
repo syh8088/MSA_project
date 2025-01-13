@@ -43,7 +43,8 @@ public class OrderCheckOutService implements RequestOrderCheckOutUseCase {
                 idempotency,
                 PaymentEventMethod.CARD,
                 PaymentEventType.NORMAL,
-                productList
+                productList,
+                request.getMemberNo()
         );
 
         paymentCheckOutPort.insertPaymentCheckOut(paymentEvent);

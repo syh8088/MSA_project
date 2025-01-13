@@ -12,15 +12,18 @@ import java.util.List;
 public class PaymentCheckOutCommand {
 
     private List<Long> productNoList = Arrays.asList(1L, 2L, 3L);
+    private long memberNo;
 
     @Builder
-    private PaymentCheckOutCommand(List<Long> productNoList) {
+    private PaymentCheckOutCommand(List<Long> productNoList, long memberNo) {
         this.productNoList = productNoList;
+        this.memberNo = memberNo;
     }
 
-    public static PaymentCheckOutCommand of(List<Long> productNoList) {
+    public static PaymentCheckOutCommand of(List<Long> productNoList, long memberNo) {
         return PaymentCheckOutCommand.builder()
                 .productNoList(productNoList)
+                .memberNo(memberNo)
                 .build();
     }
 }

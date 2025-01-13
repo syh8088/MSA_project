@@ -78,7 +78,8 @@ public class PaymentEvent extends CommonEntity {
             String oderId,
             PaymentEventMethod method,
             PaymentEventType type,
-            List<ProductOutPut> productList
+            List<ProductOutPut> productList,
+            long memberNo
     ) {
 
         Snowflake snowflake = new Snowflake();
@@ -89,6 +90,7 @@ public class PaymentEvent extends CommonEntity {
                 .method(method)
                 .type(type)
                 .orderName(ProductOutPut.getOrderName(productList))
+                .memberNo(memberNo)
                 .build();
 
         List<PaymentOrder> paymentOrders = PaymentOrder.of(
