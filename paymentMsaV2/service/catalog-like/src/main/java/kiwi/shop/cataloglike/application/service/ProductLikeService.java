@@ -8,7 +8,6 @@ import kiwi.shop.cataloglike.application.port.out.ProductLikePort;
 import kiwi.shop.cataloglike.common.UseCase;
 import kiwi.shop.cataloglike.domain.ProductLikeCommand;
 import kiwi.shop.cataloglike.domain.ProductUnLikeCommand;
-import kiwi.shop.cataloglike.domain.UpdateProductLikeCommand;
 import kiwi.shop.common.event.EventType;
 import kiwi.shop.common.event.payload.ProductLikedEventPayload;
 import kiwi.shop.common.event.payload.ProductUnLikedEventPayload;
@@ -48,12 +47,12 @@ public class ProductLikeService implements ProductLikeUseCase {
         LocalDateTime now = LocalDateTime.now();
         ProductLikeCommand productLikeCommand = ProductLikeCommand.of(nextId, productNo, memberNo, now);
 
+        productLikePort.like(productLikeCommand);
         try {
-            productLikePort.like(productLikeCommand);
             productLikeCountPort.increase(productNo);
         }
         catch (ObjectOptimisticLockingFailureException e) {
-            this.retrySaveOperation(productLikeCommand, productNo);
+            this.retrySaveOperation(UpdateProductLikeHandler.UpdateType.LIKE, productNo);
         }
 
         long productLikeCount = productLikeCountPort.selectProductLikeCountByProductNo(productNo);
@@ -79,12 +78,12 @@ public class ProductLikeService implements ProductLikeUseCase {
 
             ProductUnLikeCommand productUnLikeCommand = ProductUnLikeCommand.of(productNo, memberNo);
 
+            productLikePort.unlike(productUnLikeCommand);
             try {
-                productLikePort.unlike(productUnLikeCommand);
                 productLikeCountPort.decrease(productNo);
             }
             catch (ObjectOptimisticLockingFailureException e) {
-                this.retrySaveOperation(productUnLikeCommand, productNo);
+                this.retrySaveOperation(UpdateProductLikeHandler.UpdateType.UNLIKE, productNo);
             }
 
             long productLikeCount = productLikeCountPort.selectProductLikeCountByProductNo(productNo);
@@ -109,18 +108,18 @@ public class ProductLikeService implements ProductLikeUseCase {
     /**
      * 재시도를 할 때 최신 상태의 지갑을 기반으로 지갑 상태를 업데이트하도록 로직
      */
-    private void performSaveOperationWithRecent(UpdateProductLikeCommand productLikeCommand, long productNo) {
+    private void performSaveOperationWithRecent(UpdateProductLikeHandler.UpdateType updateType, long productNo) {
 
         UpdateProductLikeHandler updateProductLikeHandler
-                = UpdateProductLikeHandler.getHandlerUpdateProductLikeServices(productLikeCommand, updateProductLikeHandlers);
+                = UpdateProductLikeHandler.getHandlerUpdateProductLikeServices(updateType, updateProductLikeHandlers);
 
-        updateProductLikeHandler.execute(productNo, productLikeCommand);
+        updateProductLikeHandler.execute(productNo);
     }
 
     /**
      * 재시도 함수는 최대 3번만 제시도하도록 만들고 제시도 사이에 충돌을 방지하기 위해 약간의 지연 시간을 준다.
      */
-    private void retrySaveOperation(UpdateProductLikeCommand updateProductLikeCommand, long productNo) {
+    private void retrySaveOperation(UpdateProductLikeHandler.UpdateType updateType, long productNo) {
 
         int maxRetries = 3;
         int baseDelay = 100;
@@ -128,7 +127,7 @@ public class ProductLikeService implements ProductLikeUseCase {
 
         while (true) {
             try {
-                this.performSaveOperationWithRecent(updateProductLikeCommand, productNo);
+                this.performSaveOperationWithRecent(updateType, productNo);
                 break;
             }
             catch (ObjectOptimisticLockingFailureException e) {

@@ -1,22 +1,22 @@
 package kiwi.shop.cataloglike.application.service;
 
-import kiwi.shop.cataloglike.domain.UpdateProductLikeCommand;
+import lombok.Getter;
 
 import java.util.List;
 
 public interface UpdateProductLikeHandler {
 
-    void execute(long productNo, UpdateProductLikeCommand updateProductLikeCommand);
+    void execute(long productNo);
 
-    boolean supports(UpdateProductLikeCommand productLikeCommand);
+    boolean supports(UpdateType updateType);
 
     static UpdateProductLikeHandler getHandlerUpdateProductLikeServices(
-            UpdateProductLikeCommand productLikeCommand,
+            UpdateType updateType,
             List<UpdateProductLikeHandler> updateProductLikeHandlers
     ) {
 
         for (UpdateProductLikeHandler updateProductLikeHandler : updateProductLikeHandlers) {
-            if (updateProductLikeHandler.supports(productLikeCommand)) {
+            if (updateProductLikeHandler.supports(updateType)) {
                 return updateProductLikeHandler;
             }
         }
@@ -24,4 +24,9 @@ public interface UpdateProductLikeHandler {
         throw new IllegalArgumentException("handler getHandlerUpdateProductLikeServices 를 찾을 수 없습니다.");
     }
 
+    @Getter
+    enum UpdateType {
+        LIKE,
+        UNLIKE
+    }
 }

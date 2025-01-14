@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
-public class ProductLikeCommand implements UpdateProductLikeCommand {
+public class ProductLikeCommand {
 
     private long productLikeNo;
     private long productNo;
