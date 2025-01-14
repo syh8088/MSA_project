@@ -121,7 +121,6 @@ public class SettlementService implements SettlementUseCase {
 
     /**
      * 재시도 함수는 최대 3번만 제시도하도록 만들고 제시도 사이에 충돌을 방지하기 위해 약간의 지연 시간을 준다.
-     *
      */
     private void retrySaveOperation(List<WalletOutPut> wallets) {
 
@@ -142,7 +141,7 @@ public class SettlementService implements SettlementUseCase {
                 }
 
                 // 만약에 제시도 횟수를 초과하진 않았더라면 충돌을 방지하기 위해서 베이스 딜레이와 지터 값을 통해 다음 제시도까지 약간 대기하도록 한다.
-                waitForNextRetry(baseDelay);
+                this.waitForNextRetry(baseDelay);
             }
         }
     }

@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class ProductUnLikeCommand {
+public class ProductUnLikeCommand implements UpdateProductLikeCommand {
 
     private long productNo;
     private long memberNo;
