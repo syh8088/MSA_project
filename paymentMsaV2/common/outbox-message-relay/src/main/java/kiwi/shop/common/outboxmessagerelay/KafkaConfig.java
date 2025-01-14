@@ -107,13 +107,8 @@ public class KafkaConfig {
         ConcurrentKafkaListenerContainerFactory<String, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory);
         factory.setCommonErrorHandler(errorHandler);
-
-        /**
-         * TODO 음.. 이거 자세히 알아보자...
-         * https://stackoverflow.com/questions/44788188/acknowledgement-acknowledge-throwing-exception-in-spring-kafka-kafkalistener
-         */
-//        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.RECORD);
         factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL_IMMEDIATE);
+
         return factory;
     }
 

@@ -50,6 +50,8 @@ public class PaymentEventQueryModel {
 
         List<PaymentConfirmOrderPayload> paymentOrderList = payload.getPaymentOrderList();
 
+        if (Objects.isNull(paymentOrderList) || paymentOrderList.isEmpty()) return Optional.empty();
+
         return Optional.ofNullable(PaymentEventQueryModel.builder()
                 .paymentEventNo(payload.getPaymentEventNo())
                 .memberNo(payload.getMemberNo())

@@ -2,13 +2,15 @@ package kiwi.shop.common.outboxmessagerelay;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Pageable;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
+import org.springframework.transaction.support.TransactionCallbackWithoutResult;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,6 +24,8 @@ public class MessageRelay {
     private final OutboxRepository outboxRepository;
     private final MessageRelayCoordinator messageRelayCoordinator;
     private final KafkaTemplate<String, String> messageRelayKafkaTemplate;
+
+    private final TransactionTemplate transactionTemplate;
 
     @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
     public void createOutbox(OutboxEvent outboxEvent) {
@@ -48,14 +52,24 @@ public class MessageRelay {
         catch (Exception e) {
             log.error("[MessageRelay.publishEvent] outbox={}", outbox, e);
         }
+        finally {
+            transactionTemplate.execute(new TransactionCallbackWithoutResult() {
+                @Override
+                protected void doInTransactionWithoutResult(TransactionStatus status) {
+                    outboxRepository.updateStatusByOutboxNo(outbox.getOutboxNo(), OutBoxStatus.SUCCESS);
+                }
+            });
+
+
+        }
     }
 
-//    @Scheduled(
-//            fixedDelay = 10,
-//            initialDelay = 5,
-//            timeUnit = TimeUnit.SECONDS,
-//            scheduler = "messageRelayPublishPendingEventExecutor"
-//    )
+    @Scheduled(
+            fixedDelay = 10,
+            initialDelay = 5,
+            timeUnit = TimeUnit.SECONDS,
+            scheduler = "messageRelayPublishPendingEventExecutor"
+    )
     public void publishPendingEvent() {
 
         AssignedShard assignedShard = messageRelayCoordinator.assignShards();
@@ -63,10 +77,11 @@ public class MessageRelay {
         log.info("[MessageRelay.publishPendingEvent] assignedShard size={}", assignedShard.getShards().size());
 
         for (Long shard : assignedShard.getShards()) {
-            List<Outbox> outboxes = outboxRepository.findAllByShardKeyAndCreatedDateTimeLessThanEqualOrderByCreatedDateTimeAsc(
+            List<Outbox> outboxes = outboxRepository.selectOutboxListByShardKeyAndStatusAndCreatedDateTimeLessThanEqualOrderByCreatedDateTimeAsc(
                     shard,
+                    OutBoxStatus.INIT,
                     LocalDateTime.now().minusSeconds(10),
-                    Pageable.ofSize(100)
+                    100
             );
 
             for (Outbox outbox : outboxes) {
