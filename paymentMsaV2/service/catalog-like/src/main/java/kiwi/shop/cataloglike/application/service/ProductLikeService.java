@@ -17,7 +17,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.TransactionTemplate;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -32,8 +31,6 @@ public class ProductLikeService implements ProductLikeUseCase {
     private final ProductLikeCountPort productLikeCountPort;
 
     private final OutboxEventPublisher outboxEventPublisher;
-
-    private final TransactionTemplate transactionTemplate;
 
     private List<UpdateProductLikeHandler> updateProductLikeHandlers;
 

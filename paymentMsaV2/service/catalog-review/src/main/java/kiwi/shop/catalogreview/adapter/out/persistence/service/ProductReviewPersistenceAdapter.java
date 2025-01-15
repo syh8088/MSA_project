@@ -1,6 +1,5 @@
 package kiwi.shop.catalogreview.adapter.out.persistence.service;
 
-import kiwi.shop.catalogreview.adapter.in.web.request.StarRatingType;
 import kiwi.shop.catalogreview.adapter.out.persistence.entity.ProductReview;
 import kiwi.shop.catalogreview.adapter.out.persistence.entity.ProductReviewCount;
 import kiwi.shop.catalogreview.adapter.out.persistence.repository.ProductReviewCountRepository;
@@ -13,6 +12,8 @@ import kiwi.shop.catalogreview.domain.InsertProductReviewCommand;
 import kiwi.shop.common.snowflake.Snowflake;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.Optional;
 
 @Slf4j
 @WebAdapter
@@ -51,19 +52,19 @@ public class ProductReviewPersistenceAdapter implements ProductReviewPort, Produ
     }
 
     @Override
-    public ProductReviewCount increase(long productNo, StarRatingType starRatingType) {
+    public Optional<ProductReviewCount> increase(long productNo, long starRating) {
 
         ProductReviewCount productReviewCount = productReviewCountRepository.findById(productNo)
                 .orElseGet(() -> ProductReviewCount.of(productNo, 0L, 0L));
 
         productReviewCount.reviewCountIncrease();
-        productReviewCount.reviewStarRatingIncrease(starRatingType.getStarRating());
+        productReviewCount.reviewStarRatingIncrease(starRating);
 
-        return productReviewCountRepository.save(productReviewCount);
+        return Optional.of(productReviewCountRepository.save(productReviewCount));
     }
 
     @Override
-    public ProductReviewCount decrease(long productNo, long starRating) {
+    public Optional<ProductReviewCount> decrease(long productNo, long starRating) {
 
         ProductReviewCount productReviewCount = productReviewCountRepository
                 .findById(productNo)
@@ -72,7 +73,7 @@ public class ProductReviewPersistenceAdapter implements ProductReviewPort, Produ
         productReviewCount.reviewCountDecrease();
         productReviewCount.reviewStarRatingDecrease(starRating);
 
-        return productReviewCountRepository.save(productReviewCount);
+        return Optional.of(productReviewCountRepository.save(productReviewCount));
     }
 
     @Override

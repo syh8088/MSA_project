@@ -11,7 +11,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 @Slf4j
 @UseCase
 @RequiredArgsConstructor
-public class UpdateIncreaseProductLikeHandler implements UpdateProductLikeHandler {
+public class IncreaseProductLikeHandler implements UpdateProductLikeHandler {
 
     private final ProductLikeCountPort productLikeCountPort;
 
