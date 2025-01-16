@@ -723,11 +723,11 @@ create table payment_msa_v2_wallet.outbox
     unique (idempotency_key)
 );
 
-INSERT INTO payment_msa_v2_seller.sellers (no, seller_id, created_at, updated_at) VALUES (1, 'A', '2024-11-28 22:55:09', '2024-11-28 22:55:09');
-INSERT INTO payment_msa_v2_wallet.wallets (no, seller_no, balance, version, created_at, updated_at) VALUES (1, 1, 0, 0, '2024-11-28 22:55:09', '2024-11-28 22:55:09');
-INSERT INTO payment_msa_v2_catalog.products (no, seller_no, product_id, name, price, created_at, updated_at) VALUES (1, 1, 'A', '상품A', 1000.00, '2024-11-28 22:55:09', '2024-11-28 22:55:09');
-INSERT INTO payment_msa_v2_catalog.products (no, seller_no, product_id, name, price, created_at, updated_at) VALUES (2, 1, 'B', '상품B', 2000.00, '2024-11-28 22:55:09', '2024-11-28 22:55:09');
-INSERT INTO payment_msa_v2_catalog.products (no, seller_no, product_id, name, price, created_at, updated_at) VALUES (3, 1, 'C', '상품C', 3000.00, '2024-11-28 22:55:09', '2024-11-28 22:55:09');
+INSERT INTO payment_msa_v2_seller.sellers (seller_no, seller_id, created_at, updated_at) VALUES (1, 'A', '2024-11-28 22:55:09', '2024-11-28 22:55:09');
+INSERT INTO payment_msa_v2_wallet.wallets (wallet_no, seller_no, balance, version, created_at, updated_at) VALUES (1, 1, 0, 0, '2024-11-28 22:55:09', '2024-11-28 22:55:09');
+INSERT INTO payment_msa_v2_catalog.products (product_no, seller_no, product_id, name, price, created_at, updated_at) VALUES (1, 1, 'A', '상품A', 1000.00, '2024-11-28 22:55:09', '2024-11-28 22:55:09');
+INSERT INTO payment_msa_v2_catalog.products (product_no, seller_no, product_id, name, price, created_at, updated_at) VALUES (2, 1, 'B', '상품B', 2000.00, '2024-11-28 22:55:09', '2024-11-28 22:55:09');
+INSERT INTO payment_msa_v2_catalog.products (product_no, seller_no, product_id, name, price, created_at, updated_at) VALUES (3, 1, 'C', '상품C', 3000.00, '2024-11-28 22:55:09', '2024-11-28 22:55:09');
 ```
 
 
