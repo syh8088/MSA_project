@@ -1,5 +1,6 @@
 package kiwi.shop.orderquery.client;
 
+import kiwi.shop.orderquery.cache.OptimizedCacheable;
 import kiwi.shop.orderquery.domain.PaymentEventResponse;
 import kiwi.shop.orderquery.domain.PaymentEventResponses;
 import kiwi.shop.orderquery.feign.OrderFeignConfig;
@@ -20,6 +21,7 @@ import java.time.LocalDateTime;
 )
 public interface OrderClient {
 
+    @OptimizedCacheable(type = "ordersByMemberNo", ttlSeconds = 1)
     @GetMapping(value = "/api/orders/members/{memberNo}", produces = MediaType.APPLICATION_JSON_VALUE)
     PaymentEventResponses selectPaymentOrderList(
             @PathVariable("memberNo") long memberNo,
