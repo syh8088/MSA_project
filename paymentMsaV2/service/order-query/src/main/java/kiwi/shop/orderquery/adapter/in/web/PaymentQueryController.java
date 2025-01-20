@@ -27,7 +27,12 @@ public class PaymentQueryController {
     ) {
 
         PaymentEventWithOrderListCommand paymentEventWithOrderListCommand
-                = PaymentEventWithOrderListCommand.of(paymentEventListRequest.getPaymentEventNo(), paymentEventListRequest.getCreatedDateTime(), memberNo, paymentEventListRequest.getLimit());
+                = PaymentEventWithOrderListCommand.of(
+                        paymentEventListRequest.getPaymentEventNo(),
+                        paymentEventListRequest.getCreatedDateTime(),
+                        memberNo,
+                        paymentEventListRequest.getLimit()
+                );
 
         List<PaymentEventResponse> paymentEventResponseList
                 = paymentQueryUseCase.selectPaymentEventWithOrderList(paymentEventWithOrderListCommand);
