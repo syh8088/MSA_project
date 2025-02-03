@@ -1,7 +1,7 @@
 package kiwi.shop.wallet.adapter.out.persistence.entity;
 
 import kiwi.shop.common.snowflake.Snowflake;
-import kiwi.shop.wallet.domain.TransactionType;
+import kiwi.shop.wallet.domain.enums.TransactionType;
 import kiwi.shop.wallet.domain.WalletTransactionOutPut;
 import jakarta.persistence.*;
 import lombok.Getter;

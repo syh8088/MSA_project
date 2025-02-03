@@ -1,6 +1,7 @@
 package kiwi.shop.wallet.domain;
 
 import com.querydsl.core.annotations.QueryProjection;
+import kiwi.shop.wallet.domain.enums.TransactionType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

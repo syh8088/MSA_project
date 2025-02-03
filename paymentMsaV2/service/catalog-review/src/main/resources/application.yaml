@@ -3,9 +3,11 @@ spring:
     import:
       - classpath:/yaml/application-common.yaml
       - classpath:/yaml/application-local.yaml
+      - classpath:/yaml/application-prod.yaml
       - classpath:/yaml/application-test.yaml
   profiles:
     default: local
     group:
       test: test, common
       local: local, common
+      prod: prod, common

@@ -1,4 +1,4 @@
-package kiwi.shop.wallet.domain;
+package kiwi.shop.wallet.domain.enums;
 
 import lombok.Getter;
 

@@ -9,7 +9,7 @@ import kiwi.shop.wallet.application.port.out.UpdateWalletPort;
 import kiwi.shop.wallet.common.UseCase;
 import kiwi.shop.wallet.domain.PaymentOrderWithSellerOutPut;
 import kiwi.shop.wallet.domain.WalletEventMessage;
-import kiwi.shop.wallet.domain.WalletEventMessageType;
+import kiwi.shop.wallet.domain.enums.WalletEventMessageType;
 import kiwi.shop.wallet.domain.WalletOutPut;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

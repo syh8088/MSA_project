@@ -1,5 +1,6 @@
 package kiwi.shop.wallet.domain;
 
+import kiwi.shop.wallet.domain.enums.WalletEventMessageType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
