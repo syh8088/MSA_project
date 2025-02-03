@@ -1,17 +1,109 @@
-
-
 # 결제 서비스를 이용한 MSA 서비스 만들어보기
 
-서비스는 총 8개 서비스가 존재하고 있습니다.
-1. order-service - 주문 서비스 (Port: 8080)
-2. catalog-service - 상품 서비스 (Port: 8081)
-3. wallet-service - 지갑 서비스 (Port: 8082)
-4. seller-service - 판매자 서비스 (Port: 8083)
-5. hot-catalog-service - 인기 상품 서비스 (Port: 8084)
-6. catalog-review-service - 리뷰 서비스 (Port: 8085)
-7. catalog-like-service - 좋아요 상품 서비스 (Port: 8086)
-8. order-query-service - 상품 조회 전용 서비스 (CQRS) (Port: 8087)
+## 로컬 환경 실행 방법
 
+### Skill & Tools - Backend
+- Java 17
+- Spring boot 3.2.0
+- Junit5
+- JPA
+- QueryDsl
+- Mybatis - Cursor Paging 구현 목적 사용
+- Mysql 8.x
+- H2 (TEST 코드 실행시에만 해당)
+- docker
+- redis
+- zookeeper
+- kafka
+- kafka-ui
+
+### Service Endpoint
+
+- order-service (주문 서비스)
+  - http://localhost:8080
+
+- catalog-service (상품 서비스)
+  - http://localhost:8081
+
+- wallet-service (지갑 서비스)
+  - http://localhost:8082
+
+- seller-service (판매자 서비스)
+  - http://localhost:8083
+
+- hot-catalog-service (인기 상품 서비스)
+  - http://localhost:8084
+
+- catalog-review-service (상품 리뷰 서비스)
+  - http://localhost:8085
+
+- catalog-like-service (상품 좋아요 서비스)
+  - http://localhost:8086
+
+- order-query-service (상품 조회 전용 서비스 (CQRS))
+  - http://localhost:8087
+
+
+
+- Mysql
+  - http://localhost:3306
+  - id: root
+  - password: 1234
+
+- Redis
+  - http://localhost:6379
+
+- kafka
+  - http://localhost:9092,http://localhost:9093,http://localhost:9094
+
+- kafka-ui
+  - http://localhost:8989
+
+### Server Execution
+```
+// 1. 해당 프로젝트 루트 디렉토리 까지 이동 합니다. 
+
+// 2. `jar` 실행파일을 생성 합니다.
+cd ${프로젝트 디렉토리}/service/order/ 
+./gradlew bootJar
+
+cd ${프로젝트 디렉토리}/service/catalog/ 
+./gradlew bootJar
+
+cd ${프로젝트 디렉토리}/service/wallet/ 
+./gradlew bootJar
+
+cd ${프로젝트 디렉토리}/service/seller/ 
+./gradlew bootJar
+
+cd ${프로젝트 디렉토리}/service/hot-catalog/ 
+./gradlew bootJar
+
+cd ${프로젝트 디렉토리}/service/catalog-review/ 
+./gradlew bootJar
+
+cd ${프로젝트 디렉토리}/service/catalog-like/ 
+./gradlew bootJar
+
+cd ${프로젝트 디렉토리}/service/order-query/ 
+./gradlew bootJar
+
+// 3. docker image 를 생성 합니다.
+docker build -t order-service ${프로젝트 디렉토리}/service/order/.
+docker build -t catalog-service ${프로젝트 디렉토리}/service/catalog/.
+docker build -t wallet-service ${프로젝트 디렉토리}/service/wallet/.
+docker build -t seller-service ${프로젝트 디렉토리}/service/seller/.
+docker build -t hot-catalog-service ${프로젝트 디렉토리}/service/hot-catalog/.
+docker build -t catalog-review-service ${프로젝트 디렉토리}/service/catalog-review/.
+docker build -t catalog-like-service ${프로젝트 디렉토리}/service/catalog-like/.
+docker build -t order-query-service ${프로젝트 디렉토리}/service/order-query/.
+
+// 4. docker-compose 를 실행 합니다.
+docker-compose up -d
+```
+
+### `jar` 실행파일을 생성 실행이 안된다면 인텔리제이에서 지원하는 `bootJar` 기능 이용 부탁드립니다.
+![인텔리제이 bootJar](./md_resource/bootjar.png)
 
 ## 결제 시스템 설명 및 소개
 
