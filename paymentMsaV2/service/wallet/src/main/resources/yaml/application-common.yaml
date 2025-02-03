@@ -1,6 +1,6 @@
 spring:
   application:
-    name: kiwi-shop-wallet-service
+    name: wallet-service
   config:
     activate:
       on-profile: common

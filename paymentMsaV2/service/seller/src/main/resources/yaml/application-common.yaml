@@ -1,6 +1,6 @@
 spring:
   application:
-    name: kiwi-shop-seller-service
+    name: seller-service
   config:
     activate:
       on-profile: common

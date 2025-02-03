@@ -1,6 +1,6 @@
 spring:
   application:
-    name: kiwi-shop-catalog-review-service
+    name: catalog-review-service
   config:
     activate:
       on-profile: common

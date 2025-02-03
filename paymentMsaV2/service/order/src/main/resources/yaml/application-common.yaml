@@ -1,6 +1,6 @@
 spring:
   application:
-    name: kiwi-shop-order-service
+    name: order-service
   config:
     activate:
       on-profile: common
@@ -34,16 +34,6 @@ resilience4j.retry:
   instances:
     paymentRetryConfig:
       baseConfig: paymentRetryConfig
-
-toss:
-  secretKey: test_sk_eqRGgYO1r5Ozvqwz1Z7O3QnN2Eya
-  url: https://api.tosspayments.com
-
-endpoints:
-  catalog:
-    url: http://localhost:8081
-  wallet:
-    url: http://127.0.0.1:8082
 
 server:
   port: 8080

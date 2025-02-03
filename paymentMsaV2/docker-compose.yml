@@ -109,22 +109,12 @@ services:
       - kafka-3
 
 # Domain services
-  payment-service:
-    image: payment-service
+  order-service:
+    image: order-service
     networks:
       - kiwi_payment_network
     ports:
       - "8080:8080"
-    depends_on:
-      mysql-server:
-        condition: service_healthy
-
-  wallet-service:
-    image: wallet-service
-    networks:
-      - kiwi_payment_network
-    ports:
-      - "8081:8081"
     depends_on:
       mysql-server:
         condition: service_healthy
@@ -139,52 +129,12 @@ services:
       mysql-server:
         condition: service_healthy
 
-  catalog-like-service:
-    image: catalog-like-service
+  wallet-service:
+    image: wallet-service
     networks:
       - kiwi_payment_network
     ports:
-      - "8081:8081"
-    depends_on:
-      mysql-server:
-        condition: service_healthy
-
-  catalog-review-service:
-    image: catalog-review-service
-    networks:
-      - kiwi_payment_network
-    ports:
-      - "8081:8081"
-    depends_on:
-      mysql-server:
-        condition: service_healthy
-
-  hot-catalog-service:
-    image: hot-catalog-service
-    networks:
-      - kiwi_payment_network
-    ports:
-      - "8081:8081"
-    depends_on:
-      mysql-server:
-        condition: service_healthy
-
-  order-service:
-    image: order-service
-    networks:
-      - kiwi_payment_network
-    ports:
-      - "8081:8081"
-    depends_on:
-      mysql-server:
-        condition: service_healthy
-
-  order-query-service:
-    image: order-query-service
-    networks:
-      - kiwi_payment_network
-    ports:
-      - "8081:8081"
+      - "8082:8082"
     depends_on:
       mysql-server:
         condition: service_healthy
@@ -194,7 +144,47 @@ services:
     networks:
       - kiwi_payment_network
     ports:
-      - "8081:8081"
+      - "8083:8083"
+    depends_on:
+      mysql-server:
+        condition: service_healthy
+
+  hot-catalog-service:
+    image: hot-catalog-service
+    networks:
+      - kiwi_payment_network
+    ports:
+      - "8084:8084"
+    depends_on:
+      mysql-server:
+        condition: service_healthy
+
+  catalog-review-service:
+    image: catalog-review-service
+    networks:
+      - kiwi_payment_network
+    ports:
+      - "8085:8085"
+    depends_on:
+      mysql-server:
+        condition: service_healthy
+
+  catalog-like-service:
+    image: catalog-like-service
+    networks:
+      - kiwi_payment_network
+    ports:
+      - "8086:8086"
+    depends_on:
+      mysql-server:
+        condition: service_healthy
+
+  order-query-service:
+    image: order-query-service
+    networks:
+      - kiwi_payment_network
+    ports:
+      - "8087:8087"
     depends_on:
       mysql-server:
         condition: service_healthy

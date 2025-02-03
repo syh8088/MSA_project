@@ -26,6 +26,16 @@ spring:
   kafka:
     bootstrap-servers: kafka-1:29092,kafka-2:29093,kafka-3:29094
 
+toss:
+  secretKey: test_sk_eqRGgYO1r5Ozvqwz1Z7O3QnN2Eya
+  url: https://api.tosspayments.com
+
+endpoints:
+  catalog:
+    url: catalog-service:8081
+  wallet:
+    url: wallet-service:8082
+
 logging:
   level:
     org.hibernate.SQL: debug # logger에 출력하려면

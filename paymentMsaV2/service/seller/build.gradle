@@ -24,6 +24,10 @@ dependencies {
 
     // json
     implementation group: 'com.google.code.gson', name: 'gson'
+
+    implementation project(':common:snowflake')
+    implementation project(':common:outbox-message-relay')
+    implementation project(':common:event')
 }
 
 ext {
