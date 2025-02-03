@@ -6,10 +6,6 @@ spring:
       on-profile: common
   messages:
     basename: messages/messages, messages/error
-  data:
-    redis:
-      host: 127.0.0.1
-      port: 6379
 
 mybatis:
   type-aliases-package: kiwi.shop.order.adapter
