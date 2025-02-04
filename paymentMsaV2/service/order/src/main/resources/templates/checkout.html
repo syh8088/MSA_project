@@ -22,9 +22,9 @@
         <!-- 쿠폰 체크박스 -->
         <div style="padding-left: 25px">
             <div class="checkable typography--p">
-                <label for="coupon-box" class="checkable__label typography--regular"
-                ><input id="coupon-box" class="checkable__input" type="checkbox" aria-checked="true" /><span class="checkable__label-text">5,000원 쿠폰 적용</span></label
-                >
+<!--                <label for="coupon-box" class="checkable__label typography&#45;&#45;regular">-->
+<!--                    <input id="coupon-box" class="checkable__input" type="checkbox" aria-checked="true" /><span class="checkable__label-text">5,000원 쿠폰 적용</span>-->
+<!--                </label>-->
             </div>
         </div>
         <!-- 결제하기 버튼 -->
@@ -35,7 +35,7 @@
 </div>
 <script>
     const button = document.getElementById("payment-button");
-    const coupon = document.getElementById("coupon-box");
+    // const coupon = document.getElementById("coupon-box");
     const generateRandomString = () => window.btoa(Math.random()).slice(0, 20);
 
     /*<![CDATA[*/
@@ -62,13 +62,15 @@
 
     // ------  결제 금액 업데이트 ------
     // @docs https://docs.tosspayments.com/reference/widget-sdk#updateamount결제-금액
-    coupon.addEventListener("change", function () {
-        if (coupon.checked) {
-            paymentMethodWidget.updateAmount(amount - 5000);
-        } else {
-            paymentMethodWidget.updateAmount(amount);
-        }
-    });
+
+
+    // coupon.addEventListener("change", function () {
+    //     if (coupon.checked) {
+    //         paymentMethodWidget.updateAmount(amount - 5000);
+    //     } else {
+    //         paymentMethodWidget.updateAmount(amount);
+    //     }
+    // });
 
     // ------ '결제하기' 버튼 누르면 결제창 띄우기 ------
     // @docs https://docs.tosspayments.com/reference/widget-sdk#requestpayment결제-정보

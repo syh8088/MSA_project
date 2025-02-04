@@ -119,9 +119,73 @@ docker-compose up -d
 주문 서비스 메인 페이지에서 가장 먼저 출력되는 데이터는 가장 HOT 한 상품 목록 리스트를 출력 할 예정인데 사용자들이 `상품 결제`, `좋아요 (찜하기)`, `리뷰 등록` 하게 된다면 해당 상품의 점수 SCORE 를 계산해서 가장 HOT 상품을 출력 할 수 있도록 합니다.
 
 
-이제부터 결제 시스템을 개발하기 위한 고려해야 되는 상황들을 설명 하도록 하겠습니다.
+## 결제 시스템 동작 구현 순서
 
-## 마이크로서비스 vs 모놀리식
+### 결제 시스템 진행하는 방법
+
+우선 결제 시도를 위해 http://localhost:8080 접속 하도록 합니다.
+
+![결제 페이지](./md_resource/window_checkout.png)
+
+결제 페이지를 접속 하면 `결제하기` 버튼이 보입니다. 해당 버튼을 클릭 합니다.
+
+![결제 시도하기](./md_resource/window_checkout_2.png)
+
+결제 진행하기 위해 카드 정보가 나타나는데요. `실제로 결제가 안되는 테스트` 입니다. 원하시는 카드 정보 설정 후 진행 하도록 합니다.
+
+![결제 시도하기](./md_resource/window_checkout_3.png)
+
+모두 진행 되었으면 결제가 최종적으로 완료 되었다는 페이지가 나타납니다.
+
+### 상품 좋아요 등록
+
+![postman 상품 좋아요 등록](./md_resource/postman_create_productLike.png)
+
+Postman 이용해서 상품 좋아요 등록을 해봅니다.
+
+참고로 결제 시스템 동작 구현 편리를 위해 `member (회원)` 와 `sellers (판매자)` 는 각각 하나씩 미리 등록된 상태 입니다.
+
+모두 해당 테이블 `PK 값은 1 (memberNo, sellerNo)` 입니다.
+
+그리고 상품도 미리 등록 되어 있습니다. 총 3개 상품이 등록되어 있는데요. (payment_msa_v2_catalog.products 테이블에서 확인 가능 합니다.)
+
+각각 해당 테이블 `PK 값은 (productNo)` 1, 2, 3 입니다.
+
+
+### 상품 리뷰 등록
+
+![postman 상품 리뷰 등록](./md_resource/postman_create_productReview.png)
+
+Postman 이용해서 상품 리뷰 등록을 해봅니다.
+
+요청 데이터 중에 평점을 지정 할 수 있습니다. (starRatingType) 리뷰 평점 
+
+1. ONE
+2. TWO
+3. THREE
+4. FOUR
+5. FIVE
+
+해당 데이터 중 하나를 선택해 리뷰 평점을 지정 할 수 있습니다.
+
+### hot 상품 조회
+
+![postman hot 상품 조회](./md_resource/postman_get_hot_products.png)
+
+이전에 상품 리뷰 및 좋아요 등록 과정을 통해서 각각의 상품 score 를 계산해서 hot 상품도 추가가 됩니다.
+
+### 주문 조회
+
+![postman 주문 조회](./md_resource/postman_get_orders.png)
+
+### 주문 상세 조회
+
+![postman 상세 조회](./md_resource/postman_get_order_detail.png)
+
+
+## 개발 과정에서 고려한 사항
+
+### 마이크로서비스 vs 모놀리식
 상품 가입 프로세스 및 결제 시스템에 있어서 각각의 프로세스를 하나의 서버로 운영 하는것이 좋을지 (모놀리식) 아니면
 
 각각의 서버를 분리해 마이크로서비스 통해 운영 하는것이 좋을지 고민 해보았습니다.
@@ -151,7 +215,7 @@ docker-compose up -d
 
 이번에 만든 결제 주문 시스템 경우는 '주문 상품 Query 전용 서비스' 를 만들어서 관리 하고자 합니다.
 
-## Database Primary PK 전략 - Snowflake 선택
+### Database Primary PK 전략 - Snowflake 선택
 
 Database Primary PK 전략에 있어서 주로 많이 사용하는 `Auto Increment` 전략이 있습니다. insert 할때마다 순차적으로 숫자 1씩 해서 유니크 한 값을 보장 하는 전략 입니다.
 주로 데이터 타입으로는 'bigint' (64비트) 로 지정을 합니다. 하지만 이 전략은 단점이 있는데요. 
@@ -182,7 +246,7 @@ Mysql InnoDB 기준으로 특정 테이블에 `UUID` 값을 이용해 특정 데
 대체 가능한 방법으로는 `Snowflake` 로 이용해서 PK 전략을 수립 할 수 있습니다. `UUID` 값으로 유니크한 값을 보장 하고 시간 기반 순차성도 보장 하기 떄문에 `b+tree` 알고리즘을 이용한 Mysql Index 탐색에 있어서 성능을 향상 시킬수 있겠습니다.
 그리고 `Auto Increment` 에서 보통 사용되는 데이터 타입 'bigint' (64비트) 와 동일하게 64비트로 구성 되어 있습니다.
 
-## 대규모 트래픽 대비해서 EDA (Event Driven Architecture) 도입
+### 대규모 트래픽 대비해서 EDA (Event Driven Architecture) 도입
 
 대량의 트래픽 요청이 들어오면 이에 대응 하는 방법이 여러가지 있겠지만 대표적으로 서버 `Scale-Out` 으로 요청량을 분할 해서 대응 할 수 있습니다.
 하지만 `Scale-Out` 해도 요청량이 갑자기 급변 할때 즉 확장의 속도가 요청량의 속도를 따라잡지 못 할때가 있습니다. 확장이 빨리 되지 않으므로 서버 증설까지 기존 서버로 대응 해야 한다는 점인데요.
@@ -217,7 +281,7 @@ EDA 란 메시지 (이벤트) 기반으로 비동기 통신을 이용해서 상�
 
 하지만 여러번 호출 한다고 하면 결제 관련 데이터 일관성 문제로 이어질수 있습니다. 이러한 문제는 `멱등성` 그리고 `Optimistic Locking` 을 이용해서 해결 하고자 합니다.
 
-## Idempotency (멱등성)
+### Idempotency (멱등성)
 
 멱등성 처리은 요청이 여러 번 들어와도 딱 한번만 처리하도록 설계하는 방식을 의미 합니다.
 
@@ -233,7 +297,7 @@ timeout 발생으로 재시도 할 필요가 있습니다.
 결제 관련 데이터 베이스 테이블에 insert 할때도 멱등성 키값을 잘 활용 할 수 있습니다. 멱등성 키값 통해 유니크한 칼럼으로 설정하면 2번 이상 insert 시 무결성 제약 조건으로 인해 실패하게 하도록 합니다.
 
 
-## Optimistic Locking 이용해서 데이터 일관성 유지하기
+### Optimistic Locking 이용해서 데이터 일관성 유지하기
 
 ![Lost Update 문제 발생 예시](./md_resource/OptimisticLockingExample.png)
 
@@ -247,7 +311,7 @@ timeout 발생으로 재시도 할 필요가 있습니다.
 
 동시화 기법에 있어서 여러가지 방법이 있지만 이러한 이슈 경우 빈번하게 발생하지 않을 것 같아 `Optimistic Locking` 기법으로 선택 하였습니다.
 
-## Retry Queue 와 Dead Letter Queue 이용해서 메시지 보장 획득 하기
+### Retry Queue 와 Dead Letter Queue 이용해서 메시지 보장 획득 하기
 
 `wallet server` 역활은 `payment server` 에서 이벤트 메시지를 발행하면 `wallet server` 는 해당 메시지를 수신 해서 정산 프로세스를 진행 합니다.
 하지만 정산 프로세스 진행 하는 과정에서 예상치 않는 에러로 인해서 문제가 발생 해서 방치 하게 된다면 최종 결제에 있어서 데이터 일관성 문제가 발생 하게 됩니다.
@@ -322,7 +386,7 @@ public class KafkaConfig {
 해당 Kafka Topic 으로부터 발생한 이벤트 토픽명을 `.DLT` 붙여서 해당 Topic 에 저장 하도록 합니다. 
 
 
-## Transaction OutBox Pattern 도입하기
+### Transaction OutBox Pattern 도입하기
 
 결제 승인이 완료되고 이후 @Transaction 영역 안에서 처리 해야 하는 프로세스는 다음과 같습니다.
 
@@ -348,7 +412,7 @@ public class KafkaConfig {
 
 만약 이후 프로세스가 하나라도 실패할 경우 `outbox` 테이블에 저장 했던 프로세스는 롤백이 되고 결국 메시지 발행은 하지 않도록 됩니다.
 
-## Scale-out 통한 중복 메시지 발행 문제
+### Scale-out 통한 중복 메시지 발행 문제
 
 ![N개 APP 그리고 N 개 테이블 샤딩 통해 중복 메시지 문제](./md_resource/Duplicate_message_issuance_problem_due_to_sharding.png)
 
@@ -397,6 +461,12 @@ balance 데이터 값을 계산해서 업데이트를 하도록 합니다.
 
 <details markdown="1">
 <summary>자원 <-- <b>클릭하면 목록이 나타납니다!!</b> </summary>
+
+
+
+
+
+
 
 <details markdown="1" style="margin-left:14px">
 <summary>상품 리뷰 등록</summary>
