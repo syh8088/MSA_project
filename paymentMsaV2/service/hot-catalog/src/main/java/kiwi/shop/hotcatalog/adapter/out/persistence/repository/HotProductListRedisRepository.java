@@ -37,7 +37,8 @@ public class HotProductListRedisRepository {
             String key = generateKey();
             conn.zAdd(key, score, String.valueOf(productNo));
 
-            // 상위 10개의 인기글만 만들어서 유지하기 위해 설명한 limit 값으로 sorted set 설정 할 수 있습니다.
+            // 상위 10개의 상품만 만들어서 유지하기 위해 설명한 limit 값으로 sorted set 설정 할 수 있습니다.
+            // 명령어: ZREMRANGEBYRANK ${key} 0 - hotProductLimitCount - 1
             conn.zRemRange(key, 0, - hotProductLimitCount - 1);
             conn.expire(key, hotProductExpireTtl.toSeconds());
 

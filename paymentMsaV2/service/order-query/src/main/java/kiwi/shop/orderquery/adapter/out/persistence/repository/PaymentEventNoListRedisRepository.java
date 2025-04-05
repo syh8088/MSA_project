@@ -29,6 +29,8 @@ public class PaymentEventNoListRedisRepository {
             StringRedisConnection conn = (StringRedisConnection) action;
             String key = this.generateKey(memberNo);
             conn.zAdd(key, 0, this.toPaddedString(paymentEventNo));
+
+            // 명령어: ZREMRANGEBYRANK ${key} 0 - limit - 1
             conn.zRemRange(key, 0, - limit - 1);
             return null;
         });
